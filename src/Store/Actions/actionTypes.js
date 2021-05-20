@@ -1,1 +1,2 @@
 export const SERVICE_SELECT = 'SERVICE_SELECT'
+export const SERVICE_LIST = 'SERVICE_LIST'

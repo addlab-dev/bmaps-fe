@@ -1,35 +1,38 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import {selectService} from '../../Store/Actions';
+import {selectService, serviceList} from '../../Store/Actions';
 
-const test_services = [
-    {
-        title : 'Popular Treatments',
-        id : '1-f',
-        services : [
-            {name:'Power shape 1',id : 1, time : '1hr',price: 0 ,desription:'service discription if exists appears here' },
-            {name:'Power shape 2',id : 2, time : '1hr',price: 0 ,desription:'service discription if exists appears here' },
-            {name:'Power shape 4',id : 4, time : '1hr',price: 0 ,desription:'service discription if exists appears here' },
-            {name:'Power shape 6',id : 6, time : '1hr',price: 0 ,desription:'service discription if exists appears here' },        
-        ] 
-    },
-    {
-        title : 'Body Remodelling',
-        id : '1-d',
-        services : [
-            {name:'Reducing fat hip',id : 7, time : '1hr',price: 0 ,desription:'service discription if exists appears here' },
-            {name:'Reducing Body mass',id : 8, time : '1hr',price: 0 ,desription:'service discription if exists appears here' },
-            {name:'Power shape 6',id : 9, time : '1hr',price: 0 ,desription:'service discription if exists appears here' },        
-        ] 
-    },
-]
+// const test_services = [
+//     {
+//         title : 'Popular Treatments',
+//         id : '1-f',
+//         services : [
+//             {name:'Power shape 1',id : 1, time : '1hr',price: 0 ,desription:'service discription if exists appears here' },
+//             {name:'Power shape 2',id : 2, time : '1hr',price: 0 ,desription:'service discription if exists appears here' },
+//             {name:'Power shape 4',id : 4, time : '1hr',price: 0 ,desription:'service discription if exists appears here' },
+//             {name:'Power shape 6',id : 6, time : '1hr',price: 0 ,desription:'service discription if exists appears here' },        
+//         ] 
+//     },
+//     {
+//         title : 'Body Remodelling',
+//         id : '1-d',
+//         services : [
+//             {name:'Reducing fat hip',id : 7, time : '1hr',price: 0 ,desription:'service discription if exists appears here' },
+//             {name:'Reducing Body mass',id : 8, time : '1hr',price: 0 ,desription:'service discription if exists appears here' },
+//             {name:'Power shape 6',id : 9, time : '1hr',price: 0 ,desription:'service discription if exists appears here' },        
+//         ] 
+//     },
+// ]
 
 const Services = () => {
     const dispatch = useDispatch();
+    const test_services = useSelector((state) => state.booking.serviceList)
+
     dispatch(selectService("hello"));
 
     // Replace with api response
-    // dispatch(storeStaff(response.data.staff));
+    // dispatch(selectService(selectedService));
+    // dispatch(serviceList(response.data.serviceList));
     return (
         <>
         <div className="col-span-6 shadow-2xl p-8 row-span-9 overflow-y-auto rounded-t-xl h-full bg-red-50 relative">
