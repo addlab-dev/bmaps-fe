@@ -1,0 +1,1 @@
+export const SERVICE_SELECT = 'SERVICE_SELECT'

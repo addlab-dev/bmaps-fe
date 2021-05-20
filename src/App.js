@@ -3,15 +3,21 @@ import { BrowserRouter } from 'react-router-dom'
 import Layout from './Layout/Layout'
 import AuthContextProvider from './Context/AuthContext'
 import Pages from './Pages'
-function App() {
 
+import { Provider } from 'react-redux';
+import { useStore } from './Store'
+
+function App(pageProps) {
+  const store = useStore(pageProps.initialReduxState)
   return (
     <AuthContextProvider>
+      <Provider store={store}>
     <Layout>
      <BrowserRouter>
        <Pages/>
      </BrowserRouter>
       </Layout>
+      </Provider>
       </AuthContextProvider>
  )
 }

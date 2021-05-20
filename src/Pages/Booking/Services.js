@@ -1,4 +1,6 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux'
+import {selectService} from '../../Store/Actions';
 
 const test_services = [
     {
@@ -23,6 +25,11 @@ const test_services = [
 ]
 
 const Services = () => {
+    const dispatch = useDispatch();
+    dispatch(selectService("hello"));
+
+    // Replace with api response
+    // dispatch(storeStaff(response.data.staff));
     return (
         <>
         <div className="col-span-6 shadow-2xl p-8 row-span-9 overflow-y-auto rounded-t-xl h-full bg-red-50 relative">
