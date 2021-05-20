@@ -1,0 +1,4 @@
+Screens 
+    - Appointmnts histor
+Others 
+    - Add privacy Policy page

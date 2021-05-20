@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+.react-calendar {
+  
+  max-width: 550px !important;
+  margin: 0 auto;
+    @apply w-auto border-none bg-transparent   !important;
+}
+.react-calendar__navigation__prev2-button {
+  display: none !important;
+}
+.react-calendar__navigation__next2-button {
+  display: none !important;
+}
+.react-calendar__navigation button[disabled] {
+  @apply bg-transparent rounded-full hover:bg-transparent focus:bg-transparent text-gray-400 !important;
+  font-size:2.5rem;
+}
+
+.react-calendar__navigation__next-button,.react-calendar__navigation__prev-button {
+  @apply rounded-full text-main hover:bg-transparent focus:bg-transparent  !important;
+  font-size:2.5rem;
+}
+.react-calendar__navigation__label {
+  @apply  text-main hover:bg-transparent focus:bg-transparent  !important;
+  line-height:3rem;
+}
+.react-calendar__navigation__label {
+  text-transform: capitalize;
+}
+.react-calendar__month-view__weekdays__weekday {
+  @apply text-main p-1 !important;
+}
+abbr[title] {
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+.react-calendar__tile {
+  @apply focus:bg-transparent hover:bg-transparent bg-transparent !important
+}
+.react-calendar__tile--active {
+  @apply focus:bg-transparent hover:bg-transparent bg-transparent !important
+
+}
+
+.react-calendar__month-view__days__day--weekend {
+  @apply focus:bg-transparent hover:bg-transparent bg-transparent text-black !important
+}
+.react-calendar__tile--active abbr {
+  @apply focus:bg-main hover:bg-main bg-main text-white rounded-full p-2 !important
+
+}
+.text-input {
+  @apply placeholder-main text-main block w-full sm:text-sm  border-t-0 border-l-0 border-r-0 bg-red-50 focus:outline-none outline-none focus:ring-0 focus:border-main border-gray-300 border-b
+}
+checkbox:checked,checkbox {
+  @apply focus:ring-0 focus:outline-none outline-none
+}
+input[type="date"]:before {
+  content: attr(placeholder) !important;
+  margin-right: 0.5em;
+  @apply text-main
+}
+input[type="date"]:focus:before,
+input[type="date"]:valid:before {
+  content: "";
+}
