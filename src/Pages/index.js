@@ -1,4 +1,4 @@
-import Login from '../Pages/Login'
+import Login from '../Pages/Customer/Login'
 import Register from '../Pages/Register'
 import Services from '../Pages/Booking/Services'
 import Professionals from '../Pages/Booking/Professionals'

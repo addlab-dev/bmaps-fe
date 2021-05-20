@@ -1,11 +1,12 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
-
+import Api from '../../Api/Api';
 
 const Login = () => {
     const { register, handleSubmit ,formState: { errors }} = useForm();
-    const onSubmit = data => console.log(data);
-
+    const onSubmit = (data) => {
+        Api.login(data)
+    };
     return (
         <>
         <div className="col-span-6 shadow-2xl p-8 row-span-9 overflow-y-auto rounded-t-xl h-full bg-red-50 relative">

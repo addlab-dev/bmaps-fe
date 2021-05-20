@@ -1,8 +1,8 @@
 import ApiBase from './index'
 
 class ApiInit extends ApiBase {
-
     async login(data) {
+       console.log(data);
       const resData = await this.post('/user/login', data).then((res) => res.data)
       return resData
     }
