@@ -36,6 +36,7 @@ const Services = () => {
         dispatch(selectService(data));
     }
     console.log(errors);
+    
     // Replace with api response on load of component
     // dispatch(selectService(selectedService));
     // dispatch(serviceList(response.data.serviceList));
