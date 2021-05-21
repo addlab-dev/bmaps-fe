@@ -1,14 +1,19 @@
 import React from 'react';
-
-const professionals = [
-            {name:'Liviana Arsenio',id : 1 },
-            {name:'Agnese Palladino',id : 2 },
-            {name:'Terrance Wolff',id : 4 },
-            {name:'Liviana Arsenio',id : 6 },        
-]
-
+import { useSelector, useDispatch } from 'react-redux'
+import {selectProfessional} from '../../Store/Actions';
+import { useForm } from 'react-hook-form';
 
 const Professionals = () => {
+    const dispatch = useDispatch();
+    const professionals = useSelector((state) => state.booking.professionalList)
+    const defaultProf = useSelector((state)=> state.booking.selectedProfessional)
+    const { register, handleSubmit, errors } = useForm();
+    const onSubmit = (data) => {
+        
+        console.log(data);
+        dispatch(selectProfessional(data));
+    }
+    console.log(errors);
     return (
         <>
         <div className="col-span-6 shadow-2xl p-8 row-span-9 overflow-y-auto rounded-t-xl h-full bg-red-50 relative">

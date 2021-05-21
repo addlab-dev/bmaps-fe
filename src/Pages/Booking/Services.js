@@ -1,29 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import {selectService, serviceList} from '../../Store/Actions';
+import {selectService} from '../../Store/Actions';
 import { useForm } from 'react-hook-form';
-
-// const test_services = [
-//     {
-//         title : 'Popular Treatments',
-//         id : '1-f',
-//         services : [
-//             {name:'Power shape 1',id : 1, time : '1hr',price: 0 ,desription:'service discription if exists appears here' },
-//             {name:'Power shape 2',id : 2, time : '1hr',price: 0 ,desription:'service discription if exists appears here' },
-//             {name:'Power shape 4',id : 4, time : '1hr',price: 0 ,desription:'service discription if exists appears here' },
-//             {name:'Power shape 6',id : 6, time : '1hr',price: 0 ,desription:'service discription if exists appears here' },        
-//         ] 
-//     },
-//     {
-//         title : 'Body Remodelling',
-//         id : '1-d',
-//         services : [
-//             {name:'Reducing fat hip',id : 7, time : '1hr',price: 0 ,desription:'service discription if exists appears here' },
-//             {name:'Reducing Body mass',id : 8, time : '1hr',price: 0 ,desription:'service discription if exists appears here' },
-//             {name:'Power shape 6',id : 9, time : '1hr',price: 0 ,desription:'service discription if exists appears here' },        
-//         ] 
-//     },
-// ]
 
 const Services = () => {
     const dispatch = useDispatch();

@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { RadioGroup } from '@headlessui/react'
-
+import { useSelector, useDispatch } from 'react-redux'
+import { selectSlot} from '../../Store/Actions';
+import { useForm } from 'react-hook-form';
 
 const calendarSetting = {
     locale : 'it-IT',
@@ -13,41 +15,20 @@ const calendarSetting = {
     view : 'month'
 }
 
-const plans = [
-    {
-      name: '10:00',
-    },
-    {
-      name: '11:00',
-    },
-    {
-      name: '12:00',
-    },
-    {
-        name: '13:00',
-      },
-      {
-        name: '14:00',
-      },
-      {
-        name: '15:00',
-      },
-      {
-          name: '16:00',
-        },
-        {
-          name: '17:00',
-        },
-        {
-          name: '18:00',
-        }
-  ]
-  
-
 const Slots = () => {
     const [selected, setSelected] = useState(plans[0])
     const [value, onChange] = useState(new Date());
     //const [caldate, onCaldate] = useState(new Date());
+    const dispatch = useDispatch();
+    const plans = useSelector((state) => state.booking.slotList)
+    const defaultProf = useSelector((state)=> state.booking.selectedSlot)
+    const { register, handleSubmit, errors } = useForm();
+    const onSubmit = (data) => {
+        
+        console.log(data);
+        dispatch(selectSlot(data));
+    }
+    console.log(errors);
     return (
         <>
         <div className="col-span-6 shadow-2xl p-8 row-span-9 overflow-y-auto h-full rounded-t-xl bg-red-50 relative">

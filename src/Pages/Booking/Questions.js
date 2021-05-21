@@ -1,16 +1,18 @@
 import React from 'react';
-
-
-const steps = [
-    { name: 'Step 1', href: '#', status: 'complete' },
-    { name: 'Step 2', href: '#', status: 'current' },
-    { name: 'Step 3', href: '#', status: 'upcoming' },
-    { name: 'Step 4', href: '#', status: 'upcoming' },
-  ]
-
-
+import { useSelector, useDispatch } from 'react-redux'
+import {selectStep} from '../../Store/Actions';
+import { useForm } from 'react-hook-form';
 
 const Questions = () => {
+    const dispatch = useDispatch();
+    const steps = useSelector((state) => state.booking.stepList)
+    const { register, handleSubmit, errors } = useForm();
+    const onSubmit = (data) => {
+        
+        console.log(data);
+        dispatch(selectStep(data));
+    }
+    console.log(errors);
     return (
         <>
         <div className="col-span-6 shadow-2xl p-8 row-span-9 overflow-y-auto rounded-t-xl h-full bg-red-50 relative">

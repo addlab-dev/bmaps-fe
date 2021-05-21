@@ -1,10 +1,10 @@
 import React from 'react'
 
-const Summery = () => {
+const Summary = () => {
     return(
         <>
     <div className="col-span-6 shadow-2xl p-8 row-span-9 overflow-y-auto rounded-t-xl h-full bg-red-50 relative">
-        <h1 className="w-full text-main font-medium text-xl pl-1 mb-2" >Summery</h1>
+        <h1 className="w-full text-main font-medium text-xl pl-1 mb-2" >Summary</h1>
             <div className="register_wrapper mt-5 ml-4 h-full relative">
                     <section className="w-full  mt-12 mb-8 pb-20 h-auto border-b-2 border-gray-300">
                     <h1 className="w-full text-main font-bold text-lg pl-1 mb-5" >Friday 15 May, 10:30</h1>
@@ -46,4 +46,4 @@ const Summery = () => {
     )
 }
 
-export default Summery
+export default Summary
