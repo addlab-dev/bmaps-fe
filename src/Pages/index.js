@@ -15,6 +15,10 @@ const Pages = () => {
         <Switch>
         <Route component={Services} path="/services"  />
         <Route component={Professionals} path="/professionals"  />
+        <Route component={Slots} path="/slots"  />
+        <Route component={Questions} path="/questions"  />
+        <Route component={Summary} path="/summary"  />
+        <Route component={Confirmation} path="/confirmation"  />
         </Switch>
     ) : (
         <Switch>

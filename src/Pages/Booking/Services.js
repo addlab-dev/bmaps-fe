@@ -2,16 +2,18 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import {selectService} from '../../Store/Actions';
 import { useForm } from 'react-hook-form';
+import { useHistory } from "react-router-dom";
 
 const Services = () => {
     const dispatch = useDispatch();
+    const history = useHistory();
     const test_services = useSelector((state) => state.booking.serviceList)
     const defaultService = useSelector((state)=> state.booking.selectedService)
     const { register, handleSubmit, errors } = useForm();
     const onSubmit = (data) => {
-        
         console.log(data);
         dispatch(selectService(data));
+        history.push("/slots");
     }
     console.log(errors);
     
@@ -28,8 +30,8 @@ const Services = () => {
             <form onSubmit={handleSubmit(onSubmit)}>
             <div className="services_wrapper mt-5 ml-4">
             {test_services.map((category) => (
-                    <section className="w-full mt-4 mb-8">
-                        <h1 className="w-full text-main font-medium text-lg pl-1 mb-2" key={category.id}>{category.title}</h1>
+                    <section key={category.id} className="w-full mt-4 mb-8">
+                        <h1 className="w-full text-main font-medium text-lg pl-1 mb-2">{category.title}</h1>
                                     {category.services && category.services.map(service => (
                                             <div className="service relative w-full pl-3 pb-5 pt-5 border-b border-main">
                                             <label htmlFor={service.id} className="text-main font-bold text-md inline cursor-pointer">{service.name}</label>
@@ -45,7 +47,7 @@ const Services = () => {
                                             {...register('serviceGroup',{ required: true })}
                                             />
                                             <p className="text-gray-500 text-sm pt-2">
-                                                {service.desription}
+                                                {service.description}
                                             </p>
                                             </div>
                                     ))}

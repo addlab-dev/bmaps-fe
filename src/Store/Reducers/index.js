@@ -12,28 +12,28 @@ const defaultState = {
           id: 1,
           time: '1hr',
           price: 0,
-          desription: 'service discription if exists appears here'
+          description: 'service description if exists appears here'
         },
         {
           name: 'Power shape 2',
           id: 2,
           time: '1hr',
           price: 0,
-          desription: 'service discription if exists appears here'
+          description: 'service description if exists appears here'
         },
         {
           name: 'Power shape 4',
           id: 4,
           time: '1hr',
           price: 0,
-          desription: 'service discription if exists appears here'
+          description: 'service description if exists appears here'
         },
         {
           name: 'Power shape 6',
           id: 6,
           time: '1hr',
           price: 0,
-          desription: 'service discription if exists appears here'
+          description: 'service description if exists appears here'
         },
       ]
     },
@@ -45,21 +45,21 @@ const defaultState = {
           id: 7,
           time: '1hr',
           price: 0,
-          desription: 'service discription if exists appears here'
+          description: 'service description if exists appears here'
         },
         {
           name: 'Reducing Body mass',
           id: 8,
           time: '1hr',
           price: 0,
-          desription: 'service discription if exists appears here'
+          description: 'service description if exists appears here'
         },
         {
           name: 'Power shape 6',
           id: 9,
           time: '1hr',
           price: 0,
-          desription: 'service discription if exists appears here'
+          description: 'service description if exists appears here'
         },
       ]
     },
@@ -103,34 +103,36 @@ const defaultState = {
     },
   ],
   slotList: [{
-      name: '10:00',
+      time: '10:00',
     },
     {
-      name: '11:00',
+      time: '11:00',
     },
     {
-      name: '12:00',
+      time: '12:00',
     },
     {
-      name: '13:00',
+      time: '13:00',
     },
     {
-      name: '14:00',
+      time: '14:00',
     },
     {
-      name: '15:00',
+      time: '15:00',
     },
     {
-      name: '16:00',
+      time: '16:00',
     },
     {
-      name: '17:00',
+      time: '17:00',
     },
     {
-      name: '18:00',
+      time: '18:00',
     }
   ],
-
+  selectedProfessional:{},
+  selectedSlot:{},
+  selectedStep:{},
   bookingInfo: {},
   slot_value: "",
   sel_service: "",
@@ -155,13 +157,25 @@ const bookingReducer = (state = defaultState, action) => {
         return {
           ...state, serviceList: action.payload
         }
+      case types.PROFESSIONAL_SELECT:
+        return {
+          ...state, selectedProfessional: action.payload
+        }
       case types.PROFESSIONAL_LIST:
         return {
           ...state, professionalList: action.payload
         }
+      case types.SLOT_SELECT:
+        return {
+          ...state, selectedSlot: action.payload
+        }
       case types.SLOT_LIST:
         return {
           ...state, slotList: action.payload
+        }
+      case types.STEP_SELECT:
+        return {
+          ...state, selectedStep: action.payload
         }
       case types.STEP_LIST:
         return {

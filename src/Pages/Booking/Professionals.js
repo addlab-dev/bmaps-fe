@@ -18,9 +18,9 @@ const Professionals = () => {
         <>
         <div className="col-span-6 shadow-2xl p-8 row-span-9 overflow-y-auto rounded-t-xl h-full bg-red-50 relative">
             <div className="w-full h-auto" >
-                <h1 className="text-main font-bold text-lg pb-4 pt-2 ">2. Select professional</h1>
+                <h1 className="text-main font-bold text-lg pb-4 pt-2 ">3. Select professional</h1>
             </div>
-            <div className="profissionals_wrapper mt-5 ml-4">
+            <div className="professionals_wrapper mt-5 ml-4">
                     <section className="w-full mt-4 mb-8">
                             {professionals.map((prof) =>(
                                 <div className="prof relative w-full pl-1 pb-5 pt-5 border-b border-gray-300">
