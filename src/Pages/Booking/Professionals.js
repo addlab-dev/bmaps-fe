@@ -32,15 +32,15 @@ const Professionals = () => {
                     <section className="w-full mt-4 mb-8">
                             {professionals.filter(filterProf).map((prof) =>(
                                 <div key={prof.id} className="prof relative w-full pl-1  border-b border-gray-300">
-                                            <label htmlFor={prof.id} className="text-main relative w-full pb-5 pt-5 flex font-bold text-md inline cursor-pointer">{prof.name}
-                                            <input
-                                            id={prof.id}
-                                            value={prof}
-                                            name="prof"
-                                            type="radio"
-                                            {...register('prof',{ required: true })}
-                                            className="focus:text-main h-5 w-5 top-1/3 text-main border-gray-300 absolute right-5" /></label>
-                                            </div>
+                                    <label htmlFor={prof.id} className="text-main relative w-full pb-5 pt-5 flex font-bold text-md inline cursor-pointer">{prof.name}
+                                    <input
+                                    id={prof.id}
+                                    value={prof}
+                                    name="prof"
+                                    type="radio"
+                                    {...register('prof',{ required: true })}
+                                    className="focus:text-main h-5 w-5 top-1/3 text-main border-gray-300 absolute right-5" /></label>
+                                </div>
                             ))}
                     </section>
             </div>
