@@ -22,6 +22,10 @@ export const selectService = (selectedService) => dispatch => dispatch({
     type: types.SLOT_SELECT,
     payload: selectedSlot
   });
+  export const selectDate = (selectedDate) => dispatch => dispatch({
+    type: types.DATE_SELECT,
+    payload: selectedDate
+  });
   export const slotList = (slotList) => dispatch => dispatch({
     type: types.SLOT_LIST,
     payload: slotList

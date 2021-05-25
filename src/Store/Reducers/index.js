@@ -130,8 +130,9 @@ const defaultState = {
       time: '18:00',
     }
   ],
-  selectedProfessional:{},
+  selectedProfessional:[],
   selectedSlot:{},
+  selectedDate:{},
   selectedStep:{},
   bookingInfo: {},
   slot_value: "",
@@ -168,6 +169,10 @@ const bookingReducer = (state = defaultState, action) => {
       case types.SLOT_SELECT:
         return {
           ...state, selectedSlot: action.payload
+        }
+      case types.DATE_SELECT:
+        return {
+          ...state, selectedDate: action.payload
         }
       case types.SLOT_LIST:
         return {

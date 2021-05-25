@@ -3,7 +3,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { RadioGroup } from '@headlessui/react'
 import { useSelector, useDispatch } from 'react-redux'
-import { selectSlot} from '../../Store/Actions';
+import { selectSlot, selectDate} from '../../Store/Actions';
 import { useForm } from 'react-hook-form';
 import { useHistory } from "react-router-dom";
 
@@ -22,10 +22,17 @@ const Slots = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const plans = useSelector((state) => state.booking.slotList)
-    const defaultProf = useSelector((state)=> state.booking.selectedSlot)
     const { register, handleSubmit, errors } = useForm();
+    const [selected, setSelected] = useState(plans[0])
+    const [value, setValue] = useState(new Date());
+    const onDateChange = (event) => {
+      console.log(event);
+      setValue(event);
+        // let newSelDate = event.toLocaleDateString("it-IT").slice(0, 10).replace(/\//g, '-');
+    }
     const onSubmit = (data) => {
         console.log(data);
+        dispatch(selectDate(value));
         dispatch(selectSlot(data));
         history.push("/professionals");
     }
@@ -40,14 +47,7 @@ const Slots = () => {
       
   // },[router.query]);  
 
-    const [selected, setSelected] = useState(plans[0])
-    const [value, setValue] = useState(new Date());
-    const onDateChange = (event) => {
-      console.log(event);
-      setValue(event);
-      dispatch(selectSlot(selected));
-        // let newSelDate = event.toLocaleDateString("it-IT").slice(0, 10).replace(/\//g, '-');
-    }
+    
     return (
         <>
         <div className="col-span-6 shadow-2xl p-8 row-span-9 overflow-y-auto h-full rounded-t-xl bg-red-50 relative">
@@ -74,9 +74,9 @@ const Slots = () => {
           <div className="mx-4 flex flex-wrap  gap-x-7 gap-y-4 items-center justify-center ">
             {plans.map((plan) => (
               <RadioGroup.Option
+              as="label" htmlFor={plan.time}
                 key={plan.time}
                 value={plan.time}
-                name="planTime"
                 className={({ active, checked }) =>
                   `${
                     active
@@ -90,17 +90,23 @@ const Slots = () => {
                   }
                     grid relative rounded-lg shadow-md px-3 py-2 cursor-pointer  focus:outline-none`
                 }
-                {...register('planTime',{ required: true })}
               >
                 {({ active, checked }) => (
                   <>
                           <RadioGroup.Label
-                            as="p"
                             className={`font-medium  ${
                               checked ? 'text-white' : 'text-gray-900'
                             }`}
                           >
                             {plan.time}
+                            <input
+                              id={plan.time}
+                              name="time"
+                              type="radio"
+                              value={plan.time}
+                              className="invisible hidden"
+                              {...register('time',{ required: true })}
+                              />
                           </RadioGroup.Label>
                   </>
                 )}

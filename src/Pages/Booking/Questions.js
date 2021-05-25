@@ -2,22 +2,24 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import {selectStep} from '../../Store/Actions';
 import { useForm } from 'react-hook-form';
+import { useHistory } from "react-router-dom";
 
 const Questions = () => {
     const dispatch = useDispatch();
+    const history = useHistory();
     const steps = useSelector((state) => state.booking.stepList)
     const { register, handleSubmit, errors } = useForm();
     const onSubmit = (data) => {
-        
         console.log(data);
         dispatch(selectStep(data));
+        history.push("/summary");
     }
     console.log(errors);
     return (
         <>
         <div className="col-span-6 shadow-2xl p-8 row-span-9 overflow-y-auto rounded-t-xl h-full bg-red-50 relative">
             <div className="w-full h-auto relative " >
-                <h1 className="text-main font-bold text-lg pb-4 pt-2 ">4. Tell us know a more about youself.</h1>
+                <h1 className="text-main font-bold text-lg pb-4 pt-2 ">4. Tell us know a more about yourself.</h1>
                     <nav className="absolute right-5 top-5" aria-label="Progress">
                             <ol className="ml-8 flex items-center space-x-5">
                                 {steps.map((step) => (
@@ -103,7 +105,7 @@ const Questions = () => {
 
 
             <div className="fixed right-12 bottom-12 flex flex-wrap  gap-x-1 items-center justify-center">
-                <button className="text-main bg-white rounded px-5 py-2 grid text-md mr-3 shadow-md focus:outline-none hover:shadow-lg">
+                <button onClick={()=> {history.push("/professionals");}} className="text-main bg-white rounded px-5 py-2 grid text-md mr-3 shadow-md focus:outline-none hover:shadow-lg">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 17l-5-5m0 0l5-5m-5 5h12" />
                 </svg>

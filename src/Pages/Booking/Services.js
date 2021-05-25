@@ -8,7 +8,6 @@ const Services = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const test_services = useSelector((state) => state.booking.serviceList)
-    const defaultService = useSelector((state)=> state.booking.selectedService)
     const { register, handleSubmit, errors } = useForm();
     const onSubmit = (data) => {
         console.log(data);
@@ -33,22 +32,23 @@ const Services = () => {
                     <section key={category.id} className="w-full mt-4 mb-8">
                         <h1 className="w-full text-main font-medium text-lg pl-1 mb-2">{category.title}</h1>
                                     {category.services && category.services.map(service => (
-                                            <div className="service relative w-full pl-3 pb-5 pt-5 border-b border-main">
-                                            <label htmlFor={service.id} className="text-main font-bold text-md inline cursor-pointer">{service.name}</label>
-                                            <span className="text-gray-400 text-sm pl-4">{service.time} session</span>
-                                            <br></br>
-                                            <h4 htmlFor={service.id} className="text-main font-bold text-sm inline cursor-pointer w-full">€ {service.price}</h4>
+                                            <div htmlFor={service.id} className="service relative w-full pl-3 border-b border-main">
+                                            <label  className="text-main w-full pb-5 pt-5 font-bold flex flex-col justify-center text-md inline cursor-pointer">
+                                                <span className="flex items-center">{service.name}
+                                            <span className="text-gray-400 text-sm pl-4">{service.time} session</span></span>
+                                            <h4 htmlFor={service.id} className="text-main font-bold text-sm mt-3 inline cursor-pointer w-full">€ {service.price}</h4>
                                             <input
                                             id={service.id}
-                                            name="serviceGroup"
+                                            name="service"
                                             type="radio"
                                             value={service.id}
-                                            className="focus:text-main h-5 w-5 top-1/3 text-main border-gray-300 absolute right-5"
-                                            {...register('serviceGroup',{ required: true })}
+                                            className="focus:text-main h-5 w-5 text-main border-gray-300 absolute right-5"
+                                            {...register('service',{ required: true })}
                                             />
-                                            <p className="text-gray-500 text-sm pt-2">
+                                            <p className="text-gray-500 text-sm pt-2 font-normal">
                                                 {service.description}
                                             </p>
+                                            </label>
                                             </div>
                                     ))}
                     </section>
