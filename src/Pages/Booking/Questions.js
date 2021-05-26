@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import {Stepper, MobileStepper, Step, StepLabel, Button, Container, TextField, FormControlLabel, Checkbox, RadioGroup, Radio, Modal } from '@material-ui/core';
+import {Stepper, Step } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux'
-import {selectStep} from '../../Store/Actions';
+import {selectStep, bookingStatus} from '../../Store/Actions';
 import { useForm } from 'react-hook-form';
 import { useHistory } from "react-router-dom";
 
@@ -45,12 +45,13 @@ const Questions = () => {
       //   registered: accState.registered,
       //   loggedIn: accState.isLoggedIn,
     });
-  //   const [bookStatus, setBookStatus] = React.useState({
-  //     // store_id: 1,
-  //     // slot_value: bookingSlot,
-  //     // service_id: serv_id,
-  //     // staff_id: bookingStaff,
-  //   })
+    const [bookStatus, setBookStatus] = React.useState({
+        store_id: 1,
+        date: bookingDate,
+        slot_value: bookingSlot,
+        service_id: bookingService,
+        staff_id: bookingStaff,
+    })
   
   //   const handleLoggedIn = () => () => {
   //     debugger
@@ -101,26 +102,21 @@ const Questions = () => {
       // dispatch(bookingAnswers(updateQuest));
       setQuestions(updateQuest);
       
-      // if(activeStep === steps - 1) {
-      //     const uniqueObjects = [...new Map(updateQuest.map(item => [item.id, item])).values()];
-      //     const finalBookStatus = {...bookStatus, answers: [...uniqueObjects]};
-      //     dispatch(bookingStatus(finalBookStatus));
-      //   if(window.localStorage.getItem('token') !== "null") {
-      //     API.post('placebooking/now',bookingStat, {headers: {'Authorization': `Bearer ${localStorage.getItem('token')}`}})
-      //     .then((response) => {
-      //       // console.log(response);
-      //       if (response.status === 200) {
-      //         router.push(`/store/${id}/book/${serv_id}/confirmation`)
-      //       }
-      //     }, (error) => {
-      //       // console.log(error);
-      //     });
-      //     // debugger
-      //     // handleLoggedIn();
-      //   } else {
-      //     handleOpen();
-      //   }
-      // } else {
+      if(activeStep === steps - 1) {
+          const uniqueObjects = [...new Map(updateQuest.map(item => [item.id, item])).values()];
+          const finalBookStatus = {...bookStatus, answers: [...uniqueObjects]};
+          dispatch(bookingStatus(finalBookStatus));
+          history.push("/summary");
+        //   API.post('placebooking/now',bookingStat, {headers: {'Authorization': `Bearer ${localStorage.getItem('token')}`}})
+        //   .then((response) => {
+        //     // console.log(response);
+        //     if (response.status === 200) {
+        //       router.push(`/store/${id}/book/${serv_id}/confirmation`)
+        //     }
+        //   }, (error) => {
+        //     // console.log(error);
+        //   });
+      } else {
         let newSkipped = skipped;
         if (isStepSkipped(activeStep)) {
           newSkipped = new Set(newSkipped.values());
@@ -128,11 +124,11 @@ const Questions = () => {
         }
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
         setSkipped(newSkipped);
-      // }
+      }
     };
     const handleBack = () => {
       if(activeStep === 0) {
-      //   router.back();
+        history.push("/professionals");
       }
       setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
@@ -153,28 +149,7 @@ const Questions = () => {
     const handleReset = () => {
       setActiveStep(0);
     };
-    function StyledRadio(props) {
-      
-        return (
-          <input
-            type="radio"
-            className="focus:text-main h-5 w-5 text-main border-gray-300 absolute right-5"
-            color="default"
-            {...props}
-          />
-        );
-      }
-    function StyledCheckbox(props) {
-      
-        return (
-          <input
-            type="checkbox"
-            className="focus:text-main h-5 w-5 text-main border-gray-300 absolute right-5"
-            color="default"
-            {...props}
-          />
-        );
-      }
+
     function getStepContent(step) {
         if(bookingInfo[step].type == 1) {
           return (<section className="w-full mt-4 mb-8">
@@ -183,30 +158,29 @@ const Questions = () => {
             <div className="w-full mt-6"><textarea
                 className="shadow-sm focus:ring-main focus:border-main mt-1 block w-full sm:text-sm border-gray-300 rounded-md bg-red-50"
                 placeholder="Please Describe"
-                defaultValue={''}
                 rows={4}
                 type="text"
                 value={answers[step] || ""}
                 onChange={handleChange}
-                InputProps={{ disableUnderline: true}}
             /></div>
           </section>)
         } else if (bookingInfo[step].type == 2) {
           return (<section className="w-full mt-4 mb-8">
             <h3  className="text-main font-bold text-lg pb-4 pt-2">{bookingInfo[step].question}<span className="helper-text">(Select 1 option minimum)</span></h3>
             <div className="w-full mt-6">{bookingInfo[step].answers.map(answer =>
-          <FormControlLabel key={answer.id} className="w-full flex-row-reverse justify-between text-main font-bold text-md inline cursor-pointer"
-                        control={<Checkbox className="focus:text-main h-5 w-5 top-1/3 text-main border-gray-300 absolute right-5" name={answer.name} value={answer.id} onChange={handleCheckboxChange} />} 
-                        label={<div><h5>{answer.answer}</h5><p>This is an additional message</p></div>}
-                    />)}</div>
+                <label key={answer.id} className="w-full p-2 flex flex-row justify-between text-main text-md cursor-pointer">{answer.answer}
+                        <input type="checkbox" className="focus:text-main h-5 w-5 text-main border-gray-300" name={answer.name} value={answer.id} onChange={handleCheckboxChange} /> 
+                        </label> 
+                    )}
+                    </div>
           </section>)
         } else if (bookingInfo[step].type == 3) {
           return (<section className="w-full mt-4 mb-8">
             <h3  className="text-main font-bold text-lg pb-4 pt-2">{bookingInfo[step].question}<span className="helper-text">(Select 1 option)</span></h3>
-            <div className="w-full mt-6"><RadioGroup className="booking-info-radio" aria-label="multi" name="multi1" value={Number(answers[step])} onChange={handleChange}>
-            {bookingInfo[step].answers.map(answer => <FormControlLabel className="w-full flex-row-reverse justify-between text-main font-bold text-md inline cursor-pointer" key={answer.answer} htmlFor={Number(answer.id)} value={Number(answer.id)} 
-            control={<Radio name="multi1" id={Number(answer.id)} className="focus:text-main h-5 w-5 text-main border-gray-300 absolute right-5"/>} label={<div><h5>{answer.answer}</h5></div>} />)}
-          </RadioGroup></div>
+            <div className="w-full mt-6">
+            {bookingInfo[step].answers.map(answer => <label className="w-full p-2 flex flex-row justify-between text-main  text-md cursor-pointer" key={answer.answer} htmlFor={Number(answer.id)} value={Number(answer.id)}>{answer.answer}
+            <input type="radio" onChange={handleChange} name="multi1" id={Number(answer.id)} className="focus:text-main h-5 w-5 text-main border-gray-300 "/></label> )}
+            </div>
           </section>)
         }
     }
@@ -216,8 +190,8 @@ const Questions = () => {
             <div className="w-full h-auto relative " >
                 <h1 className="text-main font-bold text-lg pb-4 pt-2 ">4. Tell us know a more about yourself.</h1>
                     <nav className="absolute right-5 top-5" aria-label="Progress">
-                            <ol className="ml-8 flex items-center space-x-5">
-                                {/* {steps.map((step) => (
+                            {/* <ol className="ml-8 flex items-center space-x-5">
+                                {bookingInfo.map((step) => (
                                 <li key={step.name}>
                                     {step.status === 'complete' ? (
                                     <a href={step.href} className="block w-2.5 h-2.5 bg-main rounded-full hover:bg-main">
@@ -234,10 +208,11 @@ const Questions = () => {
                                     </a>
                                     )}
                                 </li>
-                                ))} */}
-                            </ol>
+                                ))}
+                            </ol> */}
                             <Stepper 
-                            className="ml-8 flex items-center space-x-5"
+                            className="ml-8 flex items-center space-x-2"
+                            style={{backgroundColor:"transparent",padding:"0"}}
                                 steps={bookingInfo.length}
                                 activeStep={activeStep}>
                                 {bookingInfo.map((label, index) => {
@@ -250,8 +225,8 @@ const Questions = () => {
                                     stepProps.completed = false;
                                     }
                                     return (
-                                    <Step key={label} {...stepProps} classes={{root: "block w-2.5 h-2.5 bg-gray-200 rounded-full hover:bg-gray-400", alternativeLabel:"relative block w-2.5 h-2.5 bg-red ",completed:"block w-2.5 h-2.5 bg-main rounded-full hover:bg-main"}}>
-                                        {/* <StepLabel {...labelProps}></StepLabel> */}
+                                    <Step key={label} {...stepProps} style={{paddingLeft:"0"}} classes={{root: "block w-2.5 h-2.5 pl-0 bg-gray-200 rounded-full hover:bg-gray-400", alternativeLabel:"relative block w-2.5 h-2.5 bg-red ",completed:"block w-2.5 h-2.5 bg-main rounded-full hover:bg-main"}}>
+                                        {/* <StepLabel {...labelProps} StepIconProps={{classes:{root: "block w-2.5 h-2.5 pl-0 bg-gray-200 rounded-full hover:bg-gray-400", active:"relative block w-2.5 h-2.5 bg-red ",completed:"block w-2.5 h-2.5 bg-main rounded-full hover:bg-main"}}}></StepLabel> */}
                                     </Step>
                                     );
                                 })}

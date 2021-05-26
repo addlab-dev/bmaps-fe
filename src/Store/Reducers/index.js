@@ -285,6 +285,10 @@ const bookingReducer = (state = defaultState, action) => {
         return {
           ...state, questions: action.payload
         }
+      case types.BOOKING_STATUS:
+        return {
+          ...state, bookingStatus: action.payload
+        }
         default:
           return state
   }

@@ -42,4 +42,8 @@ export const selectService = (selectedService) => dispatch => dispatch({
     type: types.QUESTION_LIST,
     payload: questionList
   });
+  export const bookingStatus = (bookingStatus) => dispatch => dispatch({
+    type: types.BOOKING_STATUS,
+    payload: bookingStatus
+  });
   

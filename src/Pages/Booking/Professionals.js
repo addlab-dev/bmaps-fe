@@ -36,7 +36,7 @@ const Professionals = () => {
                     <section className="w-full mt-4 mb-8">
                             {professionals.filter(filterProf).map((prof) =>(
                                 <div key={prof.id} className="prof relative w-full pl-1  border-b border-gray-300">
-                                    <label htmlFor={prof.id} className="text-main relative w-full pb-5 pt-5 flex font-bold text-md inline cursor-pointer">{prof.name}
+                                    <label htmlFor={prof.id} className="text-main relative w-full pb-5 pt-5 font-bold text-md inline-flex cursor-pointer">{prof.name}
                                     <input
                                     id={prof.id}
                                     value={prof.id}
