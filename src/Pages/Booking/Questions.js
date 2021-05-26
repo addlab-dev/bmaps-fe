@@ -153,6 +153,28 @@ const Questions = () => {
     const handleReset = () => {
       setActiveStep(0);
     };
+    function StyledRadio(props) {
+      
+        return (
+          <input
+            type="radio"
+            className="focus:text-main h-5 w-5 text-main border-gray-300 absolute right-5"
+            color="default"
+            {...props}
+          />
+        );
+      }
+    function StyledCheckbox(props) {
+      
+        return (
+          <input
+            type="checkbox"
+            className="focus:text-main h-5 w-5 text-main border-gray-300 absolute right-5"
+            color="default"
+            {...props}
+          />
+        );
+      }
     function getStepContent(step) {
         if(bookingInfo[step].type == 1) {
           return (<section className="w-full mt-4 mb-8">
@@ -163,7 +185,6 @@ const Questions = () => {
                 placeholder="Please Describe"
                 defaultValue={''}
                 rows={4}
-                multiline
                 type="text"
                 value={answers[step] || ""}
                 onChange={handleChange}
@@ -174,7 +195,7 @@ const Questions = () => {
           return (<section className="w-full mt-4 mb-8">
             <h3  className="text-main font-bold text-lg pb-4 pt-2">{bookingInfo[step].question}<span className="helper-text">(Select 1 option minimum)</span></h3>
             <div className="w-full mt-6">{bookingInfo[step].answers.map(answer =>
-          <FormControlLabel key={answer.id} className="text-main font-bold text-md inline cursor-pointer"
+          <FormControlLabel key={answer.id} className="w-full flex-row-reverse justify-between text-main font-bold text-md inline cursor-pointer"
                         control={<Checkbox className="focus:text-main h-5 w-5 top-1/3 text-main border-gray-300 absolute right-5" name={answer.name} value={answer.id} onChange={handleCheckboxChange} />} 
                         label={<div><h5>{answer.answer}</h5><p>This is an additional message</p></div>}
                     />)}</div>
@@ -183,7 +204,8 @@ const Questions = () => {
           return (<section className="w-full mt-4 mb-8">
             <h3  className="text-main font-bold text-lg pb-4 pt-2">{bookingInfo[step].question}<span className="helper-text">(Select 1 option)</span></h3>
             <div className="w-full mt-6"><RadioGroup className="booking-info-radio" aria-label="multi" name="multi1" value={Number(answers[step])} onChange={handleChange}>
-            {bookingInfo[step].answers.map(answer => <FormControlLabel className="text-main font-bold text-md inline cursor-pointer" key={answer.answer} value={Number(answer.id)} control={<Radio className="focus:text-main h-5 w-5 top-1/3 text-main border-gray-300 absolute right-5"/>} label={<div><h5>{answer.answer}</h5></div>} />)}
+            {bookingInfo[step].answers.map(answer => <FormControlLabel className="w-full flex-row-reverse justify-between text-main font-bold text-md inline cursor-pointer" key={answer.answer} htmlFor={Number(answer.id)} value={Number(answer.id)} 
+            control={<Radio name="multi1" id={Number(answer.id)} className="focus:text-main h-5 w-5 text-main border-gray-300 absolute right-5"/>} label={<div><h5>{answer.answer}</h5></div>} />)}
           </RadioGroup></div>
           </section>)
         }
@@ -215,10 +237,8 @@ const Questions = () => {
                                 ))} */}
                             </ol>
                             <Stepper 
-                            variant="dots"
                             className="ml-8 flex items-center space-x-5"
                                 steps={bookingInfo.length}
-                                position="static"
                                 activeStep={activeStep}>
                                 {bookingInfo.map((label, index) => {
                                     const stepProps = {};
@@ -230,7 +250,7 @@ const Questions = () => {
                                     stepProps.completed = false;
                                     }
                                     return (
-                                    <Step key={label} {...stepProps} classes={{root: "block w-2.5 h-2.5 bg-gray-200 rounded-full hover:bg-gray-400", active:"relative block w-2.5 h-2.5 bg-main rounded-full",completed:"block w-2.5 h-2.5 bg-main rounded-full hover:bg-main"}}>
+                                    <Step key={label} {...stepProps} classes={{root: "block w-2.5 h-2.5 bg-gray-200 rounded-full hover:bg-gray-400", alternativeLabel:"relative block w-2.5 h-2.5 bg-red ",completed:"block w-2.5 h-2.5 bg-main rounded-full hover:bg-main"}}>
                                         {/* <StepLabel {...labelProps}></StepLabel> */}
                                     </Step>
                                     );
@@ -240,65 +260,7 @@ const Questions = () => {
             </div>
             <div className="questions_wrapper mt-5 ml-4">
             {getStepContent(activeStep)}
-                    {/* <section className="w-full mt-4 mb-8">
-                            <h1 className="text-main font-bold text-lg pb-4 pt-2 ">Do you have any pre existing health conditions or allergies?</h1>
-                            <div className="w-full mt-6">
-                            <textarea
-                                id="about"
-                                name="about"
-                                rows={4}
-                                className="shadow-sm focus:ring-main focus:border-main mt-1 block w-full sm:text-sm border-gray-300 rounded-md bg-red-50"
-                                placeholder="Please Describe"
-                                defaultValue={''}
-                            />
-                            </div>
-                    </section> */}
-
-                            {/* <section className="w-full mt-4 mb-1">
-                            <h1 className="text-main font-bold text-lg pb-4 pt-2 ">
-                                    How many sessions do you want for this treatment?
-                                    <br/>
-                                    <span className="w-full text-gray-500 font-normal text-sm">(Select 1 option)</span>
-                            </h1>
-                            <div className="w-full mt-6">
-                            <div className="prof relative w-full pl-1 pb-5 pt-5 border-b border-gray-300">
-                                            <label htmlFor="x1" className="text-main font-bold text-md inline cursor-pointer">4 sessions - 3 weeks</label>
-                                            <input
-                                            id="x1"
-                                            name="group1"
-                                            type="radio"
-                                            className="focus:text-main h-5 w-5 top-1/3 text-main border-gray-300 absolute right-5" />
-                                </div>
-                                <div className="prof relative w-full pl-1 pb-5 pt-5 border-b border-gray-300">
-                                            <label htmlFor="x2" className="text-main font-bold text-md inline cursor-pointer">4 sessions - 3 weeks</label>
-                                            <input
-                                            id="x2"
-                                            name="group1"
-                                            type="radio"
-                                            className="focus:text-main h-5 w-5 top-1/3 text-main border-gray-300 absolute right-5" />
-                                </div>
-                                <div className="prof relative w-full pl-1 pb-5 pt-5 border-b border-gray-300">
-                                            <label htmlFor="x3" className="text-main font-bold text-md inline cursor-pointer">4 sessions - 3 weeks</label>
-                                            <input
-                                            id="x3"
-                                            name="group1"
-                                            type="radio"
-                                            className="focus:text-main h-5 w-5 top-1/3 text-main border-gray-300 absolute right-5" />
-                                </div>
-                                <div className="prof relative w-full pl-1 pb-5 pt-5 border-b border-gray-300">
-                                            <label htmlFor="x4" className="text-main font-bold text-md inline cursor-pointer">4 sessions - 3 weeks</label>
-                                            <input
-                                            id="x4"
-                                            name="group1"
-                                            type="radio"
-                                            className="focus:text-main h-5 w-5 top-1/3 text-main border-gray-300 absolute right-5" />
-                                </div>
-
-                            </div>
-                    </section> */}
             </div>
-
-
 
             <div className="fixed right-12 bottom-12 flex flex-wrap  gap-x-1 items-center justify-center">
                 <button onClick={handleBack} className="text-main bg-white rounded px-5 py-2 grid text-md mr-3 shadow-md focus:outline-none hover:shadow-lg">
