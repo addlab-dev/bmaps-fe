@@ -8,6 +8,7 @@ import Questions from './Booking/Questions'
 import Slots from './Booking/Slots'
 import Confirmation from './Booking/Confirmation'
 import Summary from './Booking/Summary'
+import BookingInfo from './Booking/Info'
 
 const Pages = () => {
     const {authState} = useAuthContext()
@@ -17,6 +18,7 @@ const Pages = () => {
         <Route component={Professionals} path="/professionals"  />
         <Route component={Slots} path="/slots"  />
         <Route component={Questions} path="/questions"  />
+        <Route component={BookingInfo} path="/info"  />
         <Route component={Summary} path="/summary"  />
         <Route component={Confirmation} path="/confirmation"  />
         </Switch>

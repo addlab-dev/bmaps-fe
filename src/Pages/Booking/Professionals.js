@@ -17,8 +17,12 @@ const Professionals = () => {
     const onSubmit = (data) => {
         console.log(data);
         dispatch(selectProfessional(data));
-        // history.push("/questions");
+        history.push("/questions");
     }
+
+    // useEffect {
+// send selected slot, date and service get staff
+    // }
     console.log(errors);
     return (
         <>
@@ -35,7 +39,7 @@ const Professionals = () => {
                                     <label htmlFor={prof.id} className="text-main relative w-full pb-5 pt-5 flex font-bold text-md inline cursor-pointer">{prof.name}
                                     <input
                                     id={prof.id}
-                                    value={prof}
+                                    value={prof.id}
                                     name="prof"
                                     type="radio"
                                     {...register('prof',{ required: true })}

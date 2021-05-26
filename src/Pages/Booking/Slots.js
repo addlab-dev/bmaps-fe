@@ -39,6 +39,7 @@ const Slots = () => {
     console.log(errors);
     
   //   useEffect(() => {
+    //  get call with service ID
   //     if(typeof window !== 'undefined' && !bookingSlot) {
   //         router.push(`/store/${id}`)
   //     } else {

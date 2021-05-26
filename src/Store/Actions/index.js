@@ -38,4 +38,8 @@ export const selectService = (selectedService) => dispatch => dispatch({
     type: types.STEP_LIST,
     payload: stepList
   });
+  export const questionList = (questionList) => dispatch => dispatch({
+    type: types.QUESTION_LIST,
+    payload: questionList
+  });
   
