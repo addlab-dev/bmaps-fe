@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import {selectService} from '../../Store/Actions';
 import { useForm } from 'react-hook-form';
 import { useHistory } from "react-router-dom";
+import Api from '../../Api/Api';
 
 const Services = () => {
     const dispatch = useDispatch();
@@ -15,7 +16,14 @@ const Services = () => {
         history.push("/slots");
     }
     console.log(errors);
-    
+    useEffect(() => {
+        Api.getService("/shop/1/services").then(function(response){
+            console.log(response)
+        })
+        return () => {
+            
+        }
+    }, [test_services])
     // Replace with api response on load of component
     // dispatch(selectService(selectedService));
     // dispatch(serviceList(response.data.serviceList));
@@ -33,7 +41,7 @@ const Services = () => {
                         <h1 className="w-full text-main font-medium text-lg pl-1 mb-2">{category.title}</h1>
                                     {category.services && category.services.map(service => (
                                             <div htmlFor={service.id} className="service relative w-full pl-3 border-b border-main">
-                                            <label  className="text-main w-full pb-5 pt-5 font-bold flex flex-col justify-center text-md inline cursor-pointer">
+                                            <label  className="text-main w-full pb-5 pt-5 font-bold flex flex-col justify-center text-md cursor-pointer">
                                                 <span className="flex items-center">{service.name}
                                             <span className="text-gray-400 text-sm pl-4">{service.time} session</span></span>
                                             <h4 htmlFor={service.id} className="text-main font-bold text-sm mt-3 inline cursor-pointer w-full">€ {service.price}</h4>
