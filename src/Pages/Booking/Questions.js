@@ -33,7 +33,8 @@ const Questions = () => {
     const [questions, setQuestions] = React.useState([]);
     const [answers,setAnswers] = React.useState(new Array(steps).fill(""));
   
-  
+  console.log("questions",questions)
+  console.log("answers",answers)
     const [state, setState] = React.useState({   
         step1: 'Do you have any pre existing health conditions or allergies?',
         step2: 'Do you want to add extra services',
@@ -178,8 +179,8 @@ const Questions = () => {
           return (<section className="w-full mt-4 mb-8">
             <h3  className="text-main font-bold text-lg pb-4 pt-2">{bookingInfo[step].question}<span className="helper-text">(Select 1 option)</span></h3>
             <div className="w-full mt-6">
-            {bookingInfo[step].answers.map(answer => <label className="w-full p-2 flex flex-row justify-between text-main  text-md cursor-pointer" key={answer.answer} htmlFor={Number(answer.id)} value={Number(answer.id)}>{answer.answer}
-            <input type="radio" onChange={handleChange} name="multi1" id={Number(answer.id)} className="focus:text-main h-5 w-5 text-main border-gray-300 "/></label> )}
+            {bookingInfo[step].answers.map(answer => <label className="w-full p-2 flex flex-row justify-between text-main  text-md cursor-pointer" key={answer.answer} htmlFor={Number(answer.id)} >{answer.answer}
+            <input type="radio" onChange={handleChange} name="multi1" id={Number(answer.id)} value={Number(answer.id)} className="focus:text-main h-5 w-5 text-main border-gray-300 "/></label> )}
             </div>
           </section>)
         }
