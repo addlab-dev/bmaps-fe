@@ -6,9 +6,13 @@ class ApiInit extends ApiBase {
       const resData = await this.post('/user/login', data).then((res) => res.data)
       return resData
     }
-    async getService(data) {
-       console.log(data);
-      const resData = await this.get(data).then((res) => res.data)
+    // async getService(data) {
+    //    console.log(data);
+    //   const resData = await this.get(data).then((res) => res.data)
+    //   return resData
+    // }
+    async getService(shop) {
+      const resData = await this.get('shop/'+shop+'/services', null).then((res) => res.data)
       return resData
     }
 

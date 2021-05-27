@@ -24,14 +24,15 @@ const Pages = () => {
         </Switch>
     ) : (
         <Switch>
-        <Route component={Services} path="/services"  />
         <Route component={Professionals} path="/professionals"  />
         <Route component={Slots} path="/slots"  />
         <Route component={Questions} path="/questions"  />
         <Route component={Summary} path="/summary"  />
         <Route component={Confirmation} path="/confirmation"  />
         <Route component={Register} path="/register"  />
-        <Route component={Login}  />
+        <Route component={Login} path="/login" />
+        <Route component={Services} path="/" />
+
     </Switch>
     )
 }
