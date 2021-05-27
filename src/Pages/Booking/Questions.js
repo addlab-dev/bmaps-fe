@@ -156,7 +156,7 @@ const Questions = () => {
     };
 
     function getStepContent(step) {
-        if(bookingInfo[step].type == 1) {
+        if(bookingInfo[step].type === 1) {
           return (<section className="w-full mt-4 mb-8">
             <h3 className="text-main font-bold text-lg pb-4 pt-2">{bookingInfo[step].question} <span className="helper-text">(Type some text)</span></h3>
           
@@ -169,7 +169,7 @@ const Questions = () => {
                 onChange={handleChange}
             /></div>
           </section>)
-        } else if (bookingInfo[step].type == 2) {
+        } else if (bookingInfo[step].type === 2) {
           return (<section className="w-full mt-4 mb-8">
             <h3  className="text-main font-bold text-lg pb-4 pt-2">{bookingInfo[step].question}<span className="helper-text">(Select 1 option minimum)</span></h3>
             <div className="w-full mt-6">{bookingInfo[step].answers.map(answer =>
@@ -179,7 +179,7 @@ const Questions = () => {
                     )}
                     </div>
           </section>)
-        } else if (bookingInfo[step].type == 3) {
+        } else if (bookingInfo[step].type === 3) {
           return (<section className="w-full mt-4 mb-8">
             <h3  className="text-main font-bold text-lg pb-4 pt-2">{bookingInfo[step].question}<span className="helper-text">(Select 1 option)</span></h3>
             <div className="w-full mt-6">
@@ -228,7 +228,7 @@ const Questions = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 17l-5-5m0 0l5-5m-5 5h12" />
                 </svg>
                 </button>
-                <button className="text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg" disabled={answers[activeStep] == ""} onClick={handleNext}>
+                <button className="text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg" disabled={answers[activeStep] === ""} onClick={handleNext}>
                     {activeStep === steps-1 ? 'Finish' : 'Next'}
                   </button>
             {/* <button className="text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg">Next</button> */}

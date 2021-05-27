@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useHistory } from "react-router-dom";
 import { useParams } from "react-router";
 
