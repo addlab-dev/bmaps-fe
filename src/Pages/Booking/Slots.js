@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { RadioGroup } from '@headlessui/react'
@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { selectSlot, selectDate} from '../../Store/Actions';
 import { useForm } from 'react-hook-form';
 import { useHistory } from "react-router-dom";
+import { useParams } from "react-router";
 
 const calendarSetting = {
     locale : 'it-IT',
@@ -22,31 +23,28 @@ const Slots = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const plans = useSelector((state) => state.booking.slotList)
+    const shopID = useSelector((state) => state.booking.storeID)
     const { register, handleSubmit, errors } = useForm();
     const [selected, setSelected] = useState(plans[0])
     const [value, setValue] = useState(new Date());
+    let { id } = useParams();
     const onDateChange = (event) => {
-      console.log(event);
       setValue(event);
         // let newSelDate = event.toLocaleDateString("it-IT").slice(0, 10).replace(/\//g, '-');
     }
     const onSubmit = (data) => {
-        console.log(data);
         dispatch(selectDate(value));
         dispatch(selectSlot(data));
-        history.push("/professionals");
+        history.push(`/${shopID}/professionals`);
     }
-    console.log(errors);
     
-  //   useEffect(() => {
-    //  get call with service ID
-  //     if(typeof window !== 'undefined' && !bookingSlot) {
-  //         router.push(`/store/${id}`)
-  //     } else {
-  //         dispatch(bookingStaff(staff.id))
-  //     }
-      
-  // },[router.query]);  
+    useEffect(() => {
+      if(typeof window !== 'undefined' && !shopID) {
+        history.push(`/${id}/services`)
+      } else {
+          // dispatch(bookingStaff(staff.id))
+      }
+  },[]);  
 
     
     return (
@@ -121,7 +119,7 @@ const Slots = () => {
                 </div>
             </div>
             <div className="fixed right-12 bottom-12 flex flex-wrap  gap-x-1 items-center justify-center">
-                <button onClick={()=> {history.push("/services");}} className="text-main bg-white rounded px-5 py-2 grid text-md mr-3 shadow-md focus:outline-none hover:shadow-lg">
+                <button onClick={()=> {history.push(`/${shopID}/services`);}} className="text-main bg-white rounded px-5 py-2 grid text-md mr-3 shadow-md focus:outline-none hover:shadow-lg">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 17l-5-5m0 0l5-5m-5 5h12" />
                 </svg>

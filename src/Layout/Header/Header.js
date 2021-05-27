@@ -1,10 +1,10 @@
 import React,{ Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
+import { useSelector } from 'react-redux'
+
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
+  MemoryRouter as Router,
   Link
 } from 'react-router-dom'
 
@@ -26,6 +26,7 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
   }
 const Header = () => {
+  const shopID = useSelector((state) => state.booking.storeID)
     return (
         <Disclosure as="nav" className="col-span-full lg:grid lg:grid-cols-1 text-center ">
           {({ open }) => (
@@ -45,7 +46,7 @@ const Header = () => {
                     {listItems.map((item) => (
                         <Link 
                           className="border-transparent text-main hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-md font-medium"   
-                          to={item.to} 
+                          to={`${shopID}/${item.to}`} 
                           key={item.text}>
                             {item.text}
                           </Link>

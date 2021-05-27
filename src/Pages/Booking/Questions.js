@@ -4,37 +4,41 @@ import { useSelector, useDispatch } from 'react-redux'
 import {selectStep, bookingStatus} from '../../Store/Actions';
 import { useForm } from 'react-hook-form';
 import { useHistory } from "react-router-dom";
+import { useParams } from "react-router";
 
 const Questions = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     // const steps = useSelector((state) => state.booking.stepList)
     const { register, handleSubmit, errors } = useForm();
-    const onSubmit = (data) => {
-        console.log(data);
-        dispatch(selectStep(data));
-        history.push("/summary");
-    }
-    console.log(errors);
     const bookingInfo = useSelector((state) => state.booking.questions)
     const bookingService = useSelector((state) => state.booking.selectedService)
     const bookingStaff = useSelector((state) => state.booking.selectedProfessional)
     const bookingDate = useSelector((state) => state.booking.selectedDate)
     const bookingSlot = useSelector((state) => state.booking.selectedSlot)
     const bookingStat = useSelector((state) => state.booking.bookingStatus)
-  
+    const shopID = useSelector((state) => state.booking.storeID)
+
     const [activeStep, setActiveStep] = React.useState(0);
     const [skipped, setSkipped] = React.useState(new Set());
     const [open, setOpen] = React.useState(false);
     const steps = bookingInfo.length;
-    
-  console.log(steps)
-  console.log(bookingInfo)
+    let { id } = useParams();
+
     const [questions, setQuestions] = React.useState([]);
     const [answers,setAnswers] = React.useState(new Array(steps).fill(""));
-  
-  console.log("questions",questions)
-  console.log("answers",answers)
+
+  useEffect(() => {
+    if(typeof window !== 'undefined' && !shopID) {
+      history.push(`/${id}/services`)
+    } else {
+        // dispatch(bookingStaff(staff.id))
+    }
+},[]);  
+  const onSubmit = (data) => {
+    dispatch(selectStep(data));
+    history.push(`/${shopID}/summary`);
+}
     const [state, setState] = React.useState({   
         step1: 'Do you have any pre existing health conditions or allergies?',
         step2: 'Do you want to add extra services',
@@ -47,7 +51,7 @@ const Questions = () => {
       //   loggedIn: accState.isLoggedIn,
     });
     const [bookStatus, setBookStatus] = React.useState({
-        store_id: 1,
+        store_id: shopID,
         date: bookingDate,
         slot_value: bookingSlot,
         service_id: bookingService,
@@ -107,7 +111,7 @@ const Questions = () => {
           const uniqueObjects = [...new Map(updateQuest.map(item => [item.id, item])).values()];
           const finalBookStatus = {...bookStatus, answers: [...uniqueObjects]};
           dispatch(bookingStatus(finalBookStatus));
-          history.push("/summary");
+          history.push(`/${shopID}/summary`);
         //   API.post('placebooking/now',bookingStat, {headers: {'Authorization': `Bearer ${localStorage.getItem('token')}`}})
         //   .then((response) => {
         //     // console.log(response);
@@ -129,7 +133,7 @@ const Questions = () => {
     };
     const handleBack = () => {
       if(activeStep === 0) {
-        history.push("/professionals");
+        history.push(`/${shopID}/professionals`);
       }
       setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
@@ -191,26 +195,6 @@ const Questions = () => {
             <div className="w-full h-auto relative " >
                 <h1 className="text-main font-bold text-lg pb-4 pt-2 ">4. Tell us know a more about yourself.</h1>
                     <nav className="absolute right-5 top-5" aria-label="Progress">
-                            {/* <ol className="ml-8 flex items-center space-x-5">
-                                {bookingInfo.map((step) => (
-                                <li key={step.name}>
-                                    {step.status === 'complete' ? (
-                                    <a href={step.href} className="block w-2.5 h-2.5 bg-main rounded-full hover:bg-main">
-                                        <span className="sr-only">{step.name}</span>
-                                    </a>
-                                    ) : step.status === 'current' ? (
-                                    <a href={step.href} className="relative flex items-center justify-center" aria-current="step">
-                                        <span className="relative block w-2.5 h-2.5 bg-main rounded-full" aria-hidden="true" />
-                                        <span className="sr-only">{step.name}</span>
-                                    </a>
-                                    ) : (
-                                    <a href={step.href} className="block w-2.5 h-2.5 bg-gray-200 rounded-full hover:bg-gray-400">
-                                        <span className="sr-only">{step.name}</span>
-                                    </a>
-                                    )}
-                                </li>
-                                ))}
-                            </ol> */}
                             <Stepper 
                             className="ml-8 flex items-center space-x-2"
                             style={{backgroundColor:"transparent",padding:"0"}}

@@ -3,6 +3,7 @@ import {
 } from 'redux'
 import * as types from '../Actions/actionTypes'
 const defaultState = {
+  storeID:"",
   selectedService: {},
   serviceList: [],
   professionalList: [{
@@ -186,6 +187,10 @@ const defaultState = {
 // booking REDUCER
 const bookingReducer = (state = defaultState, action) => {
   switch (action.type) {
+    case types.STORE_ID:
+      return {
+        ...state, storeID: action.payload
+      }
     case types.SERVICE_SELECT:
       return {
         ...state, selectedService: action.payload

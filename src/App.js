@@ -12,13 +12,13 @@ function App(pageProps) {
   return (
     <AuthContextProvider>
       <Provider store={store}>
-    <Layout>
-     <BrowserRouter>
-       <Pages/>
-     </BrowserRouter>
-      </Layout>
+        <Layout>
+          <BrowserRouter>
+            <Pages />
+          </BrowserRouter>
+        </Layout>
       </Provider>
-      </AuthContextProvider>
+    </AuthContextProvider>
  )
 }
 
