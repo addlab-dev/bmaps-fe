@@ -14,28 +14,13 @@ const defaultState = {
       text: 'Appointments',
     },
     {
-      to: 'account',
+      to: 'login',
       text: 'Account',
     },
   ],
   selectedService: {},
   serviceList: [],
-  professionalList: [{
-      name: 'Liviana Arsenio',
-      id: 1
-    },
-    {
-      name: 'Agnese Palladino',
-      id: 2
-    },
-    {
-      name: 'Terrance Wolff',
-      id: 4
-    },
-    {
-      name: 'Liviana Arsenio',
-      id: 6
-    },
+  professionalList: [
   ],
   stepList: [{
       name: 'Step 1',
