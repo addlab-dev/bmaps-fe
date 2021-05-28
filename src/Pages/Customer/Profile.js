@@ -1,6 +1,22 @@
-import React from 'react'
+import React,{ useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { useParams } from "react-router";
+import { useHistory } from "react-router-dom";
+import Api from '../../Api/Api';
 
 const Profile = () => {
+    let { id } = useParams();
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const shopID = useSelector((state) => state.booking.storeID)
+
+    useEffect(() => {
+        if(typeof window !== 'undefined' && !shopID) {
+          history.push(`/${id}/services`)
+        } else {
+            // dispatch(bookingStaff(staff.id))
+        }
+    },[]); 
     return(
         <>
     <div className="col-span-6 shadow-2xl p-8 row-span-9 overflow-y-auto rounded-t-xl h-full bg-red-50 relative">
