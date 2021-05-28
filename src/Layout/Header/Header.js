@@ -2,31 +2,19 @@ import React,{ Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
 import { useSelector } from 'react-redux'
-
 import {
-  MemoryRouter as Router,
+  BrowserRouter as Router,
+  useLocation,
   Link
 } from 'react-router-dom'
 
-const listItems = [
-  {
-    to: '/services',
-    text: 'Services',
-  },
-  {
-    to: '/appointments',
-    text: 'Appointments',
-  },
-  {
-    to: '/account',
-    text: 'Account',
-  },
-]
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
   }
 const Header = () => {
+  const menuItems = useSelector((state) => state.booking.menuItems)
   const shopID = useSelector((state) => state.booking.storeID)
+  console.log(menuItems)
     return (
         <Disclosure as="nav" className="col-span-full lg:grid lg:grid-cols-1 text-center ">
           {({ open }) => (
@@ -43,10 +31,10 @@ const Header = () => {
                     </div>
                     <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
                       <Router>
-                    {listItems.map((item) => (
+                    {menuItems.map((item) => (
                         <Link 
                           className="border-transparent text-main hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-md font-medium"   
-                          to={`${shopID}/${item.to}`} 
+                          to={`/${shopID}/${item.to}`} 
                           key={item.text}>
                             {item.text}
                           </Link>
@@ -86,7 +74,7 @@ const Header = () => {
                           >
                             <Menu.Items
                               static
-                              className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+                              className="z-10 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
                             >
                               <Menu.Item>
                                 {({ active }) => (
