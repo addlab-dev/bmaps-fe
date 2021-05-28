@@ -7,6 +7,7 @@ import {
   useLocation,
   Link
 } from 'react-router-dom'
+import Services from '../../Pages/Booking/Services'
 const menuItems = [
   {
     to: 'services',
@@ -46,7 +47,7 @@ const Header = () => {
                     {menuItems.map((item) => (
                         <Link 
                           className="border-transparent text-main hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-md font-medium"   
-                          to={`/${shopID}/${item.to}`} 
+                          to={location => ({ ...location, pathname: item.to })}
                           key={item.text}>
                             {item.text}
                           </Link>
@@ -55,10 +56,10 @@ const Header = () => {
                     </div>
                   </div>
                   <div className="hidden sm:ml-6 sm:flex sm:items-center">
-                    <button className="bg-white p-1 rounded-full text-main hover:text-main focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green">
+                    {/* <button className="bg-white p-1 rounded-full text-main hover:text-main focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green">
                       <span className="sr-only">View notifications</span>
                       <BellIcon className="h-6 w-6" aria-hidden="true" />
-                    </button>
+                    </button> */}
     
                     {/* Profile dropdown */}
                     <Menu as="div" className="ml-3 relative">
@@ -88,7 +89,7 @@ const Header = () => {
                               static
                               className="z-10 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
                             >
-                              <Menu.Item>
+                              {/* <Menu.Item>
                                 {({ active }) => (
                                   <a
                                     href="javascript:void(0);"
@@ -113,7 +114,7 @@ const Header = () => {
                                     Settings
                                   </a>
                                 )}
-                              </Menu.Item>
+                              </Menu.Item> */}
                               <Menu.Item>
                                 {({ active }) => (
                                   <a
