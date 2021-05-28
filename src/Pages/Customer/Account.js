@@ -11,8 +11,9 @@ const Account = () => {
     const shopID = useSelector((state) => state.booking.storeID)
 
     useEffect(() => {
+        console.log("account")
         if(typeof window !== 'undefined' && !shopID) {
-          history.push(`/${id}/services`)
+        //   history.push(`/${id}/services`)
         } else {
             // dispatch(bookingStaff(staff.id))
         }

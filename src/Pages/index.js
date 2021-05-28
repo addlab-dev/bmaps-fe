@@ -11,12 +11,18 @@ import Summary from './Booking/Summary'
 import ResetPassword from './Customer/ResetPassword'
 import Account from './Customer/Account'
 import Appointments from './Customer/Appointments'
+import {useParams} from 'react-router'
 
+const ShopID = () => {
+    let {id} = useParams();
+    console.log(id)
+    return (<div></div>)
+  }
 const Pages = () => {
     const {authState} = useAuthContext();
-    console.log(!authState.token)
+    console.log(authState.token)
     return <div>
-        <BrowserRouter>
+        <ShopID />
             <Switch>
                 <Route exact component={Services} path="/:id/services" />
                 <Route component={Professionals} path="/:id/professionals"  />
@@ -27,16 +33,9 @@ const Pages = () => {
                 <Route component={Register} path="/:id/register" />
                 <Route component={Login} path="/:id/login" />
                 <Route component={ResetPassword} path="/:id/resetPassword" />
+                {authState.token && <Route exact component={Account} path="/:id/account"  />}
+                {authState.token && <Route exact component={Appointments} path="/:id/appointments"  />}
             </Switch>
-        </BrowserRouter>
-        {authState.token ? (
-        <BrowserRouter>
-            <Switch>
-                <Route component={Account} path="/:id/account"  />
-                <Route component={Appointments} path="/:id/appointments"  />
-            </Switch>
-        </BrowserRouter>
-    ) : ("")}
     </div>
 }
 export default Pages

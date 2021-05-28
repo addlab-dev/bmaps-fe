@@ -7,12 +7,24 @@ import {
   useLocation,
   Link
 } from 'react-router-dom'
-
+const menuItems = [
+  {
+    to: 'services',
+    text: 'Services',
+  },
+  {
+    to: 'appointments',
+    text: 'Appointments',
+  },
+  {
+    to: 'login',
+    text: 'Account',
+  },
+]
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
   }
 const Header = () => {
-  const menuItems = useSelector((state) => state.booking.menuItems)
   const shopID = useSelector((state) => state.booking.storeID)
   console.log(menuItems)
     return (

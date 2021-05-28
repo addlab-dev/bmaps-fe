@@ -4,20 +4,6 @@ import {
 import * as types from '../Actions/actionTypes'
 const defaultState = {
   storeID:"",
-  menuItems : [
-    {
-      to: 'services',
-      text: 'Services',
-    },
-    {
-      to: 'appointments',
-      text: 'Appointments',
-    },
-    {
-      to: 'login',
-      text: 'Account',
-    },
-  ],
   selectedService: {},
   serviceList: [],
   professionalList: [

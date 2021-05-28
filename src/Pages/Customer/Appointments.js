@@ -13,7 +13,7 @@ const Appointments = () => {
 
   useEffect(() => {
     if(typeof window !== 'undefined' && !shopID) {
-      history.push(`/${id}/services`)
+      // history.push(`/${id}/services`)
     } else {
         // dispatch(bookingStaff(staff.id))
     }
