@@ -11,6 +11,18 @@ class ApiInit extends ApiBase {
       const resData = await this.get('shop/'+shop+'/services', null).then((res) => res.data)
       return resData
     }
+    async getSlots(shop,service,date) {
+      const resData = await this.get('shop/'+shop+'/services/'+service+'/slots/'+date, null).then((res) => res.data)
+      return resData
+    }
+    async getProf(shop,service,date) {
+      const resData = await this.get('shop/'+shop+'/services/'+service+'/slots/'+date+'/staff', null).then((res) => res.data)
+      return resData
+    }
+    async getQuest(shop,service) {
+      const resData = await this.get('shop/'+shop+'/services/'+service+'/questions', null).then((res) => res.data)
+      return resData
+    }
 
 }
 

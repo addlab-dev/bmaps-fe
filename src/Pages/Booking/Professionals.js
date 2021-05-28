@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import {selectProfessional} from '../../Store/Actions';
+import {selectProfessional,professionalList} from '../../Store/Actions';
 import { useForm } from 'react-hook-form';
 import { useHistory } from "react-router-dom";
 import { useParams } from "react-router";
+import Api from '../../Api/Api';
+
 
 const Professionals = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const professionals = useSelector((state) => state.booking.professionalList)
+    const bookingService = useSelector((state) => state.booking.selectedService)
+    const bookingDate = useSelector((state) => state.booking.selectedDate)
     const shopID = useSelector((state) => state.booking.storeID)
     const { register, handleSubmit, errors } = useForm();
     const [searchValue, setSearchValue] = useState("");
@@ -21,6 +25,12 @@ const Professionals = () => {
         if(typeof window !== 'undefined' && !shopID) {
           history.push(`/${id}/services`)
         } else {
+            let newSelDate = bookingDate.toLocaleDateString("it-IT").slice(0, 10).replace(/\//g, '-');
+            Api.getProf(id, bookingService.service, newSelDate ).then((res) => {
+                // setPlans(res)
+                console.log(res)
+                dispatch(professionalList(res))
+            })
             // dispatch(bookingStaff(staff.id))
         }
     },[]); 

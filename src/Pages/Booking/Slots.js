@@ -3,10 +3,11 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { RadioGroup } from '@headlessui/react'
 import { useSelector, useDispatch } from 'react-redux'
-import { selectSlot, selectDate} from '../../Store/Actions';
+import { selectSlot, selectDate, slotList} from '../../Store/Actions';
 import { useForm } from 'react-hook-form';
 import { useHistory } from "react-router-dom";
 import { useParams } from "react-router";
+import Api from '../../Api/Api';
 
 const calendarSetting = {
     locale : 'it-IT',
@@ -24,12 +25,20 @@ const Slots = () => {
     const history = useHistory();
     const plans = useSelector((state) => state.booking.slotList)
     const shopID = useSelector((state) => state.booking.storeID)
+    const bookingService = useSelector((state) => state.booking.selectedService)
     const { register, handleSubmit, errors } = useForm();
+    // const [plans,setPlans] = useState();
     const [selected, setSelected] = useState(plans[0])
     const [value, setValue] = useState(new Date());
     let { id } = useParams();
     const onDateChange = (event) => {
       setValue(event);
+      let newSelDate = event.toLocaleDateString("it-IT").slice(0, 10).replace(/\//g, '-');
+      Api.getSlots(id, bookingService.service, newSelDate ).then((res) => {
+        // setPlans(res)
+        console.log(res)
+        dispatch(slotList(res))
+    })
         // let newSelDate = event.toLocaleDateString("it-IT").slice(0, 10).replace(/\//g, '-');
     }
     const onSubmit = (data) => {
@@ -39,10 +48,16 @@ const Slots = () => {
     }
     
     useEffect(() => {
+      let today = new Date()
+      let newSelDate = today.toLocaleDateString("it-IT").slice(0, 10).replace(/\//g, '-');
       if(typeof window !== 'undefined' && !shopID) {
         history.push(`/${id}/services`)
       } else {
-          // dispatch(bookingStaff(staff.id))
+        Api.getSlots(id, bookingService.service, newSelDate ).then((res) => {
+          // setPlans(res)
+          console.log(res)
+          dispatch(slotList(res))
+      })
       }
   },[]);  
 
@@ -51,7 +66,7 @@ const Slots = () => {
         <>
         <div className="col-span-6 shadow-2xl p-8 row-span-9 overflow-y-auto h-full rounded-t-xl bg-red-50 relative">
             <div className="w-full h-auto" >
-                <h1 className="text-main font-bold text-lg pb-4 pt-2 ">2. Select your prefrence</h1>
+                <h1 className="text-main font-bold text-lg pb-4 pt-2 ">2. Select your preference</h1>
             </div>
             <form >
             <div className="slots_wrapper mt-5">
@@ -74,8 +89,8 @@ const Slots = () => {
             {plans.map((plan) => (
               <RadioGroup.Option
               as="label" htmlFor={plan.time}
-                key={plan.time}
-                value={plan.time}
+                key={plan.slot}
+                value={plan.dateValue}
                 className={({ active, checked }) =>
                   `${
                     active
@@ -97,12 +112,12 @@ const Slots = () => {
                               checked ? 'text-white' : 'text-gray-900'
                             }`}
                           >
-                            {plan.time}
+                            {plan.slot}
                             <input
-                              id={plan.time}
+                              id={plan.slot}
                               name="time"
                               type="radio"
-                              value={plan.time}
+                              value={plan.dateValue}
                               className="invisible hidden"
                               {...register('time',{ required: true })}
                               />

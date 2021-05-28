@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import {Stepper, Step } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux'
-import {selectStep, bookingStatus} from '../../Store/Actions';
+import {selectStep, bookingStatus, questionList} from '../../Store/Actions';
 import { useForm } from 'react-hook-form';
 import { useHistory } from "react-router-dom";
 import { useParams } from "react-router";
+import Api from '../../Api/Api';
 
 const Questions = () => {
     const dispatch = useDispatch();
@@ -32,6 +33,11 @@ const Questions = () => {
     if(typeof window !== 'undefined' && !shopID) {
       history.push(`/${id}/services`)
     } else {
+      Api.getQuest(id, bookingService.service ).then((res) => {
+        // setPlans(res)
+        console.log(res)
+        dispatch(questionList(res))
+    })
         // dispatch(bookingStaff(staff.id))
     }
 },[]);  

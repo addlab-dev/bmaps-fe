@@ -15,6 +15,8 @@ const Services = () => {
     const shopID = useSelector((state) => state.booking.storeID)
     const { register, handleSubmit, errors } = useForm();
     const [services, setServices] = useState([]);
+    const [selService, setSelService] = useState();
+    const [checkedState, setCheckedState] = useState();
     useEffect(() => {
         dispatch(getStoreID(id))
         Api.getService(id).then((res) => {
@@ -26,7 +28,11 @@ const Services = () => {
         dispatch(selectService(data));
         history.push({pathname:`/${shopID}/slots`, state:{data}});
     }
-    
+    const changeService = (event) => {
+        setSelService(event.target.value);
+        // setCheckedState(selService)
+    }
+    console.log(selService)
     // Replace with api response on load of component
     // dispatch(selectService(selectedService));
     // dispatch(serviceList(response.data.serviceList));
@@ -44,17 +50,19 @@ const Services = () => {
                         {category.services && category.services.map(service => (
                             <div htmlFor={service.id} key={service.id} className="service relative w-full pl-3 border-b border-main">
                                 <label  className="text-main w-full pb-5 pt-5 font-bold flex flex-col justify-center text-md cursor-pointer">
-                                    <span className="flex items-center">{service.vendor_services[0].name}
+                                    <span className="flex items-center">{service.vendor_service.name}
                                     <span className="text-gray-400 text-sm pl-4">{service.duration} Min session</span></span>
                                     <h4 htmlFor={service.id} className="text-main font-bold text-sm mt-3 inline cursor-pointer w-full">€ {service.price}</h4>
                                     <input
                                         id={service.id}
                                         name="service"
                                         type="radio"
+                                        onClick={changeService}
                                         value={service.id}
+                                        // checked={checkedState}
                                         className="focus:text-main h-5 w-5 text-main border-gray-300 absolute right-5"
                                         {...register('service',{ required: true })}/>
-                                    <p className="text-gray-500 text-sm pt-2 w-11/12 font-normal">{service.vendor_services[0].note}</p>
+                                    <p className="text-gray-500 text-sm pt-2 w-11/12 font-normal">{service.vendor_service.note}</p>
                                 </label>
                             </div>))}
                 </section>))} 
