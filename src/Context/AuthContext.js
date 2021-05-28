@@ -44,6 +44,7 @@ const AuthContextProvider = ({ children }) => {
   }, [])
 
   const login = useCallback(async (payload) => {
+    
     await Api.setAccessToken(payload.token)
     dispatch({
       type: actionTypes.LOGIN,

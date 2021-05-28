@@ -1,15 +1,35 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { useForm } from 'react-hook-form'
 import Api from '../../Api/Api';
-
+import useAuthContext from '../../Hooks/useAuthContext'
+import { get } from 'lodash'
 const Login = () => {
     const { register, handleSubmit ,formState: { errors }} = useForm();
-    const onSubmit = (data) => {
-        Api.login(data)
-    };
+    const { login, authState } = useAuthContext()
+    const [err, setErr] = useState(null)
+
+    const onSubmit = async (data) => {
+        try {
+       //   await store.set('login.remember_password', data.remember_password)
+          const res = await Api.login({
+            email: data.email,
+            password: data.password,
+            device_name: 'web',
+          })
+          
+          
+          await login({
+            token: res.plainTextToken,
+          })
+        } catch (error) {
+          setErr(error)
+        }
+        return data
+      }
     return (
         <>
-        <div className="col-span-6 shadow-2xl p-8 row-span-9 overflow-y-auto rounded-t-xl h-full bg-red-50 relative">
+        <div className="col-span-6 shadow-2xl p-8 row-span-9 overflow-y-auto rounded-t-xl h-full bg-red-50 relative h-screen">
+          
         <h1 className="w-full text-main font-medium text-xl pl-1 mb-2" >Login</h1>
             <div className="register_wrapper mt-5 ml-4 h-full relative">
                     <section className="w-full min-h-full mt-4 mb-8 h-auto">
@@ -21,7 +41,7 @@ const Login = () => {
                             type="email"
                             {...register("email",{ required: true, type: 'email' })}
                             id="email"
-                            autocomplete="off"
+                            autoComplete="off"
                             placeholder="Email"
                             className="text-input"   
                             />
@@ -36,7 +56,7 @@ const Login = () => {
                             type="password"
                             { ...register("password",{required:true})}
                             id="password"
-                            autocomplete="off"
+                            autoComplete="off"
                             placeholder="Password"
                             className="text-input"
                             />
@@ -46,10 +66,10 @@ const Login = () => {
                         </div>
                         </div>   
                         <div className="sm:col-span-3 text-right">
-                                <a class="text-gray-400 right-0 font-normal text-sm" href="#">Forgot password ?</a>
+                                <a className="text-gray-400 right-0 font-normal text-sm" href="#">Forgot password ?</a>
                         </div>  
                         <div className="fixed right-12 bottom-12 flex flex-wrap  gap-x-1 items-center justify-center">
-                <div className="pr-5"><span class="text-gray-400 text-sm">Don't have an account ?</span> <a class="text-main font-bold text-sm" href="#">Register</a></div>
+                <div className="pr-5"><span className="text-gray-400 text-sm">Don't have an account ?</span> <a className="text-main font-bold text-sm" href="#">Register</a></div>
             <button type="submit" className="text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg">Login</button>
             </div>                 
                     </form>

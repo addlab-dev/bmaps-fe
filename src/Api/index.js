@@ -20,9 +20,14 @@ class ApiBase {
       this.config = config
 
       if (this.config.baseURL !== undefined) {
+       
+
         this.instance = axios.create({
           baseURL: this.config.baseURL,
         })
+        this.instance.defaults.withCredentials = true;
+        
+
       } else {
         throw new Error('baseURL undefined')
       }
@@ -36,6 +41,7 @@ class ApiBase {
   }
 
   async setAccessToken(token = null) {
+ 
     return new Promise((resolve, reject) => {
       if (!token) {
         throw new Error('token undefined')

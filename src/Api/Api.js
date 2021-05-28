@@ -2,9 +2,11 @@ import ApiBase from './index'
 
 class ApiInit extends ApiBase {
     async login(data) {
-       console.log(data);
-      const resData = await this.post('/user/login', data).then((res) => res.data)
-      return resData
+  
+      const resData = await this.get('/sanctum/csrf-cookie',null).then((response)=> {
+         return this.post('/customers/login', data).then((res) => res.data)
+      })    
+       return resData
     }
 
     async getService(shop) {
