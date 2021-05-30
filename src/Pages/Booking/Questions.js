@@ -41,17 +41,17 @@ const Questions = () => {
     }
 },[]);  
 
-    // const [state, setState] = React.useState({   
-    //     step1: 'Do you have any pre existing health conditions or allergies?',
-    //     step2: 'Do you want to add extra services',
-    //     step3: 'How may sessions do you want for this treatment?',
-    //     textInput: "",
-    //     checkboxValue: false,
-    //     checkboxText1: "I accept and will follow all the safety and hygiene guidelines ruled out by the government and the store.",
-    //     radioValue: "This is radio 2",
-    //   //   registered: accState.registered,
-    //   //   loggedIn: accState.isLoggedIn,
-    // });
+    const [state, setState] = React.useState({   
+        step1: 'Do you have any pre existing health conditions or allergies?',
+        step2: 'Do you want to add extra services',
+        step3: 'How may sessions do you want for this treatment?',
+        textInput: "",
+        checkboxValue: false,
+        checkboxText1: "I accept and will follow all the safety and hygiene guidelines ruled out by the government and the store.",
+        radioValue: "This is radio 2",
+      //   registered: accState.registered,
+      //   loggedIn: accState.isLoggedIn,
+    });
     const [bookStatus, setBookStatus] = React.useState({
         store_id: shopID,
         // date: bookingDate,
