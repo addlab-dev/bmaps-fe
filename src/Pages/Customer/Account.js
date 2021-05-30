@@ -7,23 +7,29 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from "react-router";
 import { useHistory } from "react-router-dom";
 import Api from '../../Api/Api';
-import { profileInfo } from '../../Store/Actions';
+import { profileInfo,loginReturn } from '../../Store/Actions';
 
 const Account = () => {
     let { id } = useParams();
+    const {authState} = useAuthContext();
     const dispatch = useDispatch();
     const history = useHistory();
     const shopID = useSelector((state) => state.booking.storeID)
     const { register, handleSubmit ,formState: { errors }} = useForm();
-    const { login, authState } = useAuthContext()
+    // const { login, authState } = useAuthContext()
     const [err, setErr] = useState(null)
     const [profile, setProfile] = useState(useSelector((state) => state.booking.profile));
     useEffect(() => {
-        if(typeof window != 'undefined' && !shopID) {
-          // history.push(`/${id}/services`) 
-      } 
+    //     if(typeof window != 'undefined' && !shopID) {
+    //       history.push(`/${id}/services`) 
+    //   } 
+    //   else 
+      if(!authState.token) {
+        dispatch(loginReturn("account"))
+        history.push(`/${id}/login`)
+      }
         Api.getProfile( {headers: {'Authorization': `Bearer ${localStorage.getItem('token')}`}})
-        .then((response) => { console.log(response);dispatch(profileInfo(response)); setProfile(response)});
+        .then((response) => {dispatch(profileInfo(response)); setProfile(response)});
     },[]); 
     
     const onSubmit = async (data) => {
@@ -41,9 +47,9 @@ const Account = () => {
             bdate: data.dob,
           })
           
-          await login({
-            token: res.plainTextToken,
-          })
+        //   await login({
+        //     token: res.plainTextToken,
+        //   })
         } catch (error) {
           setErr(error)
         }
@@ -52,7 +58,7 @@ const Account = () => {
     return (
         <>
         <div className="col-span-6 shadow-2xl p-8 row-span-9 overflow-y-auto rounded-t-xl h-full bg-red-50 relative">
-        <h1 className="w-full text-main font-medium text-xl pl-1 mb-2" >Register</h1>
+        <h1 className="w-full text-main font-medium text-xl pl-1 mb-2" >Account</h1>
             <div className="register_wrapper mt-5 ml-4 h-full relative">
                     <section className="w-full min-h-full mt-4 mb-8 pb-28 h-auto">
                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-8 ">

@@ -54,4 +54,8 @@ export const selectService = (selectedService) => dispatch => dispatch({
     type: types.PROFILE_INFO,
     payload: profileInfo
   });
+  export const loginReturn = (loginReturn) => dispatch => dispatch({
+    type: types.LOGIN_RETURN,
+    payload: loginReturn
+  });
   

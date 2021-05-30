@@ -17,15 +17,12 @@ const Summary = () => {
     }
 },[]); 
   const confirmBooking = () => {
-    console.log(bookingStat)
     Api.bookNow(bookingStat, {headers: {'Authorization': `Bearer ${localStorage.getItem('token')}`}})
     .then((response) => {
       if (response.status == 200) {
-        console.log("success")
         history.push(`/${id}/appointments`)
         
       }
-      console.log(response)
     }, (error) => {
       console.log(error);
     });

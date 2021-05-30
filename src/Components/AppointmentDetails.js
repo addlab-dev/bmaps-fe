@@ -1,10 +1,10 @@
 
-import React,{ useState, useEffect } from 'react'
+import React from 'react'
 import Api from '../Api/Api';
 import { useParams } from "react-router";
 import { useHistory } from "react-router-dom";
 
-const BookingInfo = (booking) => {
+const AppointmentDetails = (booking) => {
     let { id } = useParams();
     const history = useHistory();
 
@@ -55,4 +55,4 @@ const BookingInfo = (booking) => {
         </>
     )
 }
-export default BookingInfo
+export default AppointmentDetails

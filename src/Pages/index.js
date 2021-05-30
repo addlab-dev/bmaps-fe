@@ -11,7 +11,7 @@ import Summary from './Booking/Summary'
 import ResetPassword from './Customer/ResetPassword'
 import Account from './Customer/Account'
 import Appointments from './Customer/Appointments'
-import {useParams} from 'react-router'
+import {Redirect, useParams} from 'react-router'
 
 const ShopID = () => {
     let {id} = useParams();
@@ -31,8 +31,10 @@ const Pages = () => {
                 <Route exact component={Register} path="/:id/register" />
                 <Route exact component={Login} path="/:id/login" />
                 <Route exact component={ResetPassword} path="/:id/resetPassword" />
-                {authState.token && <Route exact component={Account} path="/:id/account"  />}
-                {authState.token && <Route exact component={Appointments} path="/:id/appointments"  />}
+                {/* {authState.token && <Route exact component={Account} path="/:id/account"  />} */}
+                <Route exact path="/:id/account">{authState.token ? <Account/> : <Login />}</Route>
+                <Route exact path="/:id/appointments">{authState.token ? <Appointments/> : <Login />}</Route>
+                {/* {authState.token && <Route exact component={Appointments} path="/:id/appointments"  />} */}
             </Switch>
     </div>
 }

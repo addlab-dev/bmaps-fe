@@ -30,18 +30,7 @@ const defaultState = {
     },
   ],
   slotList: [ ],
-  questions: [
-    {
-        "id": 25,
-        "service_id": 14,
-        "order": 0,
-        "question": "Adipisci ab a et sunt. ? ",
-        "type": "1",
-        "created_at": "2021-02-04T14:19:00.000000Z",
-        "updated_at": "2021-02-04T14:19:00.000000Z",
-        "answers": []
-    }
-],
+  questions: [ ],
   selectedProfessional:[],
   selectedSlot:{},
   selectedDate:{},
@@ -61,7 +50,8 @@ const defaultState = {
     address: "",
     gender: "",
     bdate: "",
-  }
+  },
+  loginReturn: "services",
 }
 // booking REDUCER
 const bookingReducer = (state = defaultState, action) => {
@@ -117,6 +107,10 @@ const bookingReducer = (state = defaultState, action) => {
       case types.PROFILE_INFO:
         return {
           ...state, profile: action.payload
+        }
+      case types.LOGIN_RETURN:
+        return {
+          ...state, loginReturn: action.payload
         }
         default:
           return state

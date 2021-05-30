@@ -1,6 +1,6 @@
 import React, {useEffect,useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import {selectService,serviceList,getStoreID} from '../../Store/Actions';
+import {selectService,serviceList,getStoreID,questionList} from '../../Store/Actions';
 import { useForm } from 'react-hook-form';
 import { useHistory } from "react-router-dom";
 import Api from '../../Api/Api';
@@ -10,8 +10,7 @@ const Services = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     let { id } = useParams();
-    const shop_services = useSelector((state) => state.booking.serviceList)
-    const selServ = useSelector((state) => state.booking.selectedService)
+    const shop_services = useSelector((state) => state.booking.serviceList)    
     const shopID = useSelector((state) => state.booking.storeID)
     const { register, handleSubmit, errors } = useForm();
     const [services, setServices] = useState([]);
@@ -26,7 +25,12 @@ const Services = () => {
     }, [])
     const onSubmit = (data) => {
         dispatch(selectService(data));
-        history.push({pathname:`/${shopID}/slots`, state:{data}});
+        Api.getQuest(id, data.service ).then((res) => {
+            dispatch(questionList(res))
+        }).then(()=> {
+            history.push({pathname:`/${shopID}/slots`, state:{data}});
+        })
+        
     }
     const changeService = (event) => {
         setSelService(event.target.value);

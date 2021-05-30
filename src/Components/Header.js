@@ -1,10 +1,13 @@
-import React,{ Fragment } from 'react'
+import React,{ Fragment, useState } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
 import {
   BrowserRouter as Router,
   Link
 } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { loginReturn } from '../Store/Actions';
+
 const menuItems = [
   {
     to: 'services',
@@ -23,6 +26,7 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
   }
 const Header = () => {
+  const dispatch = useDispatch();
     return (
         <Disclosure as="nav" className="col-span-full lg:grid lg:grid-cols-1 text-center ">
           {({ open }) => (
@@ -38,16 +42,14 @@ const Header = () => {
                       />
                     </div>
                     <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
-                      <Router>
                     {menuItems.map((item) => (
                         <Link 
                           className="border-transparent text-main hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-md font-medium"   
                           to={location => ({ ...location, pathname: item.to })}
-                          key={item.text}>
+                          key={item.text} onClick={()=>{dispatch(loginReturn(item.to))}}>
                             {item.text}
                           </Link>
                           ))}
-                      </Router>
                     </div>
                   </div>
                   <div className="hidden sm:ml-6 sm:flex sm:items-center">

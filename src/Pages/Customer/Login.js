@@ -12,6 +12,7 @@ const Login = () => {
     const { login, authState } = useAuthContext()
     const [err, setErr] = useState(null)
     const bookingStat = useSelector((state) => state.booking.bookingStatus)
+    const loginReturn = useSelector((state) => state.booking.loginReturn)
     let { id } = useParams();
     const history = useHistory();
     const onSubmit = async (data) => {
@@ -32,11 +33,7 @@ const Login = () => {
         return data
       }
       const afterLogin = (res) => {
-        if(bookingStat) {
-          history.push(`/${id}/summary`)
-        } else {
-          history.push(`/${id}/services`)
-        }
+          history.push(`/${id}/${loginReturn}`)
       }
     return (
         <>

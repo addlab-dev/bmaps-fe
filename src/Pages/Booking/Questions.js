@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {Stepper, Step } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux'
-import {selectStep, bookingStatus, questionList} from '../../Store/Actions';
+import {selectStep, bookingStatus, questionList, loginReturn} from '../../Store/Actions';
 import { useForm } from 'react-hook-form';
 import { useHistory } from "react-router-dom";
 import { useParams } from "react-router";
@@ -11,7 +11,6 @@ import useAuthContext from '../../Hooks/useAuthContext'
 const Questions = () => {
     const dispatch = useDispatch();
     const history = useHistory();
-    // const steps = useSelector((state) => state.booking.stepList)
     const { register, handleSubmit, errors } = useForm();
     const bookingInfo = useSelector((state) => state.booking.questions)
     const bookingService = useSelector((state) => state.booking.selectedService)
@@ -34,11 +33,7 @@ const Questions = () => {
   useEffect(() => {
     if(typeof window !== 'undefined' && !shopID) {
       history.push(`/${id}/services`)
-    } else {
-      Api.getQuest(id, bookingService.service ).then((res) => {
-        dispatch(questionList(res))
-    })
-    }
+    } 
 },[]);  
 
     const [state, setState] = React.useState({   
@@ -49,8 +44,6 @@ const Questions = () => {
         checkboxValue: false,
         checkboxText1: "I accept and will follow all the safety and hygiene guidelines ruled out by the government and the store.",
         radioValue: "This is radio 2",
-      //   registered: accState.registered,
-      //   loggedIn: accState.isLoggedIn,
     });
     const [bookStatus, setBookStatus] = React.useState({
         store_id: shopID,
@@ -59,17 +52,6 @@ const Questions = () => {
         service_id: bookingService.service,
         staff_id: bookingStaff.prof,
     })
-  
-  //   const handleLoggedIn = () => () => {
-  //     debugger
-  //     // API.post('placebooking/now',bookingStat)
-  //     // .then((response) => {
-  //     //   // console.log(response);
-  //     //   router.push(`/store/${id}/book/${serv_id}/confirmation`)
-  //     // }, (error) => {
-  //     //   // console.log(error);
-  //     // });
-  //   }
   
     const handleChange = (e) => {
       const newAnswers = [...answers];
@@ -116,6 +98,7 @@ const Questions = () => {
           if (authState.token) {
             history.push(`/${shopID}/summary`);
           } else {
+            dispatch(loginReturn("summary"))
             history.push(`/${shopID}/login`);
           }
       } else {
