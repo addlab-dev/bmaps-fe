@@ -2,11 +2,13 @@ import React, {useEffect} from 'react'
 import { useSelector } from 'react-redux'
 import { useHistory } from "react-router-dom";
 import { useParams } from "react-router";
+import Api from '../../Api/Api';
 
 const Summary = () => {
   const history = useHistory();
   let { id } = useParams();
   const shopID = useSelector((state) => state.booking.storeID)
+  const bookingStat = useSelector((state) => state.booking.bookingStatus)
   useEffect(() => {
     if(typeof window !== 'undefined' && !shopID) {
       history.push(`/${id}/services`)
@@ -14,6 +16,17 @@ const Summary = () => {
         // dispatch(bookingStaff(staff.id))
     }
 },[]); 
+  const confirmBooking = () => {
+    Api.bookNow(bookingStat, {headers: {'Authorization': `Bearer ${localStorage.getItem('token')}`}})
+    .then((response) => {
+      // console.log(response);
+      if (response.status === 200) {
+        // router.push(`/store/${id}/book/${serv_id}/confirmation`)
+      }
+    }, (error) => {
+      // console.log(error);
+    });
+  }
     return(
         <>
     <div className="col-span-6 shadow-2xl p-8 row-span-9 overflow-y-auto rounded-t-xl h-full bg-red-50 relative">
@@ -57,7 +70,7 @@ const Summary = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 17l-5-5m0 0l5-5m-5 5h12" />
                 </svg>
                 </button>
-            <button className="text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg">Confirm Booking</button>
+            <button onCLick={confirmBooking} className="text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg">Confirm Booking</button>
             </div>
         </div>
         </>

@@ -1,23 +1,55 @@
-import React from 'react';
-
-
+import React,{useState} from 'react'
+import { useForm } from 'react-hook-form'
+import Api from '../../Api/Api';
+import useAuthContext from '../../Hooks/useAuthContext'
+import { get } from 'lodash';
+import { BrowserRouter as Router, Link} from 'react-router-dom'
 
 const Register = () => {
+    const { register, handleSubmit ,formState: { errors }} = useForm();
+    const { login, authState } = useAuthContext()
+    const [err, setErr] = useState(null)
+    
+    const onSubmit = async (data) => {
+        try {
+       //   await store.set('login.remember_password', data.remember_password)
+          const res = await Api.register({
+            fname: data.first_name,
+            lname: data.last_name,
+            email: data.email,
+            password: data.password,
+            password_confirmation: data.conf_password,
+            contact: data.phone,
+            address: data.address,
+            gender: data.gender,
+            bdate: data.dob,
+          })
+          
+          
+          await login({
+            token: res.plainTextToken,
+          })
+        } catch (error) {
+          setErr(error)
+        }
+        return data
+      }
     return (
         <>
         <div className="col-span-6 shadow-2xl p-8 row-span-9 overflow-y-auto rounded-t-xl h-full bg-red-50 relative">
         <h1 className="w-full text-main font-medium text-xl pl-1 mb-2" >Register</h1>
             <div className="register_wrapper mt-5 ml-4 h-full relative">
                     <section className="w-full min-h-full mt-4 mb-8 pb-28 h-auto">
-                    <form className="space-y-8 ">
+                    <form onSubmit={handleSubmit(onSubmit)} className="space-y-8 ">
                     <div className="sm:col-span-3">
                         <div className="mt-1">
                             <input
                             type="text"
+                            {...register("first_name",{ required: true, type: 'text' })}
                             name="first_name"
                             id="first_name"
                             autocomplete="off"
-                            placeholder="Name"
+                            placeholder="First Name"
                             className="text-input"
                             />
                         </div>
@@ -26,6 +58,7 @@ const Register = () => {
                         <div className="mt-1">
                             <input
                             type="text"
+                            {...register("last_name",{ required: true, type: 'text' })}
                             name="last_name"
                             id="last_name"
                             autocomplete="off"
@@ -38,6 +71,7 @@ const Register = () => {
                         <div className="mt-1">
                             <input
                             type="text"
+                            {...register("phone",{ required: true, type: 'email' })}
                             name="phone"
                             id="phone"
                             autocomplete="off"
@@ -50,6 +84,7 @@ const Register = () => {
                         <div className="mt-1">
                             <input
                             type="email"
+                            {...register("email",{ required: true, type: 'email' })}
                             name="email"
                             id="email"
                             autocomplete="off"
@@ -61,7 +96,34 @@ const Register = () => {
                         <div className="sm:col-span-3">
                         <div className="mt-1">
                             <input
+                            type="Password"
+                            {...register("password",{ required: true, type: 'password' })}
+                            name="password"
+                            id="Password"
+                            autocomplete="off"
+                            placeholder="Password"
+                            className="text-input"
+                            />
+                        </div>
+                        </div>
+                        <div className="sm:col-span-3">
+                        <div className="mt-1">
+                            <input
+                            type="password"
+                            {...register("conf_password",{ required: true, type: 'password' })}
+                            name="conf_password"
+                            id="conf_password"
+                            autocomplete="off"
+                            placeholder="Confirm password"
+                            className="text-input"
+                            />
+                        </div>
+                        </div>
+                        <div className="sm:col-span-3">
+                        <div className="mt-1">
+                            <input
                             type="date"
+                            {...register("dob",{ required: true, type: 'email' })}
                             name="dob"
                             id="dob"
                             autocomplete="off"
@@ -76,6 +138,7 @@ const Register = () => {
                         <select
                             id="gender"
                             name="gender"
+                            {...register("gender",{ required: true })}
                             autoComplete="gender"
                             className="text-input">
                                 <option>Gender</option>
@@ -90,6 +153,7 @@ const Register = () => {
                         <div className="mt-1">
                             <input
                             type="text"
+                            {...register("address",{ required: true, type: 'text' })}
                             name="address"
                             id="address"
                             autocomplete="off"
@@ -103,6 +167,7 @@ const Register = () => {
                         <div className="mt-3">
                             <input
                             id="hygen"
+                            {...register("hygprivacy",{ required: true, type: 'checkbox' })}
                             name="hygprivacy"
                             type="checkbox"
                             className="focus:text-main h-5 w-5 top-1/3 text-main border-gray-300 mr-3 focus:ring-0 focus:outline-none outline-none" />
@@ -113,6 +178,7 @@ const Register = () => {
                         <div className="mt-3">
                             <input
                             id="privacy"
+                            {...register("privacy",{ required: true, type: 'checkbox' })}
                             name="privacy"
                             type="checkbox"
                             className="focus:text-main h-5 w-5 top-1/3 text-main border-gray-300 mr-3 focus:ring-0 focus:outline-none outline-none" />
@@ -123,6 +189,7 @@ const Register = () => {
                         <div className="mt-3">
                         <input
                             id="newsconsent"
+                            {...register("newsconsent",{ required: true, type: 'checkbox' })}
                             name="newsconsent"
                             type="checkbox"
                             className="focus:text-main h-5 w-5 top-1/3 text-main border-gray-300 mr-3 focus:ring-0 focus:outline-none outline-none" />
@@ -131,15 +198,16 @@ const Register = () => {
                         </label> 
                         </div>
                         </div>
+                        <div className="fixed right-12 bottom-12 flex flex-wrap  gap-x-1 items-center justify-center">
+                <div className="pr-5"><span class="text-gray-400 text-sm">have an account ?</span> <Link to={location => ({ ...location, pathname: 'login' })} class="text-main font-bold text-sm">Login</Link></div>
+
+            <input type="submit" className="text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg" value="Register"/>
+            </div>
                     </form>
                     </section> 
             </div>
 
-            <div className="fixed right-12 bottom-12 flex flex-wrap  gap-x-1 items-center justify-center">
-                <div className="pr-5"><span class="text-gray-400 text-sm">have an account ?</span> <a class="text-main font-bold text-sm" href="#">Login</a></div>
-
-            <button className="text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg">Register</button>
-            </div>
+            
         </div>
         </>
     )

@@ -3,6 +3,8 @@ import { useForm } from 'react-hook-form'
 import Api from '../../Api/Api';
 import useAuthContext from '../../Hooks/useAuthContext'
 import { get } from 'lodash'
+import { BrowserRouter as Router, Link} from 'react-router-dom'
+
 const Login = () => {
     const { register, handleSubmit ,formState: { errors }} = useForm();
     const { login, authState } = useAuthContext()
@@ -16,15 +18,18 @@ const Login = () => {
             password: data.password,
             device_name: 'web',
           })
-          
-          
           await login({
             token: res.plainTextToken,
           })
+          afterLogin(res)
         } catch (error) {
-          setErr(error)
+          setErr(error.data.error)
+          console.log(error.data.error)
         }
         return data
+      }
+      const afterLogin = (res) => {
+        console.log(res)
       }
     return (
         <>
@@ -32,7 +37,7 @@ const Login = () => {
           
         <h1 className="w-full text-main font-medium text-xl pl-1 mb-2" >Login</h1>
             <div className="register_wrapper mt-5 ml-4 h-full relative">
-                    <section className="w-full min-h-full mt-4 mb-8 h-auto">
+                <section className="w-full min-h-full mt-4 mb-8 h-auto">
                     <h1 className="mb-10 w-full text-center text-main font-bold text-lg">Login to your account to continue with the booking process</h1>
                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-8 ">
                     <div className="sm:col-span-3">
@@ -65,17 +70,19 @@ const Login = () => {
                             </span>
                         </div>
                         </div>   
+                        <div className="sm:col-span-3 text-left">
+                        <span className="text-red-600 text-xs pl-2">{err? err : ""}</span>
+                        </div>  
                         <div className="sm:col-span-3 text-right">
                                 <a className="text-gray-400 right-0 font-normal text-sm" href="#">Forgot password ?</a>
                         </div>  
                         <div className="fixed right-12 bottom-12 flex flex-wrap  gap-x-1 items-center justify-center">
-                <div className="pr-5"><span className="text-gray-400 text-sm">Don't have an account ?</span> <a className="text-main font-bold text-sm" href="#">Register</a></div>
+                <div className="pr-5"><span className="text-gray-400 text-sm">Don't have an account ?</span> <Link to={location => ({ ...location, pathname: 'register' })} className="text-main font-bold text-sm">Register</Link></div>
             <button type="submit" className="text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg">Login</button>
             </div>                 
-                    </form>
-                    </section> 
-            </div>
-            
+           </form>
+         </section> 
+       </div>            
         </div>
         </>
     )

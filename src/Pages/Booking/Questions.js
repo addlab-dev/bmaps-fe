@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form';
 import { useHistory } from "react-router-dom";
 import { useParams } from "react-router";
 import Api from '../../Api/Api';
+import useAuthContext from '../../Hooks/useAuthContext'
 
 const Questions = () => {
     const dispatch = useDispatch();
@@ -19,6 +20,7 @@ const Questions = () => {
     const bookingSlot = useSelector((state) => state.booking.selectedSlot)
     const bookingStat = useSelector((state) => state.booking.bookingStatus)
     const shopID = useSelector((state) => state.booking.storeID)
+    const {authState} = useAuthContext();
 
     const [activeStep, setActiveStep] = React.useState(0);
     const [skipped, setSkipped] = React.useState(new Set());
@@ -117,16 +119,14 @@ const Questions = () => {
           const uniqueObjects = [...new Map(updateQuest.map(item => [item.id, item])).values()];
           const finalBookStatus = {...bookStatus, answers: [...uniqueObjects]};
           dispatch(bookingStatus(finalBookStatus));
-          history.push(`/${shopID}/summary`);
-        //   API.post('placebooking/now',bookingStat, {headers: {'Authorization': `Bearer ${localStorage.getItem('token')}`}})
-        //   .then((response) => {
-        //     // console.log(response);
-        //     if (response.status === 200) {
-        //       router.push(`/store/${id}/book/${serv_id}/confirmation`)
-        //     }
-        //   }, (error) => {
-        //     // console.log(error);
-        //   });
+          // history.push(`/${shopID}/summary`);
+          
+          console.log(authState.token)
+          if (authState.token) {
+            history.push(`/${shopID}/summary`);
+          } else {
+            history.push(`/${shopID}/login`);
+          }
       } else {
         let newSkipped = skipped;
         if (isStepSkipped(activeStep)) {

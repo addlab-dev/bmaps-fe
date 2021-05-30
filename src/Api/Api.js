@@ -2,9 +2,14 @@ import ApiBase from './index'
 
 class ApiInit extends ApiBase {
     async login(data) {
-  
       const resData = await this.get('/sanctum/csrf-cookie',null).then((response)=> {
          return this.post('/customers/login', data).then((res) => res.data)
+      })    
+       return resData
+    }
+    async register(data) {
+      const resData = await this.get('/sanctum/csrf-cookie',null).then((response)=> {
+         return this.post('/customers/register', data).then((res) => res.data)
       })    
        return resData
     }
@@ -23,6 +28,10 @@ class ApiInit extends ApiBase {
     }
     async getQuest(shop,service) {
       const resData = await this.get('shop/'+shop+'/services/'+service+'/questions', null).then((res) => res.data)
+      return resData
+    }
+    async bookNow(data) {
+      const resData = await this.post('services/booknow', data).then((res) => res.data)
       return resData
     }
 
