@@ -11,6 +11,7 @@ const Services = () => {
     const history = useHistory();
     let { id } = useParams();
     const shop_services = useSelector((state) => state.booking.serviceList)    
+    const selectedService = useSelector((state) => state.booking.selectedService)    
     const shopID = useSelector((state) => state.booking.storeID)
     const { register, handleSubmit, errors } = useForm();
     const [services, setServices] = useState([]);
@@ -22,6 +23,7 @@ const Services = () => {
             setServices(res)
             dispatch(serviceList(res))
         })
+        setSelService(selectedService)
     }, [])
     const onSubmit = (data) => {
         dispatch(selectService(data));

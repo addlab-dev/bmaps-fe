@@ -1,6 +1,5 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { BrowserRouter } from 'react-router-dom'
-import Layout from './Layout/Layout'
 import AuthContextProvider from './Context/AuthContext'
 import Pages from './Pages'
 import Header from './Components/Header'
@@ -13,14 +12,12 @@ function App(pageProps) {
   return (
     <AuthContextProvider>
       <Provider store={store}>
-        <Layout>
-          <BrowserRouter>
+        <BrowserRouter>
           <div className="h-screen bg-appbg">
             <Header/>
             <Pages {...pageProps}/>
-            </div>
-          </BrowserRouter>
-        </Layout>
+          </div>
+        </BrowserRouter>
       </Provider>
     </AuthContextProvider>
  )
