@@ -18,7 +18,7 @@ const menuItems = [
     text: 'Appointments',
   },
   {
-    to: 'login',
+    to: 'account',
     text: 'Account',
   },
 ]
@@ -27,7 +27,6 @@ function classNames(...classes) {
   }
 const Header = () => {
   const shopID = useSelector((state) => state.booking.storeID)
-  console.log(menuItems)
     return (
         <Disclosure as="nav" className="col-span-full lg:grid lg:grid-cols-1 text-center ">
           {({ open }) => (

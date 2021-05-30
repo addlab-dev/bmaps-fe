@@ -28,12 +28,10 @@ const Login = () => {
           afterLogin(res)
         } catch (error) {
           setErr(error.data.error)
-          console.log(error.data.error)
         }
         return data
       }
       const afterLogin = (res) => {
-        console.log(res)
         if(authState.token) {
           history.push(`/${id}/summary`)
         } else {

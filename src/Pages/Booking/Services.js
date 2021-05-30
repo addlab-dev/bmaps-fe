@@ -30,12 +30,8 @@ const Services = () => {
     }
     const changeService = (event) => {
         setSelService(event.target.value);
-        // setCheckedState(selService)
     }
-    console.log(selService)
-    // Replace with api response on load of component
-    // dispatch(selectService(selectedService));
-    // dispatch(serviceList(response.data.serviceList));
+
     return (
         <>
         <div className="col-span-6 shadow-2xl p-8 row-span-9 overflow-y-auto rounded-t-xl h-full bg-red-50 relative">

@@ -15,12 +15,10 @@ import {useParams} from 'react-router'
 
 const ShopID = () => {
     let {id} = useParams();
-    console.log(id)
     return (<div></div>)
   }
 const Pages = () => {
     const {authState} = useAuthContext();
-    console.log(authState.token)
     return <div>
         <ShopID />
             <Switch>

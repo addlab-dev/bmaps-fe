@@ -36,17 +36,11 @@ const Questions = () => {
       history.push(`/${id}/services`)
     } else {
       Api.getQuest(id, bookingService.service ).then((res) => {
-        // setPlans(res)
-        console.log(res)
         dispatch(questionList(res))
     })
-        // dispatch(bookingStaff(staff.id))
     }
 },[]);  
-//   const onSubmit = (data) => {
-//     dispatch(selectStep(data));
-//     history.push(`/${shopID}/summary`);
-// }
+
     // const [state, setState] = React.useState({   
     //     step1: 'Do you have any pre existing health conditions or allergies?',
     //     step2: 'Do you want to add extra services',
@@ -95,9 +89,9 @@ const Questions = () => {
       }
       setAnswers( newAnswers, activeStep);
     };
-    // const handleRadioChange = (event) => {
-    //   setState({ ...state, radioValue : event.target.value});
-    // };
+    const handleRadioChange = (event) => {
+      setState({ ...state, radioValue : event.target.value});
+    };
     const isStepOptional = (step) => {
       return step === 0;
     };
@@ -112,16 +106,13 @@ const Questions = () => {
           type : bookingInfo[activeStep].type,
           answers : answers[activeStep]
       })
-      // dispatch(bookingAnswers(updateQuest));
       setQuestions(updateQuest);
       
       if(activeStep === steps - 1) {
           const uniqueObjects = [...new Map(updateQuest.map(item => [item.id, item])).values()];
           const finalBookStatus = {...bookStatus, answers: [...uniqueObjects]};
           dispatch(bookingStatus(finalBookStatus));
-          // history.push(`/${shopID}/summary`);
           
-          console.log(authState.token)
           if (authState.token) {
             history.push(`/${shopID}/summary`);
           } else {

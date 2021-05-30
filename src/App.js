@@ -14,7 +14,7 @@ function App(pageProps) {
       <Provider store={store}>
         <Layout>
           <BrowserRouter>
-            <Pages />
+            <Pages {...pageProps}/>
           </BrowserRouter>
         </Layout>
       </Provider>

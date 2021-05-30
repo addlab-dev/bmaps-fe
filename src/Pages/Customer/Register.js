@@ -48,7 +48,7 @@ const Register = () => {
                             {...register("first_name",{ required: true, type: 'text' })}
                             name="first_name"
                             id="first_name"
-                            autocomplete="off"
+                            autoComplete="off"
                             placeholder="First Name"
                             className="text-input"
                             />
@@ -61,7 +61,7 @@ const Register = () => {
                             {...register("last_name",{ required: true, type: 'text' })}
                             name="last_name"
                             id="last_name"
-                            autocomplete="off"
+                            autoComplete="off"
                             placeholder="Last Name"
                             className="text-input"
                             />
@@ -74,7 +74,7 @@ const Register = () => {
                             {...register("phone",{ required: true, type: 'email' })}
                             name="phone"
                             id="phone"
-                            autocomplete="off"
+                            autoComplete="off"
                             placeholder="Contact"
                             className="text-input"
                             />
@@ -87,7 +87,7 @@ const Register = () => {
                             {...register("email",{ required: true, type: 'email' })}
                             name="email"
                             id="email"
-                            autocomplete="off"
+                            autoComplete="off"
                             placeholder="Email"
                             className="text-input"
                             />
@@ -100,7 +100,7 @@ const Register = () => {
                             {...register("password",{ required: true, type: 'password' })}
                             name="password"
                             id="Password"
-                            autocomplete="off"
+                            autoComplete="off"
                             placeholder="Password"
                             className="text-input"
                             />
@@ -113,7 +113,7 @@ const Register = () => {
                             {...register("conf_password",{ required: true, type: 'password' })}
                             name="conf_password"
                             id="conf_password"
-                            autocomplete="off"
+                            autoComplete="off"
                             placeholder="Confirm password"
                             className="text-input"
                             />
@@ -126,7 +126,7 @@ const Register = () => {
                             {...register("dob",{ required: true, type: 'email' })}
                             name="dob"
                             id="dob"
-                            autocomplete="off"
+                            autoComplete="off"
                             placeholder="Date of birth"
                             className="text-input"
                             />
@@ -156,7 +156,7 @@ const Register = () => {
                             {...register("address",{ required: true, type: 'text' })}
                             name="address"
                             id="address"
-                            autocomplete="off"
+                            autoComplete="off"
                             placeholder="Address"
                             className="text-input"
                             />

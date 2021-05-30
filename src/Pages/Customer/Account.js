@@ -14,9 +14,11 @@ const Account = () => {
         if(typeof window !== 'undefined' && !shopID) {
         //   history.push(`/${id}/services`)
         } else {
-            // dispatch(bookingStaff(staff.id))
+          Api.getProfile().then((res) => {
+            console.log(res);
+        })
         }
-    },[]); 
+    },[]);  
     return(
         <>
     <div className="col-span-6 shadow-2xl p-8 row-span-9 overflow-y-auto rounded-t-xl h-full bg-red-50 relative">
@@ -30,7 +32,7 @@ const Account = () => {
                                 type="text"
                                 name="first_name"
                                 id="first_name"
-                                autocomplete="off"
+                                autoComplete="off"
                                 placeholder="Name"
                                 className="text-input"
                                 />
@@ -42,7 +44,7 @@ const Account = () => {
                                 type="text"
                                 name="last_name"
                                 id="last_name"
-                                autocomplete="off"
+                                autoComplete="off"
                                 placeholder="Last Name"
                                 className="text-input"
                                 />
@@ -54,7 +56,7 @@ const Account = () => {
                                 type="text"
                                 name="phone"
                                 id="phone"
-                                autocomplete="off"
+                                autoComplete="off"
                                 placeholder="Contact"
                                 className="text-input"
                                 />
@@ -66,7 +68,7 @@ const Account = () => {
                                 type="email"
                                 name="email"
                                 id="email"
-                                autocomplete="off"
+                                autoComplete="off"
                                 placeholder="Email"
                                 className="text-input"
                                 />
@@ -78,7 +80,7 @@ const Account = () => {
                                 type="date"
                                 name="dob"
                                 id="dob"
-                                autocomplete="off"
+                                autoComplete="off"
                                 placeholder="Date of birth"
                                 className="text-input"
                                 />
@@ -106,7 +108,7 @@ const Account = () => {
                                 type="text"
                                 name="address"
                                 id="address"
-                                autocomplete="off"
+                                autoComplete="off"
                                 placeholder="Address"
                                 className="text-input"
                                 />

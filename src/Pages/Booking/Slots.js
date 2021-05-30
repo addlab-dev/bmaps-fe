@@ -35,11 +35,8 @@ const Slots = () => {
       setValue(event);
       let newSelDate = event.toLocaleDateString("it-IT").slice(0, 10).replace(/\//g, '-');
       Api.getSlots(id, bookingService.service, newSelDate ).then((res) => {
-        // setPlans(res)
-        console.log(res)
         dispatch(slotList(res))
     })
-        // let newSelDate = event.toLocaleDateString("it-IT").slice(0, 10).replace(/\//g, '-');
     }
     const onSubmit = (data) => {
         dispatch(selectDate(value));
@@ -54,8 +51,6 @@ const Slots = () => {
         history.push(`/${id}/services`)
       } else {
         Api.getSlots(id, bookingService.service, newSelDate ).then((res) => {
-          // setPlans(res)
-          console.log(res)
           dispatch(slotList(res))
       })
       }

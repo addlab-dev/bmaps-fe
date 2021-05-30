@@ -20,9 +20,7 @@ const Summary = () => {
     console.log(bookingStat)
     Api.bookNow(bookingStat, {headers: {'Authorization': `Bearer ${localStorage.getItem('token')}`}})
     .then((response) => {
-      // console.log(response);
       if (response.status === 200) {
-        // router.push(`/store/${id}/book/${serv_id}/confirmation`)
         console.log("success")
       }
     }, (error) => {

@@ -27,21 +27,14 @@ const Professionals = () => {
         } else {
             let newSelDate = bookingDate.toLocaleDateString("it-IT").slice(0, 10).replace(/\//g, '-');
             Api.getProf(id, bookingService.service, newSelDate ).then((res) => {
-                // setPlans(res)
-                console.log(res)
                 dispatch(professionalList(res))
             })
-            // dispatch(bookingStaff(staff.id))
         }
     },[]); 
     const onSubmit = (data) => {
         dispatch(selectProfessional(data));
         history.push(`/${shopID}/questions`);
     }
-
-    // useEffect {
-// send selected slot, date and service get staff
-    // }
     return (
         <>
         <div className="col-span-6 shadow-2xl p-8 row-span-9 overflow-y-auto rounded-t-xl h-full bg-red-50 relative">
