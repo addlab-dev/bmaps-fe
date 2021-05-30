@@ -30,6 +30,7 @@ const Services = () => {
     }
     const changeService = (event) => {
         setSelService(event.target.value);
+        dispatch(selectService(event.target.value));
     }
 
     return (
@@ -55,7 +56,7 @@ const Services = () => {
                                         type="radio"
                                         onClick={changeService}
                                         value={service.id}
-                                        // checked={checkedState}
+                                        checked={selService == service.id }
                                         className="focus:text-main h-5 w-5 text-main border-gray-300 absolute right-5"
                                         {...register('service',{ required: true })}/>
                                     <p className="text-gray-500 text-sm pt-2 w-11/12 font-normal">{service.vendor_service.note}</p>

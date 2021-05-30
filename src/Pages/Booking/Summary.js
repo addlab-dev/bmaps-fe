@@ -10,7 +10,7 @@ const Summary = () => {
   const shopID = useSelector((state) => state.booking.storeID)
   const bookingStat = useSelector((state) => state.booking.bookingStatus)
   useEffect(() => {
-    if(typeof window !== 'undefined' && !shopID) {
+    if(typeof window != 'undefined' && !shopID) {
       history.push(`/${id}/services`)
     } else {
         // dispatch(bookingStaff(staff.id))
@@ -20,9 +20,12 @@ const Summary = () => {
     console.log(bookingStat)
     Api.bookNow(bookingStat, {headers: {'Authorization': `Bearer ${localStorage.getItem('token')}`}})
     .then((response) => {
-      if (response.status === 200) {
+      if (response.status == 200) {
         console.log("success")
+        history.push(`/${id}/appointments`)
+        
       }
+      console.log(response)
     }, (error) => {
       console.log(error);
     });

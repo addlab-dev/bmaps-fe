@@ -41,7 +41,7 @@ const AuthContextProvider = ({ children }) => {
     if (authState.token) {
       setToken()
     }
-  }, [])
+  }, [authState.token])
 
   const login = useCallback(async (payload) => {
     

@@ -9,7 +9,21 @@ const Register = () => {
     const { register, handleSubmit ,formState: { errors }} = useForm();
     const { login, authState } = useAuthContext()
     const [err, setErr] = useState(null)
-    
+    const [profile, setProfile] = useState({
+        fname: "",
+        lname: "",
+        email: "",
+        password: "",
+        password_confirmation: "",
+        contact: "",
+        address: "",
+        gender: "",
+        bdate: "",
+        hygen:"",
+        privacy:"",
+        newsconsent:""
+      });
+
     const onSubmit = async (data) => {
         try {
        //   await store.set('login.remember_password', data.remember_password)
@@ -24,7 +38,6 @@ const Register = () => {
             gender: data.gender,
             bdate: data.dob,
           })
-          
           
           await login({
             token: res.plainTextToken,
@@ -45,6 +58,7 @@ const Register = () => {
                         <div className="mt-1">
                             <input
                             type="text"
+                            defaultValue={profile.fname}
                             {...register("first_name",{ required: true, type: 'text' })}
                             name="first_name"
                             id="first_name"
@@ -58,6 +72,7 @@ const Register = () => {
                         <div className="mt-1">
                             <input
                             type="text"
+                            defaultValue={profile.lname}
                             {...register("last_name",{ required: true, type: 'text' })}
                             name="last_name"
                             id="last_name"
@@ -71,6 +86,7 @@ const Register = () => {
                         <div className="mt-1">
                             <input
                             type="text"
+                            defaultValue={profile.contact}
                             {...register("phone",{ required: true, type: 'email' })}
                             name="phone"
                             id="phone"
@@ -84,6 +100,7 @@ const Register = () => {
                         <div className="mt-1">
                             <input
                             type="email"
+                            defaultValue={profile.email}
                             {...register("email",{ required: true, type: 'email' })}
                             name="email"
                             id="email"
@@ -97,6 +114,7 @@ const Register = () => {
                         <div className="mt-1">
                             <input
                             type="Password"
+                            defaultValue={profile.password}
                             {...register("password",{ required: true, type: 'password' })}
                             name="password"
                             id="Password"
@@ -110,6 +128,7 @@ const Register = () => {
                         <div className="mt-1">
                             <input
                             type="password"
+                            defaultValue={profile.password}
                             {...register("conf_password",{ required: true, type: 'password' })}
                             name="conf_password"
                             id="conf_password"
@@ -123,6 +142,7 @@ const Register = () => {
                         <div className="mt-1">
                             <input
                             type="date"
+                            defaultValue={profile.bdate}
                             {...register("dob",{ required: true, type: 'email' })}
                             name="dob"
                             id="dob"
@@ -138,13 +158,14 @@ const Register = () => {
                         <select
                             id="gender"
                             name="gender"
+                            defaultValue={profile.gender}
                             {...register("gender",{ required: true })}
                             autoComplete="gender"
                             className="text-input">
-                                <option>Gender</option>
-                                <option>Male</option>
-                                <option>Female</option>
-                                <option>Other</option>
+                                <option disabled>Gender</option>
+                                <option value="0">Male</option>
+                                <option value="1">Female</option>
+                                <option value="2">Other</option>
                         </select>
                         </div>
                         </div>
@@ -153,6 +174,7 @@ const Register = () => {
                         <div className="mt-1">
                             <input
                             type="text"
+                            defaultValue={profile.address}
                             {...register("address",{ required: true, type: 'text' })}
                             name="address"
                             id="address"
@@ -167,6 +189,7 @@ const Register = () => {
                         <div className="mt-3">
                             <input
                             id="hygen"
+                            defaultValue={profile.hygen}
                             {...register("hygprivacy",{ required: true, type: 'checkbox' })}
                             name="hygprivacy"
                             type="checkbox"
@@ -178,6 +201,7 @@ const Register = () => {
                         <div className="mt-3">
                             <input
                             id="privacy"
+                            defaultValue={profile.privacy}
                             {...register("privacy",{ required: true, type: 'checkbox' })}
                             name="privacy"
                             type="checkbox"
@@ -189,6 +213,7 @@ const Register = () => {
                         <div className="mt-3">
                         <input
                             id="newsconsent"
+                            defaultValue={profile.newsconsent}
                             {...register("newsconsent",{ required: true, type: 'checkbox' })}
                             name="newsconsent"
                             type="checkbox"

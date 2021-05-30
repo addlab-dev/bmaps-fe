@@ -50,4 +50,8 @@ export const selectService = (selectedService) => dispatch => dispatch({
     type: types.BOOKING_STATUS,
     payload: bookingStatus
   });
+  export const profileInfo = (profileInfo) => dispatch => dispatch({
+    type: types.PROFILE_INFO,
+    payload: profileInfo
+  });
   

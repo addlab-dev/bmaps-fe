@@ -4,16 +4,16 @@ import Api from '../../Api/Api';
 import useAuthContext from '../../Hooks/useAuthContext'
 import { get } from 'lodash'
 import { useParams } from "react-router";
+import { useSelector,useDispatch } from 'react-redux'
 import { BrowserRouter as Router, Link, useHistory} from 'react-router-dom'
 
 const Login = () => {
     const { register, handleSubmit ,formState: { errors }} = useForm();
     const { login, authState } = useAuthContext()
     const [err, setErr] = useState(null)
-    // const {authState} = useAuthContext();
+    const bookingStat = useSelector((state) => state.booking.bookingStatus)
     let { id } = useParams();
     const history = useHistory();
-
     const onSubmit = async (data) => {
         try {
        //   await store.set('login.remember_password', data.remember_password)
@@ -32,7 +32,7 @@ const Login = () => {
         return data
       }
       const afterLogin = (res) => {
-        if(authState.token) {
+        if(bookingStat) {
           history.push(`/${id}/summary`)
         } else {
           history.push(`/${id}/services`)

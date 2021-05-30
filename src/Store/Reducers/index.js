@@ -50,6 +50,17 @@ const defaultState = {
   answers: [],
   bookingStatus: {
 
+  },
+  profile: {
+    fname: "",
+    lname: "",
+    email: "",
+    password: "",
+    password_confirmation: "",
+    contact: "",
+    address: "",
+    gender: "",
+    bdate: "",
   }
 }
 // booking REDUCER
@@ -102,6 +113,10 @@ const bookingReducer = (state = defaultState, action) => {
       case types.BOOKING_STATUS:
         return {
           ...state, bookingStatus: action.payload
+        }
+      case types.PROFILE_INFO:
+        return {
+          ...state, profile: action.payload
         }
         default:
           return state

@@ -1,13 +1,10 @@
 import React,{ Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
-import { useSelector } from 'react-redux'
 import {
   BrowserRouter as Router,
-  useLocation,
   Link
 } from 'react-router-dom'
-import Services from '../../Pages/Booking/Services'
 const menuItems = [
   {
     to: 'services',
@@ -26,7 +23,6 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
   }
 const Header = () => {
-  const shopID = useSelector((state) => state.booking.storeID)
     return (
         <Disclosure as="nav" className="col-span-full lg:grid lg:grid-cols-1 text-center ">
           {({ open }) => (

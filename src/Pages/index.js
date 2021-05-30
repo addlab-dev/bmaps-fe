@@ -23,14 +23,14 @@ const Pages = () => {
         <ShopID />
             <Switch>
                 <Route exact component={Services} path="/:id/services" />
-                <Route component={Professionals} path="/:id/professionals"  />
-                <Route component={Slots} path="/:id/slots"  />
-                <Route component={Questions} path="/:id/questions"  />
-                <Route component={Summary} path="/:id/summary"  />
-                <Route component={Confirmation} path="/:id/confirmation"  />
-                <Route component={Register} path="/:id/register" />
-                <Route component={Login} path="/:id/login" />
-                <Route component={ResetPassword} path="/:id/resetPassword" />
+                <Route exact component={Professionals} path="/:id/professionals"  />
+                <Route exact component={Slots} path="/:id/slots"  />
+                <Route exact component={Questions} path="/:id/questions"  />
+                <Route exact component={Summary} path="/:id/summary"  />
+                <Route exact component={Confirmation} path="/:id/confirmation"  />
+                <Route exact component={Register} path="/:id/register" />
+                <Route exact component={Login} path="/:id/login" />
+                <Route exact component={ResetPassword} path="/:id/resetPassword" />
                 {authState.token && <Route exact component={Account} path="/:id/account"  />}
                 {authState.token && <Route exact component={Appointments} path="/:id/appointments"  />}
             </Switch>

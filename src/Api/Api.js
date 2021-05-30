@@ -34,8 +34,16 @@ class ApiInit extends ApiBase {
       const resData = await this.get('profile', null).then((res) => res.data)
       return resData
     }
+    async getAppointments() {
+      const resData = await this.get('customers/bookings', null).then((res) => res.data)
+      return resData
+    }
     async bookNow(data) {
       const resData = await this.post('services/booknow', data).then((res) => res.data)
+      return resData
+    }
+    async cancelBooking(data) {
+      const resData = await this.post('booking/cancel', data).then((res) => res.data)
       return resData
     }
 
