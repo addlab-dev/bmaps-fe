@@ -17,14 +17,16 @@ const Summary = () => {
     }
 },[]); 
   const confirmBooking = () => {
+    console.log(bookingStat)
     Api.bookNow(bookingStat, {headers: {'Authorization': `Bearer ${localStorage.getItem('token')}`}})
     .then((response) => {
       // console.log(response);
       if (response.status === 200) {
         // router.push(`/store/${id}/book/${serv_id}/confirmation`)
+        console.log("success")
       }
     }, (error) => {
-      // console.log(error);
+      console.log(error);
     });
   }
     return(
@@ -70,7 +72,7 @@ const Summary = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 17l-5-5m0 0l5-5m-5 5h12" />
                 </svg>
                 </button>
-            <button onCLick={confirmBooking} className="text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg">Confirm Booking</button>
+            <button onClick={confirmBooking} className="text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg">Confirm Booking</button>
             </div>
         </div>
         </>

@@ -29,130 +29,13 @@ const defaultState = {
       status: 'upcoming'
     },
   ],
-  slotList: [{
-      time: '10:00',
-    },
-    {
-      time: '11:00',
-    },
-    {
-      time: '12:00',
-    },
-    {
-      time: '13:00',
-    },
-    {
-      time: '14:00',
-    },
-    {
-      time: '15:00',
-    },
-    {
-      time: '16:00',
-    },
-    {
-      time: '17:00',
-    },
-    {
-      time: '18:00',
-    }
-  ],
+  slotList: [ ],
   questions: [
     {
         "id": 25,
         "service_id": 14,
         "order": 0,
         "question": "Adipisci ab a et sunt. ? ",
-        "type": "1",
-        "created_at": "2021-02-04T14:19:00.000000Z",
-        "updated_at": "2021-02-04T14:19:00.000000Z",
-        "answers": []
-    },
-    {
-        "id": 20,
-        "service_id": 14,
-        "order": 0,
-        "question": "Adipisci ab quidem facilis dicta et sunt. ? ",
-        "type": "1",
-        "created_at": "2021-02-04T14:19:00.000000Z",
-        "updated_at": "2021-02-04T14:19:00.000000Z",
-        "answers": []
-    },
-    {
-        "id": 27,
-        "service_id": 14,
-        "order": 0,
-        "question": "Perferendis aperiam cupiditate pariatur officia quam. ? ",
-        "type": "3",
-        "created_at": "2021-02-04T14:19:00.000000Z",
-        "updated_at": "2021-02-04T14:19:00.000000Z",
-        "answers": [
-            {
-                "id": 36,
-                "question_id": 27,
-                "order": 0,
-                "answer": "Est eum quis ducimus beatae quia qui. !! ",
-                "created_at": "2021-02-04T14:19:00.000000Z",
-                "updated_at": "2021-02-04T14:19:00.000000Z"
-            },
-            {
-                "id": 35,
-                "question_id": 27,
-                "order": 0,
-                "answer": "Magnam quos ex corporis repellendus. !! ",
-                "created_at": "2021-02-04T14:19:00.000000Z",
-                "updated_at": "2021-02-04T14:19:00.000000Z"
-            },
-            {
-                "id": 34,
-                "question_id": 27,
-                "order": 0,
-                "answer": "Quo voluptatem voluptatem quia non quis soluta dolorem eaque. !! ",
-                "created_at": "2021-02-04T14:19:00.000000Z",
-                "updated_at": "2021-02-04T14:19:00.000000Z"
-            }
-        ]
-    },
-    {
-        "id": 23,
-        "service_id": 14,
-        "order": 0,
-        "question": "Perferendis aperiam cupiditate pariatur officia quam. ? ",
-        "type": "2",
-        "created_at": "2021-02-04T14:19:00.000000Z",
-        "updated_at": "2021-02-04T14:19:00.000000Z",
-        "answers": [
-            {
-                "id": 36,
-                "question_id": 23,
-                "order": 0,
-                "answer": "Est eum quis ducimus beatae quia qui. !! ",
-                "created_at": "2021-02-04T14:19:00.000000Z",
-                "updated_at": "2021-02-04T14:19:00.000000Z"
-            },
-            {
-                "id": 35,
-                "question_id": 23,
-                "order": 0,
-                "answer": "Magnam quos ex corporis repellendus. !! ",
-                "created_at": "2021-02-04T14:19:00.000000Z",
-                "updated_at": "2021-02-04T14:19:00.000000Z"
-            },
-            {
-                "id": 34,
-                "question_id": 23,
-                "order": 0,
-                "answer": "Quo voluptatem voluptatem quia non quis soluta dolorem eaque. !! ",
-                "created_at": "2021-02-04T14:19:00.000000Z",
-                "updated_at": "2021-02-04T14:19:00.000000Z"
-            }
-        ]
-    },
-    {
-        "id": 26,
-        "service_id": 14,
-        "order": 0,
-        "question": "Voluptatem quasi temporibus commodi nulla iure distinctio. ? ",
         "type": "1",
         "created_at": "2021-02-04T14:19:00.000000Z",
         "updated_at": "2021-02-04T14:19:00.000000Z",

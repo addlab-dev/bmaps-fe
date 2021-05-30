@@ -3,12 +3,16 @@ import { useForm } from 'react-hook-form'
 import Api from '../../Api/Api';
 import useAuthContext from '../../Hooks/useAuthContext'
 import { get } from 'lodash'
-import { BrowserRouter as Router, Link} from 'react-router-dom'
+import { useParams } from "react-router";
+import { BrowserRouter as Router, Link, useHistory} from 'react-router-dom'
 
 const Login = () => {
     const { register, handleSubmit ,formState: { errors }} = useForm();
     const { login, authState } = useAuthContext()
     const [err, setErr] = useState(null)
+    // const {authState} = useAuthContext();
+    let { id } = useParams();
+    const history = useHistory();
 
     const onSubmit = async (data) => {
         try {
@@ -30,6 +34,11 @@ const Login = () => {
       }
       const afterLogin = (res) => {
         console.log(res)
+        if(authState.token) {
+          history.push(`/${id}/summary`)
+        } else {
+          history.push(`/${id}/services`)
+        }
       }
     return (
         <>
