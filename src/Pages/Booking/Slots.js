@@ -63,7 +63,7 @@ const Slots = () => {
             <div className="w-full h-auto" >
                 <h1 className="text-main font-bold text-lg pb-4 pt-2 ">2. Select your preference</h1>
             </div>
-            <form >
+            <form onSubmit={handleSubmit(onSubmit)}>
             <div className="slots_wrapper mt-5">
                 <div className="calendar_wrapper border-b border-main pb-10">
                     <h3 className="text-main text-lg font-bold">Date :</h3>
@@ -129,12 +129,12 @@ const Slots = () => {
                 </div>
             </div>
             <div className="fixed right-12 bottom-12 flex flex-wrap  gap-x-1 items-center justify-center">
-                <button onClick={()=> {history.push(`/${shopID}/services`);}} className="text-main bg-white rounded px-5 py-2 grid text-md mr-3 shadow-md focus:outline-none hover:shadow-lg">
+                <button type="button" onClick={()=> {history.push(`/${shopID}/services`);}} className="text-main bg-white rounded px-5 py-2 grid text-md mr-3 shadow-md focus:outline-none hover:shadow-lg">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 17l-5-5m0 0l5-5m-5 5h12" />
                 </svg>
                 </button>
-                <input onClick={handleSubmit(onSubmit)} type="submit" className="text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg" value="Next" />
+                <input type="submit" className="text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg" value="Next" />
             </div>
            
             </form>
@@ -143,18 +143,4 @@ const Slots = () => {
     );
 
 }
-function CheckIcon(props) {
-    return (
-      <svg viewBox="0 0 24 24" fill="none" {...props}>
-        <circle cx={12} cy={12} r={12} fill="#fff" opacity="0.2" />
-        <path
-          d="M7 13l3 3 7-7"
-          stroke="#fff"
-          strokeWidth={1.5}
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-    )
-  }
 export default Slots
