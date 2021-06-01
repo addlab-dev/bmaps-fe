@@ -46,6 +46,10 @@ class ApiInit extends ApiBase {
       const resData = await this.post('booking/cancel', data).then((res) => res.data)
       return resData
     }
+    async getData(shopId) {
+      const resData = await this.get(`shop/${shopId}`).then((res) => res.data)
+      return resData
+    }
 
 }
 
