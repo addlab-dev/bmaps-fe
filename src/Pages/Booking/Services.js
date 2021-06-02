@@ -18,7 +18,7 @@ const Services = () => {
     const [selService, setSelService] = useState();
     const [checkedState, setCheckedState] = useState();
     useEffect(() => {
-        dispatch(getStoreID(id))
+        // dispatch(getStoreID(id))
         Api.getService(id).then((res) => {
             setServices(res)
             dispatch(serviceList(res))

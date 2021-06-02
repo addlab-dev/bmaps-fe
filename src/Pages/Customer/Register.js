@@ -28,15 +28,15 @@ const Register = () => {
         try {
        //   await store.set('login.remember_password', data.remember_password)
           const res = await Api.register({
-            fname: data.first_name,
-            lname: data.last_name,
+            fname: data.fname,
+            lname: data.lname,
             email: data.email,
             password: data.password,
-            password_confirmation: data.conf_password,
-            contact: data.phone,
+            password_confirmation: data.password_confirmation,
+            contact: data.contact,
             address: data.address,
             gender: data.gender,
-            bdate: data.dob,
+            bdate: data.bdate,
           })
           
           await login({
@@ -59,9 +59,9 @@ const Register = () => {
                             <input
                             type="text"
                             defaultValue={profile.fname}
-                            {...register("first_name",{ required: true, type: 'text' })}
-                            name="first_name"
-                            id="first_name"
+                            {...register("fname",{ required: true, type: 'text' })}
+                            name="fname"
+                            id="fname"
                             autoComplete="off"
                             placeholder="First Name"
                             className="text-input"
@@ -73,9 +73,9 @@ const Register = () => {
                             <input
                             type="text"
                             defaultValue={profile.lname}
-                            {...register("last_name",{ required: true, type: 'text' })}
-                            name="last_name"
-                            id="last_name"
+                            {...register("lname",{ required: true, type: 'text' })}
+                            name="lname"
+                            id="lname"
                             autoComplete="off"
                             placeholder="Last Name"
                             className="text-input"
@@ -87,9 +87,9 @@ const Register = () => {
                             <input
                             type="text"
                             defaultValue={profile.contact}
-                            {...register("phone",{ required: true, type: 'email' })}
-                            name="phone"
-                            id="phone"
+                            {...register("contact",{ required: true, type: 'text' })}
+                            name="contact"
+                            id="contact"
                             autoComplete="off"
                             placeholder="Contact"
                             className="text-input"
@@ -113,7 +113,7 @@ const Register = () => {
                         <div className="sm:col-span-3">
                         <div className="mt-1">
                             <input
-                            type="Password"
+                            type="password"
                             defaultValue={profile.password}
                             {...register("password",{ required: true, type: 'password' })}
                             name="password"
@@ -129,9 +129,9 @@ const Register = () => {
                             <input
                             type="password"
                             defaultValue={profile.password}
-                            {...register("conf_password",{ required: true, type: 'password' })}
-                            name="conf_password"
-                            id="conf_password"
+                            {...register("password_confirmation",{ required: true, type: 'password' })}
+                            name="password_confirmation"
+                            id="password_confirmation"
                             autoComplete="off"
                             placeholder="Confirm password"
                             className="text-input"
@@ -143,9 +143,9 @@ const Register = () => {
                             <input
                             type="date"
                             defaultValue={profile.bdate}
-                            {...register("dob",{ required: true, type: 'email' })}
-                            name="dob"
-                            id="dob"
+                            {...register("bdate",{ required: true, type: 'date' })}
+                            name="bdate"
+                            id="bdate"
                             autoComplete="off"
                             placeholder="Date of birth"
                             className="text-input"

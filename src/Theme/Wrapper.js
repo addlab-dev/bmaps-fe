@@ -6,12 +6,17 @@ import PropTypes from 'prop-types'
 import WebFont from 'webfontloader'
 import defaultTheme from '../Theme/defaultTheme'
 import Pages from '../Pages'
+import {useParams} from 'react-router'
+import { useSelector, useDispatch } from 'react-redux'
+import {getStoreID} from '../Store/Actions';
 
-
-const Wrapper = ({ shopId }) => {
+const Wrapper = ({shopId}) => {
     const [data, setData] = useState(null);
-  
+    let {id} = useParams();
+    const dispatch = useDispatch();
+
   useEffect((id) => {
+    dispatch(getStoreID(id))
     Api.getData(shopId).then((res) => {
         setData(res.customizations[0])
         WebFont.load({

@@ -32,28 +32,20 @@ const Account = () => {
         .then((response) => {dispatch(profileInfo(response)); setProfile(response)});
     },[]); 
     
-    const onSubmit = async (data) => {
-        try {
-       //   await store.set('login.remember_password', data.remember_password)
-          const res = await Api.register({
-            fname: data.first_name,
-            lname: data.last_name,
+    const onSubmit = (data) => {
+        data = profile;
+        Api.setProfile({
+            fname: data.fname,
+            lname: data.lname,
             email: data.email,
-            password: data.password,
-            password_confirmation: data.conf_password,
-            contact: data.phone,
+            // password: data.password,
+            // password_confirmation: data.password_confirmation,
+            contact: data.contact,
             address: data.address,
             gender: data.gender,
-            bdate: data.dob,
+            bdate: data.bdate,
           })
-          
-        //   await login({
-        //     token: res.plainTextToken,
-        //   })
-        } catch (error) {
-          setErr(error)
-        }
-        return data
+          console.log("adsad")
       }
     return (
         <>
@@ -67,9 +59,9 @@ const Account = () => {
                             <input
                             type="text"
                             defaultValue={profile.fname}
-                            {...register("first_name",{ required: true, type: 'text' })}
-                            name="first_name"
-                            id="first_name"
+                            {...register("fname",{ type: 'text' })}
+                            name="fname"
+                            id="fname"
                             autoComplete="off"
                             placeholder="First Name"
                             className="text-input"
@@ -81,9 +73,9 @@ const Account = () => {
                             <input
                             type="text"
                             defaultValue={profile.lname}
-                            {...register("last_name",{ required: true, type: 'text' })}
-                            name="last_name"
-                            id="last_name"
+                            {...register("lname",{ type: 'text' })}
+                            name="lname"
+                            id="lname"
                             autoComplete="off"
                             placeholder="Last Name"
                             className="text-input"
@@ -95,9 +87,9 @@ const Account = () => {
                             <input
                             type="text"
                             defaultValue={profile.contact}
-                            {...register("phone",{ required: true, type: 'email' })}
-                            name="phone"
-                            id="phone"
+                            {...register("contact",{ type: 'text' })}
+                            name="contact"
+                            id="contact"
                             autoComplete="off"
                             placeholder="Contact"
                             className="text-input"
@@ -109,7 +101,7 @@ const Account = () => {
                             <input
                             type="email"
                             defaultValue={profile.email}
-                            {...register("email",{ required: true, type: 'email' })}
+                            {...register("email",{ type: 'email' })}
                             name="email"
                             id="email"
                             autoComplete="off"
@@ -123,7 +115,7 @@ const Account = () => {
                             <input
                             type="Password"
                             defaultValue={profile.password}
-                            {...register("password",{ required: true, type: 'password' })}
+                            {...register("password",{ type: 'password' })}
                             name="password"
                             id="Password"
                             autoComplete="off"
@@ -137,9 +129,9 @@ const Account = () => {
                             <input
                             type="password"
                             defaultValue={profile.password_confirmation}
-                            {...register("conf_password",{ required: true, type: 'password' })}
-                            name="conf_password"
-                            id="conf_password"
+                            {...register("password_confirmation",{ type: 'password' })}
+                            name="password_confirmation"
+                            id="password_confirmation"
                             autoComplete="off"
                             placeholder="Confirm password"
                             className="text-input"
@@ -151,9 +143,9 @@ const Account = () => {
                             <input
                             type="date"
                             defaultValue={profile.bdate}
-                            {...register("dob",{ required: true, type: 'email' })}
-                            name="dob"
-                            id="dob"
+                            {...register("bdate",{ type: 'date' })}
+                            name="bdate"
+                            id="bdate"
                             autoComplete="off"
                             placeholder="Date of birth"
                             className="text-input"
@@ -183,7 +175,7 @@ const Account = () => {
                             <input
                             type="text"
                             defaultValue={profile.address}
-                            {...register("address",{ required: true, type: 'text' })}
+                            {...register("address",{ type: 'text' })}
                             name="address"
                             id="address"
                             autoComplete="off"
@@ -197,7 +189,7 @@ const Account = () => {
                         <div className="mt-3">
                         <input
                             id="newsconsent"
-                            {...register("newsconsent",{ required: true, type: 'checkbox' })}
+                            {...register("newsconsent",{ type: 'checkbox' })}
                             name="newsconsent"
                             type="checkbox"
                             className="focus:text-main h-5 w-5 top-1/3 text-main border-gray-300 mr-3 focus:ring-0 focus:outline-none outline-none" />
@@ -208,7 +200,7 @@ const Account = () => {
                         </div>
                         <div className="fixed right-12 bottom-12 flex flex-wrap  gap-x-1 items-center justify-center">
 
-            <input type="submit" className="text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg" value="Register"/>
+            <input type="submit" className="text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg" value="Update details"/>
             </div>
                     </form>
                     </section> 

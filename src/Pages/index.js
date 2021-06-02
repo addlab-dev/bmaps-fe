@@ -11,16 +11,10 @@ import Summary from './Booking/Summary'
 import ResetPassword from './Customer/ResetPassword'
 import Account from './Customer/Account'
 import Appointments from './Customer/Appointments'
-import {Redirect, useParams} from 'react-router'
 
-const ShopID = () => {
-    let {id} = useParams();
-    return (<div></div>)
-  }
 const Pages = () => {
     const {authState} = useAuthContext();
     return <div>
-        <ShopID />
             <Switch>
                 <Route exact component={Services} path="/:id/services" />
                 <Route exact component={Professionals} path="/:id/professionals"  />

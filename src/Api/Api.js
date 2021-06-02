@@ -34,6 +34,12 @@ class ApiInit extends ApiBase {
       const resData = await this.get('profile', null).then((res) => res.data)
       return resData
     }
+    async setProfile(data) {
+      const resData = await this.get('/sanctum/csrf-cookie',null).then((response)=> {
+        return this.post('customers/profile', data).then((res) => res.data)
+     })   
+      return resData
+    }
     async getAppointments() {
       const resData = await this.get('customers/bookings', null).then((res) => res.data)
       return resData
