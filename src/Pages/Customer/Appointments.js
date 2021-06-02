@@ -16,10 +16,9 @@ const Appointments = () => {
   const shopID = useSelector((state) => state.booking.storeID)
   const [appointments,setAppointments] = useState();
   useEffect(() => {
-    // if(typeof window !== 'undefined' && !shopID) {
-    //   history.push(`/${id}/services`)
-    // }
-    // else 
+    if(typeof window !== 'undefined' && !shopID) {
+      history.push(`/${id}/services`)
+    }
     if(!authState.token) {
       dispatch(loginReturn("summary"))
       history.push(`/${id}/login`)

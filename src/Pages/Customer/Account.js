@@ -20,10 +20,9 @@ const Account = () => {
     const [err, setErr] = useState(null)
     const [profile, setProfile] = useState(useSelector((state) => state.booking.profile));
     useEffect(() => {
-    //     if(typeof window != 'undefined' && !shopID) {
-    //       history.push(`/${id}/services`) 
-    //   } 
-    //   else 
+        if(typeof window != 'undefined' && !shopID) {
+          history.push(`/${id}/services`) 
+      } 
       if(!authState.token) {
         dispatch(loginReturn("account"))
         history.push(`/${id}/login`)
