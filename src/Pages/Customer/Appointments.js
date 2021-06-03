@@ -27,7 +27,6 @@ const Appointments = () => {
     Api.getAppointments( {headers: {'Authorization': `Bearer ${localStorage.getItem('token')}`}})
       .then((response) => {
         setAppointments(response)
-        console.log(response)
       }, (error) => {
         console.log(error);
       });

@@ -3,15 +3,18 @@ import React from 'react'
 import Api from '../Api/Api';
 import { useParams } from "react-router";
 import { useHistory } from "react-router-dom";
+import { useSnackbar } from 'notistack';
 
 const AppointmentDetails = (booking) => {
     let { id } = useParams();
     const history = useHistory();
+    const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
     const cancelBooking = (event) => {
         let cancelledBooking = {booking_id: event.target.value}
       Api.cancelBooking(cancelledBooking).then((res) => {
         if (res.data == "Cancelled") {
+          enqueueSnackbar('Booking Cancelled');
             history.push(`/${id}/appointments`)
           }
       })

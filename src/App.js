@@ -3,7 +3,7 @@ import { BrowserRouter } from 'react-router-dom'
 import AuthContextProvider from './Context/AuthContext'
 import Pages from './Pages'
 import Header from './Components/Header'
-
+import { SnackbarProvider } from 'notistack';
 import { Provider } from 'react-redux';
 import { useStore } from './Store'
 
@@ -13,10 +13,12 @@ function App(pageProps) {
     <AuthContextProvider>
       <Provider store={store}>
         <BrowserRouter>
-          <div className="h-screen bg-appbg">
-            <Header/>
-            <Pages {...pageProps}/>
-          </div>
+        <SnackbarProvider maxSnack={3}>
+            <div className="h-screen bg-appbg">
+              <Header/>
+              <Pages {...pageProps}/>
+            </div>
+          </SnackbarProvider>
         </BrowserRouter>
       </Provider>
     </AuthContextProvider>

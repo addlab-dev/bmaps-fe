@@ -44,7 +44,6 @@ const Account = () => {
             gender: data.gender,
             bdate: data.bdate,
           })
-          console.log("adsad")
       }
     return (
         <>

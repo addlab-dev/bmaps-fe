@@ -8,6 +8,7 @@ import {
 import { useSelector, useDispatch } from 'react-redux'
 import { loginReturn } from '../Store/Actions';
 import useAuthContext from '../Hooks/useAuthContext'
+import { useSnackbar } from 'notistack';
 
 const menuItems = [
   {
@@ -28,9 +29,11 @@ function classNames(...classes) {
   }
 const Header = () => {
   const dispatch = useDispatch();
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const { logout, authState } = useAuthContext()
   const logOut = () => {
-    logout()
+    logout();
+    enqueueSnackbar('Logged Out Successfully');
   }
     return (
         <Disclosure as="nav" className="col-span-full lg:grid lg:grid-cols-1 text-center ">
