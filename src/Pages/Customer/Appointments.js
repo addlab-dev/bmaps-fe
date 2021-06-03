@@ -16,10 +16,9 @@ const Appointments = () => {
   const shopID = useSelector((state) => state.booking.storeID)
   const [appointments,setAppointments] = useState();
   useEffect(() => {
-    // if(typeof window !== 'undefined' && !shopID) {
-    //   history.push(`/${id}/services`)
-    // }
-    // else 
+    if(typeof window !== 'undefined' && !shopID) {
+      history.push(`/${id}/services`)
+    }
     if(!authState.token) {
       dispatch(loginReturn("summary"))
       history.push(`/${id}/login`)
@@ -27,21 +26,19 @@ const Appointments = () => {
     Api.getAppointments( {headers: {'Authorization': `Bearer ${localStorage.getItem('token')}`}})
       .then((response) => {
         setAppointments(response)
+        console.log(response)
         if (response.status == 200) {
         }
       }, (error) => {
         console.log(error);
       });
   },[]); 
-    // const cancelBooking = (event) => {
-    //   console.log(event.target.value)
-    // }
     return(
         <>
         <div className="col-span-6 shadow-2xl p-8 row-span-9 overflow-y-auto rounded-t-xl h-full bg-red-50 relative">
         {/* <h1 className="w-full text-main font-bold text-xl pl-1 mb-2" >Appointments</h1> */}
         <h2 className="w-full text-main font-bold text-xl  mt-4 mb-2">Upcoming Appointments</h2>
-          {appointments && appointments.upcoming.map((appointment)=>(
+          {appointments && appointments.cancelled.map((appointment)=>(
             <AppointmentDetails key={appointment.id} {...appointment}/>
           )) }
         <h2 className="w-full text-main font-bold text-xl mt-4 mb-2">Previous Appointments</h2>

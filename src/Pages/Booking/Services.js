@@ -5,6 +5,9 @@ import { useForm } from 'react-hook-form';
 import { useHistory } from "react-router-dom";
 import Api from '../../Api/Api';
 import { useParams } from "react-router";
+import applyTheme from '../../Theme/applyTheme'
+import WebFont from 'webfontloader'
+import defaultTheme from '../../Theme/defaultTheme'
 
 const Services = () => {
     const dispatch = useDispatch();
@@ -17,8 +20,25 @@ const Services = () => {
     const [services, setServices] = useState([]);
     const [selService, setSelService] = useState();
     const [checkedState, setCheckedState] = useState();
+    const [data, setData] = useState(null);
     useEffect(() => {
         dispatch(getStoreID(id))
+        Api.getData(id).then((res) => {
+            setData(res.customizations[0])
+            WebFont.load({
+                google: {
+                  families: [`${res.customizations[0].body_font}:400,700`, `${res.customizations[0].title_font}:400,700`],
+                },
+              })
+              const theme = {
+                ...defaultTheme,
+                fontMain: res.customizations[0].body_font,
+                fontTitle: res.customizations[0].title_font,
+                primaryColor: res.customizations[0].primary_color,
+                secondaryColor: res.customizations[0].secondary_color,
+              }
+              applyTheme(theme)
+        })
         Api.getService(id).then((res) => {
             setServices(res)
             dispatch(serviceList(res))
@@ -32,7 +52,6 @@ const Services = () => {
         }).then(()=> {
             history.push({pathname:`/${shopID}/slots`, state:{data}});
         })
-        
     }
     const changeService = (event) => {
         setSelService(event.target.value);
