@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { loginReturn } from '../Store/Actions';
+import useAuthContext from '../Hooks/useAuthContext'
 
 const menuItems = [
   {
@@ -27,6 +28,10 @@ function classNames(...classes) {
   }
 const Header = () => {
   const dispatch = useDispatch();
+  const { logout, authState } = useAuthContext()
+  const logOut = () => {
+    logout()
+  }
     return (
         <Disclosure as="nav" className="col-span-full lg:grid lg:grid-cols-1 text-center ">
           {({ open }) => (
@@ -114,15 +119,15 @@ const Header = () => {
                               </Menu.Item> */}
                               <Menu.Item>
                                 {({ active }) => (
-                                  <a
-                                    href="javascript:void(0);"
+                                  <button
+                                  onClick={logOut}
                                     className={classNames(
                                       active ? 'bg-gray-100' : '',
-                                      'block px-4 py-2 text-sm text-gray-700'
+                                      'block px-4 py-2 text-sm text-gray-700 w-full'
                                     )}
                                   >
                                     Sign out
-                                  </a>
+                                  </button>
                                 )}
                               </Menu.Item>
                             </Menu.Items>
