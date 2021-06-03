@@ -4,11 +4,14 @@ import { useHistory } from "react-router-dom";
 import { useParams } from "react-router";
 import Api from '../../Api/Api';
 import AppointmentDetails from '../../Components/AppointmentDetails';
+import { useSnackbar } from 'notistack';
+
 const Summary = () => {
   const history = useHistory();
   let { id } = useParams();
   const shopID = useSelector((state) => state.booking.storeID)
   const bookingStat = useSelector((state) => state.booking.bookingStatus)
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const [summary,setSummary] = useState();
   useEffect(() => {
     if(typeof window != 'undefined' && !shopID) {
@@ -17,13 +20,14 @@ const Summary = () => {
         // dispatch(bookingStaff(staff.id))
     }
     Api.getSummary(bookingStat).then((response) => {
-      setSummary(response); console.log(response)
+      setSummary(response);
     })
 },[]); 
   const confirmBooking = () => {
     Api.bookNow(bookingStat, {headers: {'Authorization': `Bearer ${localStorage.getItem('token')}`}})
     .then((response) => {
       if (response.status == 200) {
+        enqueueSnackbar('Booking Successful');
         history.push(`/${id}/appointments`)
       }
     }, (error) => {

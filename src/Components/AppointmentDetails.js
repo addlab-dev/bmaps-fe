@@ -3,15 +3,18 @@ import React from 'react'
 import Api from '../Api/Api';
 import { useParams } from "react-router";
 import { useHistory } from "react-router-dom";
+import { useSnackbar } from 'notistack';
 
 const AppointmentDetails = (booking) => {
     let { id } = useParams();
     const history = useHistory();
+    const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
     const cancelBooking = (event) => {
         let cancelledBooking = {booking_id: event.target.value}
       Api.cancelBooking(cancelledBooking).then((res) => {
         if (res.data == "Cancelled") {
+          enqueueSnackbar('Booking Cancelled');
             history.push(`/${id}/appointments`)
           }
       })
@@ -19,7 +22,7 @@ const AppointmentDetails = (booking) => {
     return(
         <>
             <div className="register_wrapper mt-2 ml-2 h-full relative">
-                    <section className="w-full pl-2 mt-10 mb-5 pb-5 h-auto border-b-2 border-gray-300">
+                    <section className="w-full pl-2 mt-8 mb-5 pb-8 h-auto border-b-2 border-gray-300">
                     <h1 className="w-full text-main font-bold text-lg mb-5" >{booking.service_date}</h1>
                       <div className="grid grid-cols-1 sm:grid-cols-2">
                         <div>

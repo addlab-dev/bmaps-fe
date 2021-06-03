@@ -6,7 +6,7 @@ import { get } from 'lodash'
 import { useParams } from "react-router";
 import { useSelector,useDispatch } from 'react-redux'
 import { BrowserRouter as Router, Link, useHistory} from 'react-router-dom'
-
+import { useSnackbar } from 'notistack';
 const Login = () => {
     const { register, handleSubmit ,formState: { errors }} = useForm();
     const { login, authState } = useAuthContext()
@@ -15,6 +15,7 @@ const Login = () => {
     const loginReturn = useSelector((state) => state.booking.loginReturn)
     let { id } = useParams();
     const history = useHistory();
+    const { enqueueSnackbar, closeSnackbar } = useSnackbar();
     const onSubmit = async (data) => {
         try {
        //   await store.set('login.remember_password', data.remember_password)
@@ -26,6 +27,7 @@ const Login = () => {
           await login({
             token: res.plainTextToken,
           })
+          enqueueSnackbar('Login Successful');
           afterLogin(res)
         } catch (error) {
           setErr(error.data.error)
