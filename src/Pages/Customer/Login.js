@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState, useEffect} from 'react'
 import { useForm } from 'react-hook-form'
 import Api from '../../Api/Api';
 import useAuthContext from '../../Hooks/useAuthContext'
@@ -13,9 +13,15 @@ const Login = () => {
     const [err, setErr] = useState(null)
     const bookingStat = useSelector((state) => state.booking.bookingStatus)
     const loginReturn = useSelector((state) => state.booking.loginReturn)
+    const shopID = useSelector((state) => state.booking.storeID)
     let { id } = useParams();
     const history = useHistory();
     const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+    useEffect(() => {
+      if(typeof window !== 'undefined' && !shopID) {
+        history.push(`/${id}/services`)
+      }
+    },[]);
     const onSubmit = async (data) => {
         try {
        //   await store.set('login.remember_password', data.remember_password)
