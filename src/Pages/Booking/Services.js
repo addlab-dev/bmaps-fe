@@ -60,7 +60,7 @@ const Services = () => {
 
     return (
         <>
-        <div className="col-span-6 shadow-2xl p-8 row-span-9 overflow-y-auto rounded-t-xl h-full bg-red-50 relative">
+        <div className="col-span-6 shadow-2xl p-8 row-span-9 overflow-y-auto rounded-t-xl h-full bg-red-50 relative pb-24">
             <div className="w-full h-auto" >
                 <h1 className="text-main font-bold text-lg pb-4 pt-2 ">1. Select your service</h1>
             </div>
