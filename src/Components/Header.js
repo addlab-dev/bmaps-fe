@@ -31,6 +31,7 @@ const Header = () => {
   const dispatch = useDispatch();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const { logout, authState } = useAuthContext()
+  console.log(authState.token)
   const logOut = () => {
     logout();
     enqueueSnackbar('Logged Out Successfully');
@@ -60,6 +61,7 @@ const Header = () => {
                           ))}
                     </div>
                   </div>
+                  {authState.token != null ? 
                   <div className="hidden sm:ml-6 sm:flex sm:items-center">
                     {/* <button className="bg-white p-1 rounded-full text-main hover:text-main focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green">
                       <span className="sr-only">View notifications</span>
@@ -139,6 +141,8 @@ const Header = () => {
                       )}
                     </Menu>
                   </div>
+                  : ""}
+                  {authState.token != null ? 
                   <div className="-mr-2 flex items-center sm:hidden">
                     {/* Mobile menu button */}
                     <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-main hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-green">
@@ -150,12 +154,12 @@ const Header = () => {
                       )}
                     </Disclosure.Button>
                   </div>
+                  : ""}
                 </div>
               </div>
-    
+              {authState.token != null ? 
               <Disclosure.Panel className="sm:hidden">
-                <div className="pt-2 pb-3 space-y-1">
-                  {/* Current: "bg-greenborder-green text-green", Default: "border-transparent text-main hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700" */}
+                {/* <div className="pt-2 pb-3 space-y-1">
                   <a
                     href="javascript:void(0);"
                     className="bg-greenborder-green text-green block pl-3 pr-4 py-2 border-l-4 text-base font-medium text-left"
@@ -170,7 +174,7 @@ const Header = () => {
                   </a>
                   
                  
-                </div>
+                </div> */}
                 <div className="pt-4 pb-3 border-t border-gray-200">
                   <div className="flex items-center px-4">
                     <div className="flex-shrink-0">
@@ -180,17 +184,17 @@ const Header = () => {
                         alt=""
                       />
                     </div>
-                    <div className="ml-3">
+                    {/* <div className="ml-3">
                       <div className="text-left text-base font-medium text-gray-800">Tom Cook</div>
                       <div className="text-sm font-medium text-main">tom@example.com</div>
                     </div>
                     <button className="ml-auto flex-shrink-0 bg-white p-1 rounded-full text-gray-400 hover:text-main focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green">
                       <span className="sr-only">View notifications</span>
                       <BellIcon className="h-6 w-6" aria-hidden="true" />
-                    </button>
+                    </button> */}
                   </div>
                   <div className="mt-3 space-y-1">
-                    <a
+                    {/* <a
                       href="javascript:void(0);"
                       className="text-left block px-4 py-2 text-base font-medium text-main hover:text-gray-800 hover:bg-gray-100"
                     >
@@ -201,16 +205,17 @@ const Header = () => {
                       className="text-left block px-4 py-2 text-base font-medium text-main hover:text-gray-800 hover:bg-gray-100"
                     >
                       Settings
-                    </a>
-                    <a
-                      href="javascript:void(0);"
+                    </a> */}
+                    <button
+                      onClick={logOut}
                       className="text-left block px-4 py-2 text-base font-medium text-main hover:text-gray-800 hover:bg-gray-100"
                     >
                       Sign out
-                    </a>
+                    </button>
                   </div>
                 </div>
               </Disclosure.Panel>
+            : ""}
             </>
           )}
         </Disclosure>
