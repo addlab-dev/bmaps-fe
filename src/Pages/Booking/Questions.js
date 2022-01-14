@@ -7,6 +7,7 @@ import { useHistory } from "react-router-dom";
 import { useParams } from "react-router";
 import Api from '../../Api/Api';
 import useAuthContext from '../../Hooks/useAuthContext'
+import { useSnackbar } from 'notistack';
 
 const Questions = () => {
     const dispatch = useDispatch();
@@ -20,7 +21,7 @@ const Questions = () => {
     const bookingStat = useSelector((state) => state.booking.bookingStatus)
     const shopID = useSelector((state) => state.booking.storeID)
     const {authState} = useAuthContext();
-
+    const { enqueueSnackbar, closeSnackbar } = useSnackbar();
     const [activeStep, setActiveStep] = React.useState(0);
     const [skipped, setSkipped] = React.useState(new Set());
     const [open, setOpen] = React.useState(false);
@@ -81,7 +82,6 @@ const Questions = () => {
       return skipped.has(step);
     };
     const handleNext = () => {
-  
       let updateQuest = [...questions];
       updateQuest.push({
           id : bookingQuest[activeStep].id,
@@ -94,7 +94,7 @@ const Questions = () => {
           const uniqueObjects = [...new Map(updateQuest.map(item => [item.id, item])).values()];
           const finalBookStatus = {...bookStatus, answers: [...uniqueObjects]};
           dispatch(bookingStatus(finalBookStatus));
-          
+                closeSnackbar()
           if (authState.token) {
             history.push(`/${shopID}/summary`);
           } else {
@@ -208,7 +208,7 @@ const Questions = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 17l-5-5m0 0l5-5m-5 5h12" />
                 </svg>
                 </button>
-                <button className="text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg" disabled={answers[activeStep] === ""} onClick={handleNext}>
+                <button className={`text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg ${answers[activeStep] === "" ? "opacity-50 cursor-not-allowed" : ""}`} disabled={answers[activeStep] === ""} onClick={handleNext}>
                     {activeStep === steps-1 ? 'Finish' : 'Next'}
                   </button>
             {/* <button className="text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg">Next</button> */}

@@ -51,6 +51,7 @@ const Services = () => {
         })
         setSelService(selectedService)
     }, [])
+    
     const onSubmit = (data) => {
         dispatch(selectService(data));
         setProcessing(true)

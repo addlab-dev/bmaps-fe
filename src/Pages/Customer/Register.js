@@ -224,7 +224,7 @@ const Register = () => {
                         </div>
                         </div>
                         <div className="fixed right-12 bottom-12 flex flex-wrap  gap-x-1 items-center justify-center">
-                <div className="pr-5"><span className="text-gray-400 text-sm">have an account ?</span> <Link to={location => ({ ...location, pathname: 'login' })} class="text-main font-bold text-sm">Login</Link></div>
+                <div className="pr-5"><span className="text-gray-400 text-sm">have an account ?</span> <Link to={location => ({ ...location, pathname: 'login' })} className="text-main font-bold text-sm">Login</Link></div>
 
             <input type="submit" className="text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg" value="Register"/>
             </div>

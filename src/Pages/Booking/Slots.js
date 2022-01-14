@@ -9,6 +9,7 @@ import { useHistory } from "react-router-dom";
 import { useParams } from "react-router";
 import Api from '../../Api/Api';
 import Spinner from "../../Components/Spinner"
+import { useSnackbar } from 'notistack';
 
 const calendarSetting = {
     locale : 'it-IT',
@@ -26,16 +27,15 @@ const Slots = () => {
     const plans = useSelector((state) => state.booking.slotList)
     const shopID = useSelector((state) => state.booking.storeID)
     const bookingService = useSelector((state) => state.booking.selectedService)
+    const bookingSlot = useSelector((state) => state.booking.selectedSlot)
     const { register, handleSubmit, errors } = useForm();
 
     // const [plans,setPlans] = useState();
     const [selected, setSelected] = useState(plans[0])
     const [loading, setLoading] = useState(true)
     const [processing, setProcessing] = useState(false);
+    const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
-    // console.log(selected.dateValue)
-    // console.log(plans[0].dateValue)
-    
     const [value, setValue] = useState(new Date());
     let { id } = useParams();
 
@@ -50,6 +50,7 @@ const Slots = () => {
     }
 
     const onSubmit = (data) => {
+      closeSnackbar()
       setProcessing(true)
         dispatch(selectDate(value));
         dispatch(selectSlot(data));
@@ -71,13 +72,10 @@ const Slots = () => {
       }
   },[]);  
 
-    const btnClick = (data) => {
-      console.log(selected)
-      // if(data) {
-      //   console.log(data)
-      // } else {
-      //   console.log("adasdsadasdsad")
-      // }
+    const btnClick = () => {
+      if(bookingSlot.time) {
+        enqueueSnackbar('Please select a time slot',{ variant: 'info'});
+      }
     }
     return (
         <>
@@ -85,7 +83,7 @@ const Slots = () => {
             <div className="w-full h-auto" >
                 <h1 className="text-main font-bold text-lg pb-4 pt-2 ">2. Select your preference</h1>
             </div>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(onSubmit)} id="slot-form">
             <div className="slots_wrapper mt-5">
                 <div className="calendar_wrapper border-b border-main pb-10">
                     <h3 className="text-main text-lg font-bold">Date :</h3>
@@ -134,6 +132,7 @@ const Slots = () => {
                               name="time"
                               type="radio"
                               value={plan.dateValue}
+                              required="true"
                               // checked={plan.dateValue == plans[0].dateValue ? true : false}
                               className="invisible hidden"
                               {...register('time',{ required: true })}
@@ -154,7 +153,7 @@ const Slots = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 17l-5-5m0 0l5-5m-5 5h12" />
                 </svg>
                 </button>
-                <input type="submit" onClick={btnClick(onSubmit)} className="text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg" value={processing? "Processing..." : "Next"} />
+                <input type="submit" onClick={btnClick} className="text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg" value={processing? "Processing..." : "Next"} />
             </div>
            
             </form>

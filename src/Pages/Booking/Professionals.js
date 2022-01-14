@@ -7,6 +7,7 @@ import { useParams } from "react-router";
 import Api from '../../Api/Api';
 import useAuthContext from '../../Hooks/useAuthContext'
 import Spinner from "../../Components/Spinner"
+import { useSnackbar } from 'notistack';
 
 const Professionals = () => {
     const dispatch = useDispatch();
@@ -16,12 +17,13 @@ const Professionals = () => {
     const bookingService = useSelector((state) => state.booking.selectedService)
     const bookingDate = useSelector((state) => state.booking.selectedDate)
     const bookingSlot = useSelector((state) => state.booking.selectedSlot)
+    const bookingStaff = useSelector((state) => state.booking.selectedProfessional)
     const shopID = useSelector((state) => state.booking.storeID)
     const { register, handleSubmit, errors } = useForm();
     const [searchValue, setSearchValue] = useState("");
     const [loading, setLoading] = useState(true)
     const [processing, setProcessing] = useState(false);
-
+    const { enqueueSnackbar, closeSnackbar } = useSnackbar();
     let { id } = useParams();
     const {authState} = useAuthContext();
     const bookingStat = useSelector((state) => state.booking.bookingStatus)
@@ -52,6 +54,7 @@ const Professionals = () => {
     },[]); 
     const onSubmit = (data) => {
         setProcessing(true)
+        closeSnackbar()
         dispatch(selectProfessional(data));
         if(bookingQuest.length>0) {
             setProcessing(false)
@@ -69,6 +72,11 @@ const Professionals = () => {
               }
         }   
     }
+    const btnClick = () => {
+        if(bookingStaff.prof) {
+          enqueueSnackbar('Please select a professional',{ variant: 'info'});
+        }
+      }
     return (
         <>
         <div className="col-span-6 shadow-2xl p-8 row-span-9 overflow-y-auto rounded-t-xl h-full bg-red-50 relative">
@@ -103,7 +111,7 @@ const Professionals = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 17l-5-5m0 0l5-5m-5 5h12" />
                 </svg>
                 </button>
-            <input type="submit" className="text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg" value={processing? "Processing..." : "Proceed"}/>
+            <input type="submit" onClick={btnClick} className="text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg" value={processing? "Processing..." : "Proceed"}/>
             </div>
             </form>
         </div>

@@ -26,7 +26,7 @@ const ResetPassword = () => {
             </div>
 
             <div className="fixed right-12 bottom-12 flex flex-wrap  gap-x-1 items-center justify-center">
-                <div className="pr-5"><a class="text-main font-bold text-sm" href="#">Register</a></div>
+                <div className="pr-5"><a className="text-main font-bold text-sm" href="#">Register</a></div>
             <button className="text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg">Reset Password</button>
             </div>
         </div>

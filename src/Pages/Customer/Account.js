@@ -8,6 +8,7 @@ import { useParams } from "react-router";
 import { useHistory } from "react-router-dom";
 import Api from '../../Api/Api';
 import { profileInfo,loginReturn } from '../../Store/Actions';
+import { useSnackbar } from 'notistack';
 
 const Account = () => {
     let { id } = useParams();
@@ -16,9 +17,12 @@ const Account = () => {
     const history = useHistory();
     const shopID = useSelector((state) => state.booking.storeID)
     const { register, handleSubmit ,formState: { errors }} = useForm();
+    const { enqueueSnackbar, closeSnackbar } = useSnackbar();
     // const { login, authState } = useAuthContext()
     const [err, setErr] = useState(null)
     const [profile, setProfile] = useState(useSelector((state) => state.booking.profile));
+    const [processing, setProcessing] = useState(false);
+
     useEffect(() => {
         if(typeof window != 'undefined' && !shopID) {
           history.push(`/${id}/services`) 
@@ -32,6 +36,7 @@ const Account = () => {
     },[]); 
     
     const onSubmit = (data) => {
+        setProcessing(true)
         data = profile;
         Api.setProfile({
             fname: data.fname,
@@ -43,7 +48,17 @@ const Account = () => {
             address: data.address,
             gender: data.gender,
             bdate: data.bdate,
-          })
+          }).then((response) => {
+            if (response.status == 200) {
+              setProcessing(false)
+              enqueueSnackbar('Profile Updated',{ variant: 'success'});
+              history.push(`/${id}/appointments`)
+            }
+          }, (error) => {
+            console.log(error);
+              setProcessing(false)
+              enqueueSnackbar('Uh oh! Problem occurred, please try again',{ variant: 'error'});
+          },closeSnackbar());
       }
     return (
         <>
@@ -198,7 +213,7 @@ const Account = () => {
                         </div>
                         <div className="fixed right-12 bottom-12 flex flex-wrap  gap-x-1 items-center justify-center">
 
-            <input type="submit" className="text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg" value="Update details"/>
+            <input type="submit" className="text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg" value={processing? "Submitting..." : "Update details"}/>
             </div>
                     </form>
                     </section> 

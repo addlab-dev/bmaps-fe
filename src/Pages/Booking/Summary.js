@@ -49,7 +49,6 @@ const backStep = () => {
       }
     }, (error) => {
       console.log(error);
-      console.log("Uh oh! Problem occurred, please try again")
         setProcessing(false)
         enqueueSnackbar('Uh oh! Problem occurred, please try again',{ variant: 'error'});
     },closeSnackbar());

@@ -34,7 +34,7 @@ const Header = () => {
   const { logout, authState } = useAuthContext()
   const history = useHistory();
   const shopID = useSelector((state) => state.booking.storeID)
-  console.log(authState.token)
+
   const logOut = () => {
     logout();
     enqueueSnackbar('Logged Out Successfully',{ variant: 'success'});
