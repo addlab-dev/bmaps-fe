@@ -14,7 +14,7 @@ import Appointments from './Customer/Appointments'
 
 const Pages = () => {
     const {authState} = useAuthContext();
-    return <div>
+    return <div className='content-wrapper'>
             <Switch>
                 <Route exact component={Services} path="/:id/services" />
                 <Route exact component={Professionals} path="/:id/professionals"  />

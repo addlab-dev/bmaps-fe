@@ -14,7 +14,7 @@ const AppointmentDetails = (booking) => {
         let cancelledBooking = {booking_id: event.target.value}
       Api.cancelBooking(cancelledBooking).then((res) => {
         if (res.data == "Cancelled") {
-          enqueueSnackbar('Booking Cancelled');
+          enqueueSnackbar('Booking Cancelled',{ variant: 'info'});
             history.push(`/${id}/appointments`)
           }
       })

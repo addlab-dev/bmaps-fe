@@ -8,12 +8,12 @@ import { useForm } from 'react-hook-form';
 import { useHistory } from "react-router-dom";
 import { useParams } from "react-router";
 import Api from '../../Api/Api';
+import Spinner from "../../Components/Spinner"
 
 const calendarSetting = {
     locale : 'it-IT',
     minDate : new Date(),
     //activeStartDate : new Date(),
-    maxDate : new Date('2021-07-14'),
     defaultView : 'month',
     view : 'month'
 }
@@ -27,20 +27,33 @@ const Slots = () => {
     const shopID = useSelector((state) => state.booking.storeID)
     const bookingService = useSelector((state) => state.booking.selectedService)
     const { register, handleSubmit, errors } = useForm();
+
     // const [plans,setPlans] = useState();
     const [selected, setSelected] = useState(plans[0])
+    const [loading, setLoading] = useState(true)
+    const [processing, setProcessing] = useState(false);
+
+    // console.log(selected.dateValue)
+    // console.log(plans[0].dateValue)
+    
     const [value, setValue] = useState(new Date());
     let { id } = useParams();
+
     const onDateChange = (event) => {
       setValue(event);
       let newSelDate = event.toLocaleDateString("it-IT").slice(0, 10).replace(/\//g, '-');
+      setLoading(true)
       Api.getSlots(id, bookingService.service, newSelDate ).then((res) => {
         dispatch(slotList(res))
+        setLoading(false)
     })
     }
+
     const onSubmit = (data) => {
+      setProcessing(true)
         dispatch(selectDate(value));
         dispatch(selectSlot(data));
+        setProcessing(false)
         history.push(`/${shopID}/professionals`);
     }
     
@@ -50,13 +63,22 @@ const Slots = () => {
       if(typeof window !== 'undefined' && !shopID) {
         history.push(`/${id}/services`)
       } else {
+        setLoading(true)
         Api.getSlots(id, bookingService.service, newSelDate ).then((res) => {
           dispatch(slotList(res))
-      })
+          setLoading(false)
+        })
       }
   },[]);  
 
-    
+    const btnClick = (data) => {
+      console.log(selected)
+      // if(data) {
+      //   console.log(data)
+      // } else {
+      //   console.log("adasdsadasdsad")
+      // }
+    }
     return (
         <>
         <div className="col-span-6 shadow-2xl p-8 row-span-9 overflow-y-auto h-full rounded-t-xl bg-red-50 relative pb-24">
@@ -75,9 +97,9 @@ const Slots = () => {
                 </div>
                 <div className="times_wrapper mt-5">
                 <h3 className="text-main text-lg font-bold">Time :</h3>
-                    
-                <div className=" px-4 py-4">
-     
+                {loading ? 
+                <Spinner size={10} color={"main"}/>
+               : <div className=" px-4 py-4">
         <RadioGroup value={selected} onChange={setSelected}>
           <RadioGroup.Label className="sr-only">Select time</RadioGroup.Label>
           <div className="mx-4 flex flex-wrap  gap-x-7 gap-y-4 items-center justify-center ">
@@ -105,14 +127,14 @@ const Slots = () => {
                           <RadioGroup.Label
                             className={`font-medium  ${
                               checked ? 'text-white' : 'text-gray-900'
-                            }`}
-                          >
+                            }`}>
                             {plan.slot}
                             <input
                               id={plan.slot}
                               name="time"
                               type="radio"
                               value={plan.dateValue}
+                              // checked={plan.dateValue == plans[0].dateValue ? true : false}
                               className="invisible hidden"
                               {...register('time',{ required: true })}
                               />
@@ -123,9 +145,7 @@ const Slots = () => {
             ))}
           </div>
         </RadioGroup>
-    </div>
-
-
+    </div> }
                 </div>
             </div>
             <div className="fixed right-12 bottom-12 flex flex-wrap  gap-x-1 items-center justify-center">
@@ -134,7 +154,7 @@ const Slots = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 17l-5-5m0 0l5-5m-5 5h12" />
                 </svg>
                 </button>
-                <input type="submit" className="text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg" value="Next" />
+                <input type="submit" onClick={btnClick(onSubmit)} className="text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg" value={processing? "Processing..." : "Next"} />
             </div>
            
             </form>

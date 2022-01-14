@@ -33,7 +33,7 @@ const Login = () => {
           await login({
             token: res.plainTextToken,
           })
-          enqueueSnackbar('Login Successful');
+          enqueueSnackbar('Login Successful',{ variant: 'success'});
           afterLogin(res)
         } catch (error) {
           setErr(error.data.error)

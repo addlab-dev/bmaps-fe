@@ -9,6 +9,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { loginReturn } from '../Store/Actions';
 import useAuthContext from '../Hooks/useAuthContext'
 import { useSnackbar } from 'notistack';
+import { useHistory } from "react-router-dom";
 
 const menuItems = [
   {
@@ -31,10 +32,13 @@ const Header = () => {
   const dispatch = useDispatch();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const { logout, authState } = useAuthContext()
+  const history = useHistory();
+  const shopID = useSelector((state) => state.booking.storeID)
   console.log(authState.token)
   const logOut = () => {
     logout();
-    enqueueSnackbar('Logged Out Successfully');
+    enqueueSnackbar('Logged Out Successfully',{ variant: 'success'});
+    history.push(`/${shopID}/services`);
   }
     return (
         <Disclosure as="nav" className="col-span-full lg:grid lg:grid-cols-1 text-center ">

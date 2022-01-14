@@ -35,7 +35,6 @@ const defaultState = {
   selectedSlot:{},
   selectedDate:{},
   selectedStep:{},
-  // bookingInfo: {},
   answers: [],
   bookingStatus: {
 

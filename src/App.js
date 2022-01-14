@@ -13,8 +13,8 @@ function App(pageProps) {
     <AuthContextProvider>
       <Provider store={store}>
         <BrowserRouter>
-        <SnackbarProvider maxSnack={3}>
-            <div className="h-screen bg-appbg ">
+        <SnackbarProvider maxSnack={2}>
+            <div className="h-screen bg-appbg">
               <Header/>
               <Pages {...pageProps}/>
             </div>

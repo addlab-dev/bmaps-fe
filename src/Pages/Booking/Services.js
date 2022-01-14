@@ -8,6 +8,7 @@ import { useParams } from "react-router";
 import applyTheme from '../../Theme/applyTheme'
 import WebFont from 'webfontloader'
 import defaultTheme from '../../Theme/defaultTheme'
+import Spinner from "../../Components/Spinner"
 
 const Services = () => {
     const dispatch = useDispatch();
@@ -19,10 +20,14 @@ const Services = () => {
     const { register, handleSubmit, errors } = useForm();
     const [services, setServices] = useState([]);
     const [selService, setSelService] = useState();
+    const [loading, setLoading] = useState(true);
+    const [processing, setProcessing] = useState(false);
     const [checkedState, setCheckedState] = useState();
     const [data, setData] = useState(null);
+
     useEffect(() => {
         dispatch(getStoreID(id))
+        setLoading(true)
         Api.getData(id).then((res) => {
             setData(res.customizations[0])
             WebFont.load({
@@ -42,13 +47,16 @@ const Services = () => {
         Api.getService(id).then((res) => {
             setServices(res)
             dispatch(serviceList(res))
+            setLoading(false)
         })
         setSelService(selectedService)
     }, [])
     const onSubmit = (data) => {
         dispatch(selectService(data));
+        setProcessing(true)
         Api.getQuest(id, data.service ).then((res) => {
             dispatch(questionList(res))
+            setProcessing(false)
         }).then(()=> {
             history.push({pathname:`/${shopID}/slots`, state:{data}});
         })
@@ -66,7 +74,8 @@ const Services = () => {
             </div>
             <form onSubmit={handleSubmit(onSubmit)}>
             <div className="services_wrapper mt-5 ml-4">
-            {shop_services.map((category) => (
+            {loading ? <Spinner size={10} color={"main"}/>
+            : <>{shop_services.map((category) => (
                 <section key={category.title} className="w-full mt-4 mb-8">
                     <h1 className="w-full text-main font-medium text-lg pl-1 mb-2">{category.title}</h1>
                         {category.services && category.services.map(service => (
@@ -87,9 +96,9 @@ const Services = () => {
                                     <p className="text-gray-500 text-sm pt-2 w-11/12 font-normal">{service.vendor_service.note}</p>
                                 </label>
                             </div>))}
-                </section>))} 
+                </section>))}</> }
             </div>
-            <input className="text-white bg-main rounded px-16 py-2 text-sm fixed right-12 bottom-12" type="submit" value="Select" />
+            <input className="text-white bg-main rounded px-16 py-2 text-sm fixed right-12 bottom-12" type="submit" value={processing? "Processing..." : "Select"} />
             </form>
         </div>
         </>

@@ -1,22 +1,39 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import {selectProfessional,professionalList} from '../../Store/Actions';
+import {selectProfessional,professionalList,loginReturn,bookingStatus} from '../../Store/Actions';
 import { useForm } from 'react-hook-form';
 import { useHistory } from "react-router-dom";
 import { useParams } from "react-router";
 import Api from '../../Api/Api';
-
+import useAuthContext from '../../Hooks/useAuthContext'
+import Spinner from "../../Components/Spinner"
 
 const Professionals = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const professionals = useSelector((state) => state.booking.professionalList)
+    const bookingQuest = useSelector((state) => state.booking.questions)
     const bookingService = useSelector((state) => state.booking.selectedService)
     const bookingDate = useSelector((state) => state.booking.selectedDate)
+    const bookingSlot = useSelector((state) => state.booking.selectedSlot)
     const shopID = useSelector((state) => state.booking.storeID)
     const { register, handleSubmit, errors } = useForm();
     const [searchValue, setSearchValue] = useState("");
+    const [loading, setLoading] = useState(true)
+    const [processing, setProcessing] = useState(false);
+
     let { id } = useParams();
+    const {authState} = useAuthContext();
+    const bookingStat = useSelector((state) => state.booking.bookingStatus)
+
+
+    const bookSteps = bookingQuest.length;
+    const [bookStatus, setBookStatus] = React.useState({
+        store_id: shopID,
+        // date: bookingDate,
+        slot_value: bookingSlot.time,
+        service_id: bookingService.service,
+    })
     const filterProf = ({ name }) => {
         let searchProf = name.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1;
         return searchProf;
@@ -26,14 +43,31 @@ const Professionals = () => {
           history.push(`/${id}/services`)
         } else {
             let newSelDate = bookingDate.toLocaleDateString("it-IT").slice(0, 10).replace(/\//g, '-');
+            setLoading(true)
             Api.getProf(id, bookingService.service, newSelDate ).then((res) => {
                 dispatch(professionalList(res))
+                setLoading(false)
             })
         }
     },[]); 
     const onSubmit = (data) => {
+        setProcessing(true)
         dispatch(selectProfessional(data));
-        history.push(`/${shopID}/questions`);
+        if(bookingQuest.length>0) {
+            setProcessing(false)
+            history.push(`/${shopID}/questions`);
+        } else {
+            const finalBookStatus = {...bookStatus, staff_id: data.prof, answers: []};
+          dispatch(bookingStatus(finalBookStatus));
+            if (authState.token) {
+                setProcessing(false)
+                history.push(`/${shopID}/summary`);
+              } else {
+                setProcessing(false)
+                dispatch(loginReturn("summary"))
+                history.push(`/${shopID}/login`);
+              }
+        }   
     }
     return (
         <>
@@ -45,6 +79,9 @@ const Professionals = () => {
             <form onSubmit={handleSubmit(onSubmit)}>
             <div className="professionals_wrapper mt-5 ml-4">
                     <section className="w-full mt-4 mb-8">
+                    {loading ? 
+                    <Spinner size={10} color={"main"}/>
+                        : <>
                             {professionals.filter(filterProf).map((prof) =>(
                                 <div key={prof.id} className="prof relative w-full pl-1  border-b border-gray-300">
                                     <label htmlFor={prof.id} className="text-main relative w-full pb-5 pt-5 font-bold text-md inline-flex cursor-pointer">{prof.name}
@@ -56,7 +93,7 @@ const Professionals = () => {
                                     {...register('prof',{ required: true })}
                                     className="focus:text-main h-5 w-5 top-1/3 text-main border-gray-300 absolute right-5" /></label>
                                 </div>
-                            ))}
+                            ))}</> }
                     </section>
             </div>
 
@@ -66,7 +103,7 @@ const Professionals = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 17l-5-5m0 0l5-5m-5 5h12" />
                 </svg>
                 </button>
-            <input type="submit" className="text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg" value="Proceed"/>
+            <input type="submit" className="text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg" value={processing? "Processing..." : "Proceed"}/>
             </div>
             </form>
         </div>

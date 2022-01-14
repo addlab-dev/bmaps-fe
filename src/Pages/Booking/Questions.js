@@ -12,7 +12,7 @@ const Questions = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const { register, handleSubmit, errors } = useForm();
-    const bookingInfo = useSelector((state) => state.booking.questions)
+    const bookingQuest = useSelector((state) => state.booking.questions)
     const bookingService = useSelector((state) => state.booking.selectedService)
     const bookingStaff = useSelector((state) => state.booking.selectedProfessional)
     const bookingDate = useSelector((state) => state.booking.selectedDate)
@@ -24,7 +24,7 @@ const Questions = () => {
     const [activeStep, setActiveStep] = React.useState(0);
     const [skipped, setSkipped] = React.useState(new Set());
     const [open, setOpen] = React.useState(false);
-    const steps = bookingInfo.length;
+    const steps = bookingQuest.length;
     let { id } = useParams();
 
     const [questions, setQuestions] = React.useState([]);
@@ -84,8 +84,8 @@ const Questions = () => {
   
       let updateQuest = [...questions];
       updateQuest.push({
-          id : bookingInfo[activeStep].id,
-          type : bookingInfo[activeStep].type,
+          id : bookingQuest[activeStep].id,
+          type : bookingQuest[activeStep].type,
           answers : answers[activeStep]
       })
       setQuestions(updateQuest);
@@ -136,9 +136,9 @@ const Questions = () => {
     };
 
     function getStepContent(step) {
-        if(bookingInfo[step].type == 1) {
+        if(bookingQuest[step].type == 1) {
           return (<section className="w-full mt-4 mb-8">
-            <h3 className="text-main font-bold text-lg pb-4 pt-2">{bookingInfo[step].question} <span className="helper-text">(Type some text)</span></h3>
+            <h3 className="text-main font-bold text-lg pb-4 pt-2">{bookingQuest[step].question} <span className="helper-text">(Type some text)</span></h3>
           
             <div className="w-full mt-6"><textarea
                 className="shadow-sm focus:ring-main focus:border-main mt-1 block w-full sm:text-sm border-gray-300 rounded-md bg-red-50"
@@ -149,21 +149,21 @@ const Questions = () => {
                 onChange={handleChange}
             /></div>
           </section>)
-        } else if (bookingInfo[step].type == 2) {
+        } else if (bookingQuest[step].type == 2) {
           return (<section className="w-full mt-4 mb-8">
-            <h3  className="text-main font-bold text-lg pb-4 pt-2">{bookingInfo[step].question}<span className="helper-text">(Select 1 option minimum)</span></h3>
-            <div className="w-full mt-6">{bookingInfo[step].answers.map(answer =>
+            <h3  className="text-main font-bold text-lg pb-4 pt-2">{bookingQuest[step].question}<span className="helper-text">(Select 1 option minimum)</span></h3>
+            <div className="w-full mt-6">{bookingQuest[step].answers.map(answer =>
                 <label key={answer.id} className="w-full p-2 flex flex-row justify-between text-main text-md cursor-pointer">{answer.answer}
                         <input type="checkbox" className="focus:text-main h-5 w-5 text-main border-gray-300" name={answer.name} value={answer.id} onChange={handleCheckboxChange} /> 
                         </label> 
                     )}
                     </div>
           </section>)
-        } else if (bookingInfo[step].type == 3) {
+        } else if (bookingQuest[step].type == 3) {
           return (<section className="w-full mt-4 mb-8">
-            <h3  className="text-main font-bold text-lg pb-4 pt-2">{bookingInfo[step].question}<span className="helper-text">(Select 1 option)</span></h3>
+            <h3  className="text-main font-bold text-lg pb-4 pt-2">{bookingQuest[step].question}<span className="helper-text">(Select 1 option)</span></h3>
             <div className="w-full mt-6">
-            {bookingInfo[step].answers.map(answer => <label className="w-full p-2 flex flex-row justify-between text-main  text-md cursor-pointer" key={answer.answer} htmlFor={Number(answer.id)} >{answer.answer}
+            {bookingQuest[step].answers.map(answer => <label className="w-full p-2 flex flex-row justify-between text-main  text-md cursor-pointer" key={answer.answer} htmlFor={Number(answer.id)} >{answer.answer}
             <input type="radio" onChange={handleChange} name="multi1" id={Number(answer.id)} value={Number(answer.id)} className="focus:text-main h-5 w-5 text-main border-gray-300 "/></label> )}
             </div>
           </section>)
@@ -178,9 +178,9 @@ const Questions = () => {
                             <Stepper 
                             className="ml-8 flex items-center space-x-2"
                             style={{backgroundColor:"transparent",padding:"0"}}
-                                steps={bookingInfo.length}
+                                steps={bookingQuest.length}
                                 activeStep={activeStep}>
-                                {bookingInfo.map((label, index) => {
+                                {bookingQuest.map((label, index) => {
                                     const stepProps = {};
                                     const labelProps = {};
                                     if (isStepOptional(index)) {

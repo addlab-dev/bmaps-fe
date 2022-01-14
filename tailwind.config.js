@@ -31,6 +31,7 @@ module.exports = {
       black: '#153750',
       blue: '#158BCB',
       green: '#C3D976',
+      white: '#ffffff',
       appbg : 'var(--gl-color-secondary)',
       main : 'var(--gl-color-primary)',
       transparent: 'transparent',
