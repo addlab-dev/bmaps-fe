@@ -14,7 +14,7 @@ function App(pageProps) {
       <Provider store={store}>
         <BrowserRouter>
         <SnackbarProvider maxSnack={3}>
-            <div className="h-screen bg-appbg">
+            <div className="h-screen bg-appbg ">
               <Header/>
               <Pages {...pageProps}/>
             </div>
