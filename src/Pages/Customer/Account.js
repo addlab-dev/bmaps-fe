@@ -9,6 +9,7 @@ import { useHistory } from "react-router-dom";
 import Api from '../../Api/Api';
 import { profileInfo,loginReturn } from '../../Store/Actions';
 import { useSnackbar } from 'notistack';
+import Spinner from "../../Components/Spinner"
 
 const Account = () => {
     let { id } = useParams();
@@ -21,6 +22,7 @@ const Account = () => {
     // const { login, authState } = useAuthContext()
     const [err, setErr] = useState(null)
     const [profile, setProfile] = useState(useSelector((state) => state.booking.profile));
+    const [loading, setLoading] = useState(true)
     const [processing, setProcessing] = useState(false);
 
     useEffect(() => {
@@ -31,20 +33,21 @@ const Account = () => {
         dispatch(loginReturn("account"))
         history.push(`/${id}/login`)
       }
+      console.log(profile)
+      setLoading(true)
         Api.getProfile( {headers: {'Authorization': `Bearer ${localStorage.getItem('token')}`}})
-        .then((response) => {dispatch(profileInfo(response)); setProfile(response)});
+        .then((response) => {dispatch(profileInfo(response)); setProfile(response);console.log(profile);setLoading(false)});
     },[]); 
     
     const onSubmit = (data) => {
         setProcessing(true)
         data = profile;
+        console.log(data);
         Api.setProfile({
             fname: data.fname,
             lname: data.lname,
             email: data.email,
-            // password: data.password,
-            // password_confirmation: data.password_confirmation,
-            contact: data.contact,
+            // contact: data.contact,
             address: data.address,
             gender: data.gender,
             bdate: data.bdate,
@@ -66,6 +69,9 @@ const Account = () => {
         <h1 className="w-full text-main font-medium text-xl pl-1 mb-2" >Account</h1>
             <div className="register_wrapper mt-5 ml-4 h-full relative">
                     <section className="w-full min-h-full mt-4 mb-8 pb-28 h-auto">
+                    {loading ? 
+                <Spinner size={10} color={"main"}/>
+               :
                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-8 ">
                     <div className="sm:col-span-3">
                         <div className="mt-1">
@@ -215,7 +221,7 @@ const Account = () => {
 
             <input type="submit" className="text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg" value={processing? "Submitting..." : "Update details"}/>
             </div>
-                    </form>
+                    </form> }
                     </section> 
             </div>
 
