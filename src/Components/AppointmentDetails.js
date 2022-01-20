@@ -21,9 +21,9 @@ const AppointmentDetails = (booking) => {
     }
     return(
         <>
-            <div className="register_wrapper mt-2 ml-2 h-full relative">
-                    <section className="w-full pl-2 mt-8 mb-5 pb-8 h-auto border-b-2 border-gray-300">
-                    <h1 className="w-full text-main font-bold text-lg mb-5" >{booking.service_date}</h1>
+            <div className="appointments_wrapper mt-2 h-full relative">
+                    <section className="w-full pl-2 mt-2 mb-4 pb-4 h-auto border-b-2 border-gray-300">
+                    <h1 className="w-full text-main font-bold text-lg mb-4" >{booking.service_date}</h1>
                       <div className="grid grid-cols-1 sm:grid-cols-2">
                         <div>
                             <h3 className="text-main font-bold text-md w-full pb-1 ">Service:</h3>
@@ -41,10 +41,10 @@ const AppointmentDetails = (booking) => {
                       <button onClick={cancelBooking} value={booking.id} className="mt-5 text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg">Cancel Booking</button>
                     :""}
                     </section> 
-                   {booking.payments_accepted ? <section className="w-full  mt-12 mb-8 pb-8 h-auto ">
-                    <h1 className="w-full text-main font-bold text-lg pl-1 mb-10" >Note :</h1>
+                   {booking.payments_accepted ? <section className="w-full  mt-4 mb-4 pb-4 h-auto ">
+                    <h1 className="w-full text-main font-bold text-lg pl-1 mb-4" >Note :</h1>
                       <div className="grid grid-cols-1">
-                        <div className="mt-8 sm:mt-0">                        
+                        <div className="mt-4 sm:mt-0">                        
                             <p className="text-main font-normal text-md w-full">
                             - The total amount should be directly paid at the center. 
                             </p>

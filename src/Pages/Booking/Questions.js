@@ -138,7 +138,7 @@ const Questions = () => {
     function getStepContent(step) {
         if(bookingQuest[step].type == 1) {
           return (<section className="w-full mt-4 mb-8">
-            <h3 className="text-main font-bold text-lg pb-4 pt-2">{bookingQuest[step].question} <span className="helper-text">(Type some text)</span></h3>
+            <h3 className="text-main font-bold text-lg py-2">{bookingQuest[step].question} <span className="helper-text">(Type some text)</span></h3>
           
             <div className="w-full mt-6"><textarea
                 className="shadow-sm focus:ring-main focus:border-main mt-1 block w-full sm:text-sm border-gray-300 rounded-md bg-red-50"
@@ -151,7 +151,7 @@ const Questions = () => {
           </section>)
         } else if (bookingQuest[step].type == 2) {
           return (<section className="w-full mt-4 mb-8">
-            <h3  className="text-main font-bold text-lg pb-4 pt-2">{bookingQuest[step].question}<span className="helper-text">(Select 1 option minimum)</span></h3>
+            <h3  className="text-main font-bold text-lg py-2">{bookingQuest[step].question}<span className="helper-text">(Select 1 option minimum)</span></h3>
             <div className="w-full mt-6">{bookingQuest[step].answers.map(answer =>
                 <label key={answer.id} className="w-full p-2 flex flex-row justify-between text-main text-md cursor-pointer">{answer.answer}
                         <input type="checkbox" className="focus:text-main h-5 w-5 text-main border-gray-300" name={answer.name} value={answer.id} onChange={handleCheckboxChange} /> 
@@ -161,7 +161,7 @@ const Questions = () => {
           </section>)
         } else if (bookingQuest[step].type == 3) {
           return (<section className="w-full mt-4 mb-8">
-            <h3  className="text-main font-bold text-lg pb-4 pt-2">{bookingQuest[step].question}<span className="helper-text">(Select 1 option)</span></h3>
+            <h3  className="text-main font-bold text-lg py-2">{bookingQuest[step].question}<span className="helper-text">(Select 1 option)</span></h3>
             <div className="w-full mt-6">
             {bookingQuest[step].answers.map(answer => <label className="w-full p-2 flex flex-row justify-between text-main  text-md cursor-pointer" key={answer.answer} htmlFor={Number(answer.id)} >{answer.answer}
             <input type="radio" onChange={handleChange} name="multi1" id={Number(answer.id)} value={Number(answer.id)} className="focus:text-main h-5 w-5 text-main border-gray-300 "/></label> )}
@@ -173,7 +173,7 @@ const Questions = () => {
         <>
         <div className="col-span-6 shadow-2xl p-8 row-span-9 overflow-y-auto rounded-t-xl h-full bg-red-50 relative">
             <div className="w-full h-auto relative " >
-                <h1 className="text-main font-bold text-lg pb-4 pt-2 ">4. Tell us know a more about yourself.</h1>
+                <h1 className="text-main font-bold text-lg py-2 ">4. Tell us know a more about yourself.</h1>
                     <nav className="absolute right-5 top-5" aria-label="Progress">
                             <Stepper 
                             className="ml-8 flex items-center space-x-2"
@@ -202,13 +202,13 @@ const Questions = () => {
             {getStepContent(activeStep)}
             </div>
 
-            <div className="fixed right-12 bottom-12 flex flex-wrap  gap-x-1 items-center justify-center">
-                <button type="button" onClick={handleBack} className="text-main bg-white rounded px-5 py-2 grid text-md mr-3 shadow-md focus:outline-none hover:shadow-lg">
+            <div className="fixed right-8 bottom-8 flex flex-wrap  gap-x-1 items-center justify-center">
+                <button type="button" onClick={handleBack} className="shadow-lg text-main bg-white rounded px-5 py-2 grid text-md mr-3 shadow-md focus:outline-none hover:shadow-lg">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 17l-5-5m0 0l5-5m-5 5h12" />
                 </svg>
                 </button>
-                <button className={`text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg ${answers[activeStep] === "" ? "opacity-50 cursor-not-allowed" : ""}`} disabled={answers[activeStep] === ""} onClick={handleNext}>
+                <button className={`shadow-lg text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg ${answers[activeStep] === "" ? "opacity-50 cursor-not-allowed" : ""}`} disabled={answers[activeStep] === ""} onClick={handleNext}>
                     {activeStep === steps-1 ? 'Finish' : 'Next'}
                   </button>
             {/* <button className="text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg">Next</button> */}

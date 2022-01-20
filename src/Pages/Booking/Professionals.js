@@ -81,7 +81,7 @@ const Professionals = () => {
         <>
         <div className="col-span-6 shadow-2xl p-8 row-span-9 overflow-y-auto rounded-t-xl h-full bg-red-50 relative">
             <div className="w-full h-auto" >
-                <h1 className="text-main font-bold text-lg pb-4 pt-2 ">3. Select professional</h1>
+                <h1 className="text-main font-bold text-lg py-2 ">3. Select professional</h1>
             </div>
             <input type="text" placeholder="Search a professional" onChange={e => setSearchValue(e.target.value)} value={searchValue} className="pl-2 ml-4 text-main focus:border-transparent focus:outline-none w-full bg-transparent border-t-0 border-l-0 border-r-0 border-b-1 border-gray-300"/>
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -105,13 +105,13 @@ const Professionals = () => {
                     </section>
             </div>
 
-            <div className="fixed right-12 bottom-12 flex flex-wrap  gap-x-1 items-center justify-center">
-                <button type="button" onClick={()=> {history.push(`/${shopID}/slots`);}} className="text-main bg-white rounded px-5 py-2 grid text-md mr-3 shadow-md focus:outline-none hover:shadow-lg">
+            <div className="fixed right-8 bottom-8 flex flex-wrap  gap-x-1 items-center justify-center">
+                <button type="button" onClick={()=> {history.push(`/${shopID}/slots`);}} className="shadow-lg text-main bg-white rounded px-5 py-2 grid text-md mr-3 shadow-md focus:outline-none hover:shadow-lg">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 17l-5-5m0 0l5-5m-5 5h12" />
                 </svg>
                 </button>
-            <input type="submit" onClick={btnClick} className="text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg" value={processing? "Processing..." : "Proceed"}/>
+            <input type="submit" onClick={btnClick} className="shadow-lg text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg" value={processing? "Processing..." : "Proceed"}/>
             </div>
             </form>
         </div>

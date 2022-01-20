@@ -73,18 +73,18 @@ const Slots = () => {
   },[]);  
 
     const btnClick = () => {
-      if(bookingSlot.time) {
+      console.log("hello")
         enqueueSnackbar('Please select a time slot',{ variant: 'info'});
-      }
+      
     }
     return (
         <>
-        <div className="col-span-6 shadow-2xl p-8 row-span-9 overflow-y-auto h-full rounded-t-xl bg-red-50 relative pb-24">
+        <div className="col-span-6 shadow-2xl p-8 row-span-9 overflow-y-auto h-full rounded-t-xl bg-red-50 relative pb-16">
             <div className="w-full h-auto" >
-                <h1 className="text-main font-bold text-lg pb-4 pt-2 ">2. Select your preference</h1>
+                <h1 className="text-main font-bold text-lg py-2 ">2. Select your preference</h1>
             </div>
             <form onSubmit={handleSubmit(onSubmit)} id="slot-form">
-            <div className="slots_wrapper mt-5">
+            <div className="slots_wrapper ml-5">
                 <div className="calendar_wrapper border-b border-main pb-10">
                     <h3 className="text-main text-lg font-bold">Date :</h3>
                     <Calendar 
@@ -97,10 +97,10 @@ const Slots = () => {
                 <h3 className="text-main text-lg font-bold">Time :</h3>
                 {loading ? 
                 <Spinner size={10} color={"main"}/>
-               : <div className=" px-4 py-4">
+               : <div className=" p-4">
         <RadioGroup value={selected} onChange={setSelected}>
           <RadioGroup.Label className="sr-only">Select time</RadioGroup.Label>
-          <div className="mx-4 flex flex-wrap  gap-x-7 gap-y-4 items-center justify-center ">
+          <div className="flex flex-wrap gap-x-2 items-center justify-space-evenly ">
             {plans.map((plan) => (
               <RadioGroup.Option
               as="label" htmlFor={plan.time}
@@ -147,13 +147,13 @@ const Slots = () => {
     </div> }
                 </div>
             </div>
-            <div className="fixed right-12 bottom-12 flex flex-wrap  gap-x-1 items-center justify-center">
-                <button type="button" onClick={()=> {history.push(`/${shopID}/services`);}} className="text-main bg-white rounded px-5 py-2 grid text-md mr-3 shadow-md focus:outline-none hover:shadow-lg">
+            <div className="fixed right-8 bottom-8 flex flex-wrap gap-x-1 items-center justify-space-evenly">
+                <button type="button" onClick={()=> {history.push(`/${shopID}/services`);}} className="shadow-lg text-main bg-white rounded px-5 py-2 grid text-md mr-3 focus:outline-none hover:shadow-lg">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 17l-5-5m0 0l5-5m-5 5h12" />
                 </svg>
                 </button>
-                <input type="submit" onClick={btnClick} className="text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg" value={processing? "Processing..." : "Next"} />
+                <input type="submit" onClick={btnClick} className="shadow-lg text-white bg-main rounded px-16 py-2 text-sm focus:outline-none hover:shadow-lg" value={processing? "Processing..." : "Next"} />
             </div>
            
             </form>

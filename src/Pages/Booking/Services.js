@@ -71,19 +71,19 @@ const Services = () => {
         <>
         <div className="col-span-6 shadow-2xl p-8 row-span-9 overflow-y-auto rounded-t-xl h-full bg-red-50 relative pb-24">
             <div className="w-full h-auto" >
-                <h1 className="text-main font-bold text-lg pb-4 pt-2 ">1. Select your service</h1>
+                <h1 className="text-main font-bold text-lg py-2 ">1. Select your service</h1>
             </div>
             <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="services_wrapper mt-5 ml-4">
+            <div className="services_wrapper mt-2 ml-4">
             {loading ? <Spinner size={10} color={"main"}/>
             : <>{shop_services.map((category) => (
-                <section key={category.title} className="w-full mt-4 mb-8">
-                    <h1 className="w-full text-main font-medium text-lg pl-1 mb-2">{category.title}</h1>
+                <section key={category.title} className="w-full mb-4">
+                    <h1 className="w-full text-main font-medium text-lg py-2 pl-2 border-t border-b mb-2 border-main">{category.title}</h1>
                         {category.services && category.services.map(service => (
-                            <div htmlFor={service.id} key={service.id} className="service relative w-full pl-3 border-b border-main">
-                                <label  className="text-main w-full pb-5 pt-5 font-bold flex flex-col justify-center text-md cursor-pointer">
+                            <div htmlFor={service.id} key={service.id} className="service relative w-full">
+                                <label  className={`text-main w-full py-3 border-b font-bold flex flex-col justify-center text-md cursor-pointer pl-2 ${selService == service.id ? "selected shadow-sm rounded-md" : ""}`}>
                                     <span className="flex items-center">{service.vendor_service.name}
-                                    <span className="text-gray-400 text-sm pl-4">{service.duration} Min session</span></span>
+                                    <span className="text-gray-400 text-sm pl-3">{service.duration} Min session</span></span>
                                     <h4 htmlFor={service.id} className="text-main font-bold text-sm mt-3 inline cursor-pointer w-full">€ {service.price}</h4>
                                     <input
                                         id={service.id}
@@ -92,14 +92,14 @@ const Services = () => {
                                         onClick={changeService}
                                         value={service.id}
                                         checked={selService == service.id }
-                                        className="focus:text-main h-5 w-5 text-main border-gray-300 absolute right-5"
+                                        className="focus:text-main h-5 w-5 text-main border-gray-300 absolute right-4"
                                         {...register('service',{ required: true })}/>
                                     <p className="text-gray-500 text-sm pt-2 w-11/12 font-normal">{service.vendor_service.note}</p>
                                 </label>
                             </div>))}
                 </section>))}</> }
             </div>
-            <input className="text-white bg-main rounded px-16 py-2 text-sm fixed right-12 bottom-12" type="submit" value={processing? "Processing..." : "Select"} />
+            <input className="text-white bg-main rounded px-16 py-2 text-sm fixed right-8 bottom-8 shadow-lg" type="submit" value={processing? "Processing..." : "Select"} />
             </form>
         </div>
         </>

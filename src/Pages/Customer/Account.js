@@ -36,7 +36,7 @@ const Account = () => {
       console.log(profile)
       setLoading(true)
         Api.getProfile( {headers: {'Authorization': `Bearer ${localStorage.getItem('token')}`}})
-        .then((response) => {dispatch(profileInfo(response)); setProfile(response);console.log(profile);setLoading(false)});
+        .then((response) => {dispatch(profileInfo(response)); setProfile(response); console.log(profile); setLoading(false)});
     },[]); 
     
     const onSubmit = (data) => {
@@ -66,8 +66,8 @@ const Account = () => {
     return (
         <>
         <div className="col-span-6 shadow-2xl p-8 row-span-9 overflow-y-auto rounded-t-xl h-full bg-red-50 relative">
-        <h1 className="w-full text-main font-medium text-xl pl-1 mb-2" >Account</h1>
-            <div className="register_wrapper mt-5 ml-4 h-full relative">
+        <h1 className="w-full text-main font-bold text-xl pl-1 mb-2" >Account</h1>
+            <div className="pofile_wrapper mt-5 h-full relative">
                     <section className="w-full min-h-full mt-4 mb-8 pb-28 h-auto">
                     {loading ? 
                 <Spinner size={10} color={"main"}/>
@@ -217,9 +217,9 @@ const Account = () => {
                         </label> 
                         </div>
                         </div>
-                        <div className="fixed right-12 bottom-12 flex flex-wrap  gap-x-1 items-center justify-center">
+                        <div className="fixed right-8 bottom-8 flex flex-wrap  gap-x-1 items-center justify-center">
 
-            <input type="submit" className="text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg" value={processing? "Submitting..." : "Update details"}/>
+            <input type="submit" className="shadow-lg text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg" value={processing? "Submitting..." : "Update details"}/>
             </div>
                     </form> }
                     </section> 

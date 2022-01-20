@@ -14,7 +14,7 @@ const Confirmation = () => {
                     </section> 
             </div>
 
-            <div className="fixed right-12 bottom-12 flex flex-wrap  gap-x-1 items-center justify-center">
+            <div className="fixed right-8 bottom-8 shadow-lg flex flex-wrap  gap-x-1 items-center justify-center">
             <button className="text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg">Book Another</button>
             </div>
         </div>

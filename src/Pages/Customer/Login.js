@@ -48,7 +48,7 @@ const Login = () => {
         <div className="col-span-6 shadow-2xl p-8 row-span-9 overflow-y-auto rounded-t-xl h-full bg-red-50 relative h-screen">
           
         <h1 className="w-full text-main font-medium text-xl pl-1 mb-2" >Login</h1>
-            <div className="register_wrapper mt-5 ml-4 h-full relative">
+            <div className="login_wrapper mt-5 ml-4 h-full relative">
                 <section className="w-full min-h-full mt-4 mb-8 h-auto">
                     <h1 className="mb-10 w-full text-center text-main font-bold text-lg">Login to your account to continue with the booking process</h1>
                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-8 ">
@@ -88,9 +88,9 @@ const Login = () => {
                         <div className="sm:col-span-3 text-right">
                                 <a className="text-gray-400 right-0 font-normal text-sm" href="#">Forgot password ?</a>
                         </div>  
-                        <div className="fixed right-12 bottom-12 flex flex-wrap  gap-x-1 items-center justify-center">
+                        <div className="fixed right-8 bottom-8 flex flex-wrap  gap-x-1 items-center justify-center">
                 <div className="pr-5"><span className="text-gray-400 text-sm">Don't have an account ?</span> <Link to={location => ({ ...location, pathname: 'register' })} className="text-main font-bold text-sm">Register</Link></div>
-            <button type="submit" className="text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg">Login</button>
+            <button type="submit" className="shadow-lg text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg">Login</button>
             </div>                 
            </form>
          </section> 

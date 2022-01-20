@@ -60,9 +60,14 @@ abbr[title] {
   @apply focus:bg-transparent hover:bg-transparent bg-transparent !important
 
 }
-
 .react-calendar__month-view__days__day--weekend {
   @apply focus:bg-transparent hover:bg-transparent bg-transparent text-black !important
+}
+.react-calendar__month-view__days__day--weekend {
+  color: black;
+}
+.react-calendar__tile:disabled {
+  color: #999999 !important;
 }
 .react-calendar__tile--active abbr {
   @apply focus:bg-main hover:bg-main bg-main text-white rounded-full p-2 !important
