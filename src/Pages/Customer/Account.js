@@ -33,15 +33,14 @@ const Account = () => {
         dispatch(loginReturn("account"))
         history.push(`/${id}/login`)
       }
-      console.log(profile)
       setLoading(true)
         Api.getProfile( {headers: {'Authorization': `Bearer ${localStorage.getItem('token')}`}})
-        .then((response) => {dispatch(profileInfo(response)); setProfile(response); console.log(profile); setLoading(false)});
+        .then((response) => {dispatch(profileInfo(response)); setProfile(response); setLoading(false)});
     },[]); 
     
     const onSubmit = (data) => {
         setProcessing(true)
-        data = profile;
+        setProfile(data);
         console.log(data);
         Api.setProfile({
             fname: data.fname,
@@ -51,12 +50,9 @@ const Account = () => {
             address: data.address,
             gender: data.gender,
             bdate: data.bdate,
-          }).then((response) => {
-            if (response.status == 200) {
+          }).then((res) => {
               setProcessing(false)
               enqueueSnackbar('Profile Updated',{ variant: 'success'});
-              history.push(`/${id}/appointments`)
-            }
           }, (error) => {
             console.log(error);
               setProcessing(false)
@@ -119,6 +115,7 @@ const Account = () => {
                         <div className="mt-1">
                             <input
                             type="email"
+                            disabled
                             defaultValue={profile.email}
                             {...register("email",{ type: 'email' })}
                             name="email"
