@@ -31,7 +31,7 @@ const AppointmentDetails = (booking) => {
                             <span className="text-gray-400 font-normal text-sm w-full">{booking.service_duration} min sessione</span>
                         </div>
                         <div className="mt-8 sm:mt-0">
-                        <h3 className="text-main font-bold text-md w-full pb-1">Professionale:</h3>
+                        <h3 className="text-main font-bold text-md w-full pb-1">Professionista:</h3>
                             <span className="text-gray-400 font-normal text-sm w-full">{booking.staff}</span>
                         </div>
                         

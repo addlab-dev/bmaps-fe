@@ -52,11 +52,11 @@ const Account = () => {
             bdate: data.bdate,
           }).then((res) => {
               setProcessing(false)
-              enqueueSnackbar('Profile Updated',{ variant: 'success'});
+              enqueueSnackbar('Profilo aggiornato',{ variant: 'success'});
           }, (error) => {
             console.log(error);
               setProcessing(false)
-              enqueueSnackbar('Uh oh! Problem occurred, please try again',{ variant: 'error'});
+              enqueueSnackbar('Uh oh! Si è verificato un problema, riprova per favore',{ variant: 'error'});
           },closeSnackbar());
       }
     return (
@@ -216,7 +216,7 @@ const Account = () => {
                         </div>
                         <div className="fixed right-8 bottom-8 flex flex-wrap  gap-x-1 items-center justify-center">
 
-            <input type="submit" className="shadow-lg text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg" value={processing? "Presentare..." : "Update details"}/>
+            <input type="submit" className="shadow-lg text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg" value={processing? "Presentare..." : "Aggiorna"}/>
             </div>
                     </form> }
                     </section> 

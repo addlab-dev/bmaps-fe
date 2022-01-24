@@ -135,7 +135,7 @@ const Header = () => {
                                       'block px-4 py-2 text-sm text-gray-700 w-full'
                                     )}
                                   >
-                                    Uscire
+                                    Esci
                                   </button>
                                 )}
                               </Menu.Item>
@@ -214,7 +214,7 @@ const Header = () => {
                       onClick={logOut}
                       className="text-left block px-4 py-2 text-base font-medium text-main hover:text-gray-800 hover:bg-gray-100"
                     >
-                      Uscire
+                      Esci
                     </button>
                   </div>
                 </div>

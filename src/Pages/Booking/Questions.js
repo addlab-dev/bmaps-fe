@@ -142,7 +142,7 @@ const Questions = () => {
           
             <div className="w-full mt-6"><textarea
                 className="shadow-sm focus:ring-main focus:border-main mt-1 block w-full sm:text-sm border-gray-300 rounded-md bg-red-50"
-                placeholder="Si prega di descrivere"
+                placeholder="Scrivi la tua risposta"
                 rows={4}
                 type="text"
                 value={answers[step] || ""}
@@ -209,7 +209,7 @@ const Questions = () => {
                 </svg>
                 </button>
                 <button className={`shadow-lg text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg ${answers[activeStep] === "" ? "opacity-50 cursor-not-allowed" : ""}`} disabled={answers[activeStep] === ""} onClick={handleNext}>
-                    {activeStep === steps-1 ? 'Finitura' : 'Prossimo'}
+                    {activeStep === steps-1 ? 'Completato' : 'Prossimo'}
                   </button>
             {/* <button className="text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg">Next</button> */}
             </div>

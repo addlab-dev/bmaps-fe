@@ -33,7 +33,7 @@ const Login = () => {
           await login({
             token: res.plainTextToken,
           })
-          enqueueSnackbar('Login Successful',{ variant: 'success'});
+          enqueueSnackbar('Accesso riuscito',{ variant: 'success'});
           afterLogin(res)
         } catch (error) {
           setErr(error.data.error)
@@ -89,7 +89,7 @@ const Login = () => {
                                 <a className="text-gray-400 right-0 font-normal text-sm" href="#">Hai dimenticato la password?</a>
                         </div>  
                         <div className="fixed right-8 bottom-8 flex flex-wrap  gap-x-1 items-center justify-center">
-                <div className="pr-5"><span className="text-gray-400 text-sm">Non hai un account?</span> <Link to={location => ({ ...location, pathname: 'register' })} className="text-main font-bold text-sm">Registra</Link></div>
+                <div className="pr-5"><span className="text-gray-400 text-sm">Non hai un account?</span> <Link to={location => ({ ...location, pathname: 'register' })} className="text-main font-bold text-sm">Registrati</Link></div>
             <button type="submit" className="shadow-lg text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg">Accedi</button>
             </div>                 
            </form>
