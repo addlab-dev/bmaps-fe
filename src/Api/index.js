@@ -44,11 +44,11 @@ class ApiBase {
  
     return new Promise((resolve, reject) => {
       if (!token) {
-        throw new Error('token undefined')
+        throw new Error('token indefinito')
       }
 
       if (typeof token !== 'string') {
-        return new Error('You must provide a valid token')
+        return new Error('È necessario fornire un token valido')
       }
 
       this.instance.defaults.headers.common.Authorization = `Bearer ${token}`

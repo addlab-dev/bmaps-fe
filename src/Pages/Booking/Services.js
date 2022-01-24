@@ -71,7 +71,7 @@ const Services = () => {
         <>
         <div className="col-span-6 shadow-2xl p-8 row-span-9 overflow-y-auto rounded-t-xl h-full bg-red-50 relative pb-24">
             <div className="w-full h-auto" >
-                <h1 className="text-main font-bold text-lg py-2 ">1. Select your service</h1>
+                <h1 className="text-main font-bold text-lg py-2 ">1. Seleziona il tuo servizio</h1>
             </div>
             <form onSubmit={handleSubmit(onSubmit)}>
             <div className="services_wrapper mt-2 ml-4">
@@ -83,7 +83,7 @@ const Services = () => {
                             <div htmlFor={service.id} key={service.id} className="service relative w-full">
                                 <label  className={`text-main w-full py-3 border-b font-bold flex flex-col justify-center text-md cursor-pointer pl-2 ${selService == service.id ? "selected shadow-sm rounded-md" : ""}`}>
                                     <span className="flex items-center">{service.vendor_service.name}
-                                    <span className="text-gray-400 text-sm pl-3">{service.duration} Min session</span></span>
+                                    <span className="text-gray-400 text-sm pl-3">{service.duration} Min sessione</span></span>
                                     <h4 htmlFor={service.id} className="text-main font-bold text-sm mt-3 inline cursor-pointer w-full">€ {service.price}</h4>
                                     <input
                                         id={service.id}
@@ -99,7 +99,7 @@ const Services = () => {
                             </div>))}
                 </section>))}</> }
             </div>
-            <input className="text-white bg-main rounded px-16 py-2 text-sm fixed right-8 bottom-8 shadow-lg" type="submit" value={processing? "Processing..." : "Select"} />
+            <input className="text-white bg-main rounded px-16 py-2 text-sm fixed right-8 bottom-8 shadow-lg" type="submit" value={processing? "Elaborazione..." : "Seleziona"} />
             </form>
         </div>
         </>

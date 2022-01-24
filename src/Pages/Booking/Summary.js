@@ -44,19 +44,19 @@ const backStep = () => {
     .then((response) => {
       if (response.status == 200) {
         setProcessing(false)
-        enqueueSnackbar('Booking Successful',{ variant: 'success'});
+        enqueueSnackbar('Prenotazione riuscita',{ variant: 'success'});
         history.push(`/${id}/appointments`)
       }
     }, (error) => {
       console.log(error);
         setProcessing(false)
-        enqueueSnackbar('Uh oh! Problem occurred, please try again',{ variant: 'error'});
+        enqueueSnackbar('Uh oh! Si è verificato un problema, riprova per favore',{ variant: 'error'});
     },closeSnackbar());
   }
     return(
         <>
     <div className="col-span-6 shadow-2xl p-8 row-span-9 overflow-y-auto rounded-t-xl h-full bg-red-50 relative">
-        <h1 className="w-full text-main font-bold text-xl pl-1 mb-4" >Summary</h1>
+        <h1 className="w-full text-main font-bold text-xl pl-1 mb-4" >Riassunto</h1>
         {loading ? <Spinner size={10} color={"main"}/>
             : <>
             <AppointmentDetails {...summary}/>
@@ -66,7 +66,7 @@ const backStep = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 17l-5-5m0 0l5-5m-5 5h12" />
                 </svg>
                 </button>
-            <button onClick={confirmBooking} className="text-white bg-main rounded px-16 py-2 text-sm shadow-lg focus:outline-none hover:shadow-lg">{processing? "Submitting..." : "Confirm Booking"}</button>
+            <button onClick={confirmBooking} className="text-white bg-main rounded px-16 py-2 text-sm shadow-lg focus:outline-none hover:shadow-lg">{processing? "Presentare..." : "Confermare la prenotazione"}</button>
             </div>
             </> }
         </div>

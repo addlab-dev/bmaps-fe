@@ -14,7 +14,7 @@ const AppointmentDetails = (booking) => {
         let cancelledBooking = {booking_id: event.target.value}
       Api.cancelBooking(cancelledBooking).then((res) => {
         if (res.data == "Cancelled") {
-          enqueueSnackbar('Booking Cancelled',{ variant: 'info'});
+          enqueueSnackbar('Prenotazione cancellata',{ variant: 'info'});
             history.push(`/${id}/appointments`)
           }
       })
@@ -26,30 +26,30 @@ const AppointmentDetails = (booking) => {
                     <h1 className="w-full text-main font-bold text-lg mb-4" >{booking.service_date}</h1>
                       <div className="grid grid-cols-1 sm:grid-cols-2">
                         <div>
-                            <h3 className="text-main font-bold text-md w-full pb-1 ">Service:</h3>
+                            <h3 className="text-main font-bold text-md w-full pb-1 ">Servizio:</h3>
                             <h3 className="text-main font-normal text-md w-full">{booking.service_name}</h3>
-                            <span className="text-gray-400 font-normal text-sm w-full">{booking.service_duration} min session</span>
+                            <span className="text-gray-400 font-normal text-sm w-full">{booking.service_duration} min sessione</span>
                         </div>
                         <div className="mt-8 sm:mt-0">
-                        <h3 className="text-main font-bold text-md w-full pb-1">Professional:</h3>
+                        <h3 className="text-main font-bold text-md w-full pb-1">Professionale:</h3>
                             <span className="text-gray-400 font-normal text-sm w-full">{booking.staff}</span>
                         </div>
                         
                       </div>
                       <p className="text-main font-normal text-md w-full mt-4">{booking.service_info}</p>
                       {booking.when == "upcoming" ?
-                      <button onClick={cancelBooking} value={booking.id} className="mt-5 text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg">Cancel Booking</button>
+                      <button onClick={cancelBooking} value={booking.id} className="mt-5 text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg">Cancellare la prenotazione</button>
                     :""}
                     </section> 
                    {booking.payments_accepted ? <section className="w-full  mt-4 mb-4 pb-4 h-auto ">
-                    <h1 className="w-full text-main font-bold text-lg pl-1 mb-4" >Note :</h1>
+                    <h1 className="w-full text-main font-bold text-lg pl-1 mb-4" >Nota :</h1>
                       <div className="grid grid-cols-1">
                         <div className="mt-4 sm:mt-0">                        
                             <p className="text-main font-normal text-md w-full">
-                            - The total amount should be directly paid at the center. 
+                            - L'importo totale deve essere pagato direttamente al centro. 
                             </p>
                             <p className="text-main font-normal text-md w-full">
-                            - Payment methods accepted: {booking.payments_accepted.map((item,index)=> <span key={`demo_snap_${index}`}>{ (index ? ' / ' : '') + item }</span>)}
+                            - Metodi di pagamento accettati: {booking.payments_accepted.map((item,index)=> <span key={`demo_snap_${index}`}>{ (index ? ' / ' : '') + item }</span>)}
                             </p>
                         </div>
                       </div>

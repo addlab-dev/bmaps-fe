@@ -50,7 +50,7 @@ const Register = () => {
     return (
         <>
         <div className="col-span-6 shadow-2xl p-8 row-span-9 overflow-y-auto rounded-t-xl h-full bg-red-50 relative">
-        <h1 className="w-full text-main font-medium text-xl pl-1 mb-2" >Register</h1>
+        <h1 className="w-full text-main font-medium text-xl pl-1 mb-2" >Registra</h1>
             <div className="register_wrapper mt-5 h-full relative">
                     <section className="w-full min-h-full mt-4 mb-8 pb-28 h-auto">
                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-8 ">
@@ -63,7 +63,7 @@ const Register = () => {
                             name="fname"
                             id="fname"
                             autoComplete="off"
-                            placeholder="First Name"
+                            placeholder="Nome"
                             className="text-input"
                             />
                         </div>
@@ -77,7 +77,7 @@ const Register = () => {
                             name="lname"
                             id="lname"
                             autoComplete="off"
-                            placeholder="Last Name"
+                            placeholder="Cognome"
                             className="text-input"
                             />
                         </div>
@@ -91,7 +91,7 @@ const Register = () => {
                             name="contact"
                             id="contact"
                             autoComplete="off"
-                            placeholder="Contact"
+                            placeholder="Contatta"
                             className="text-input"
                             />
                         </div>
@@ -133,7 +133,7 @@ const Register = () => {
                             name="password_confirmation"
                             id="password_confirmation"
                             autoComplete="off"
-                            placeholder="Confirm password"
+                            placeholder="Conferma la password"
                             className="text-input"
                             />
                         </div>
@@ -147,7 +147,7 @@ const Register = () => {
                             name="bdate"
                             id="bdate"
                             autoComplete="off"
-                            placeholder="Date of birth"
+                            placeholder="Data di nascita"
                             className="text-input"
                             />
                         </div>
@@ -160,12 +160,12 @@ const Register = () => {
                             name="gender"
                             defaultValue={profile.gender}
                             {...register("gender",{ required: true })}
-                            autoComplete="gender"
+                            autoComplete="genere"
                             className="text-input">
-                                <option disabled>Gender</option>
-                                <option value="0">Male</option>
-                                <option value="1">Female</option>
-                                <option value="2">Other</option>
+                                <option disabled>Genere</option>
+                                <option value="0">Maschio</option>
+                                <option value="1">Femminile</option>
+                                <option value="2">Altro</option>
                         </select>
                         </div>
                         </div>
@@ -179,7 +179,7 @@ const Register = () => {
                             name="address"
                             id="address"
                             autoComplete="off"
-                            placeholder="Address"
+                            placeholder="Indirizzo"
                             className="text-input"
                             />
                         </div>
@@ -195,7 +195,7 @@ const Register = () => {
                             type="checkbox"
                             className="focus:text-main h-5 w-5 top-1/3 text-main border-gray-300 mr-3 focus:ring-0 focus:outline-none outline-none" />
                         <label htmlFor="hygen" className="text-gray-400 font-normal text-md inline cursor-pointer">
-                        I accept and will follow all the <a href="#" className="text-gray-400 font-bold">safety and hygiene</a> guidelines ruled out by the government and the center.
+                        Accetto e seguirò tutte le <a href="#" className="text-gray-400 font-bold">linee guida di sicurezza e igiene</a> stabilite dal governo e dal centro.
                         </label>
                         </div>
                         <div className="mt-3">
@@ -207,7 +207,7 @@ const Register = () => {
                             type="checkbox"
                             className="focus:text-main h-5 w-5 top-1/3 text-main border-gray-300 mr-3 focus:ring-0 focus:outline-none outline-none" />
                         <label htmlFor="privacy" className="text-gray-400 font-normal text-md inline cursor-pointer">
-                        I have read and accept the <a href="#" className="text-gray-400 font-bold">privacy policy</a>
+                        Ho letto e accetto la <a href="#" className="text-gray-400 font-bold">privacy policy</a>
                         </label>
                         </div>
                         <div className="mt-3">
@@ -219,12 +219,12 @@ const Register = () => {
                             type="checkbox"
                             className="focus:text-main h-5 w-5 top-1/3 text-main border-gray-300 mr-3 focus:ring-0 focus:outline-none outline-none" />
                         <label htmlFor="newsconsent" className="text-gray-400 font-normal text-md inline cursor-pointer">
-                        Send me news, updates, and other interesting offers.
+                        Inviatemi notizie, aggiornamenti e altre offerte interessanti.
                         </label> 
                         </div>
                         </div>
                         <div className="fixed right-8 bottom-8 flex flex-wrap  gap-x-1 items-center justify-center">
-                <div className="pr-5"><span className="text-gray-400 text-sm">have an account ?</span> <Link to={location => ({ ...location, pathname: 'login' })} className="text-main font-bold text-sm">Login</Link></div>
+                <div className="pr-5"><span className="text-gray-400 text-sm">Hai un account? </span> <Link to={location => ({ ...location, pathname: 'login' })} className="text-main font-bold text-sm">Accedi</Link></div>
 
             <input type="submit" className="shadow-lg text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg" value="Register"/>
             </div>

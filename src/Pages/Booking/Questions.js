@@ -38,13 +38,13 @@ const Questions = () => {
 },[]);  
 
     const [state, setState] = React.useState({   
-        step1: 'Do you have any pre existing health conditions or allergies?',
-        step2: 'Do you want to add extra services',
-        step3: 'How may sessions do you want for this treatment?',
+        step1: 'Ha condizioni di salute preesistenti o allergie?',
+        step2: 'Vuoi aggiungere servizi extra',
+        step3: 'Quante sessioni vuole per questo trattamento?',
         textInput: "",
         checkboxValue: false,
-        checkboxText1: "I accept and will follow all the safety and hygiene guidelines ruled out by the government and the store.",
-        radioValue: "This is radio 2",
+        checkboxText1: "Accetto e seguirò tutte le linee guida di sicurezza e igiene stabilite dal governo e dal negozio.",
+        radioValue: "Questa è radio 2",
     });
     const [bookStatus, setBookStatus] = React.useState({
         store_id: shopID,
@@ -121,7 +121,7 @@ const Questions = () => {
       if (!isStepOptional(activeStep)) {
         // You probably want to guard against something like this,
         // it should never occur unless someone's actively trying to break something.
-        throw new Error("You can't skip a step that isn't optional.");
+        throw new Error("Non si può saltare un passo che non sia opzionale.");
       }
   
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -138,11 +138,11 @@ const Questions = () => {
     function getStepContent(step) {
         if(bookingQuest[step].type == 1) {
           return (<section className="w-full mt-4 mb-8">
-            <h3 className="text-main font-bold text-lg py-2">{bookingQuest[step].question} <span className="helper-text">(Type some text)</span></h3>
+            <h3 className="text-main font-bold text-lg py-2">{bookingQuest[step].question} <span className="helper-text">(Scrivi la tua risposta)</span></h3>
           
             <div className="w-full mt-6"><textarea
                 className="shadow-sm focus:ring-main focus:border-main mt-1 block w-full sm:text-sm border-gray-300 rounded-md bg-red-50"
-                placeholder="Please Describe"
+                placeholder="Si prega di descrivere"
                 rows={4}
                 type="text"
                 value={answers[step] || ""}
@@ -151,7 +151,7 @@ const Questions = () => {
           </section>)
         } else if (bookingQuest[step].type == 2) {
           return (<section className="w-full mt-4 mb-8">
-            <h3  className="text-main font-bold text-lg py-2">{bookingQuest[step].question}<span className="helper-text">(Select 1 option minimum)</span></h3>
+            <h3  className="text-main font-bold text-lg py-2">{bookingQuest[step].question}<span className="helper-text">(Seleziona 1 opzione minima)</span></h3>
             <div className="w-full mt-6">{bookingQuest[step].answers.map(answer =>
                 <label key={answer.id} className="w-full p-2 flex flex-row justify-between text-main text-md cursor-pointer">{answer.answer}
                         <input type="checkbox" className="focus:text-main h-5 w-5 text-main border-gray-300" name={answer.name} value={answer.id} onChange={handleCheckboxChange} /> 
@@ -161,7 +161,7 @@ const Questions = () => {
           </section>)
         } else if (bookingQuest[step].type == 3) {
           return (<section className="w-full mt-4 mb-8">
-            <h3  className="text-main font-bold text-lg py-2">{bookingQuest[step].question}<span className="helper-text">(Select 1 option)</span></h3>
+            <h3  className="text-main font-bold text-lg py-2">{bookingQuest[step].question}<span className="helper-text">(Seleziona 1 opzione)</span></h3>
             <div className="w-full mt-6">
             {bookingQuest[step].answers.map(answer => <label className="w-full p-2 flex flex-row justify-between text-main  text-md cursor-pointer" key={answer.answer} htmlFor={Number(answer.id)} >{answer.answer}
             <input type="radio" onChange={handleChange} name="multi1" id={Number(answer.id)} value={Number(answer.id)} className="focus:text-main h-5 w-5 text-main border-gray-300 "/></label> )}
@@ -173,7 +173,7 @@ const Questions = () => {
         <>
         <div className="col-span-6 shadow-2xl p-8 row-span-9 overflow-y-auto rounded-t-xl h-full bg-red-50 relative">
             <div className="w-full h-auto relative " >
-                <h1 className="text-main font-bold text-lg py-2 ">4. Tell us know a more about yourself.</h1>
+                <h1 className="text-main font-bold text-lg py-2 ">4. Raccontaci qualcosa di te.</h1>
                     <nav className="absolute right-5 top-5" aria-label="Progress">
                             <Stepper 
                             className="ml-8 flex items-center space-x-2"
@@ -209,7 +209,7 @@ const Questions = () => {
                 </svg>
                 </button>
                 <button className={`shadow-lg text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg ${answers[activeStep] === "" ? "opacity-50 cursor-not-allowed" : ""}`} disabled={answers[activeStep] === ""} onClick={handleNext}>
-                    {activeStep === steps-1 ? 'Finish' : 'Next'}
+                    {activeStep === steps-1 ? 'Finitura' : 'Prossimo'}
                   </button>
             {/* <button className="text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg">Next</button> */}
             </div>

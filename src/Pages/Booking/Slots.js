@@ -74,19 +74,19 @@ const Slots = () => {
 
     const btnClick = () => {
       console.log("hello")
-        enqueueSnackbar('Please select a time slot',{ variant: 'info'});
+        enqueueSnackbar('Si prega di selezionare una fascia oraria',{ variant: 'info'});
       
     }
     return (
         <>
         <div className="col-span-6 shadow-2xl p-8 row-span-9 overflow-y-auto h-full rounded-t-xl bg-red-50 relative pb-16">
             <div className="w-full h-auto" >
-                <h1 className="text-main font-bold text-lg py-2 ">2. Select your preference</h1>
+                <h1 className="text-main font-bold text-lg py-2 ">2. Seleziona la tua preferenza</h1>
             </div>
             <form onSubmit={handleSubmit(onSubmit)} id="slot-form">
             <div className="slots_wrapper ml-5">
                 <div className="calendar_wrapper border-b border-main pb-10">
-                    <h3 className="text-main text-lg font-bold">Date :</h3>
+                    <h3 className="text-main text-lg font-bold">Data :</h3>
                     <Calendar 
                     {...calendarSetting}
                     onChange={onDateChange}
@@ -94,12 +94,12 @@ const Slots = () => {
                     />
                 </div>
                 <div className="times_wrapper mt-5">
-                <h3 className="text-main text-lg font-bold">Time :</h3>
+                <h3 className="text-main text-lg font-bold">Tempo :</h3>
                 {loading ? 
                 <Spinner size={10} color={"main"}/>
                : <div className=" p-4">
         <RadioGroup value={selected} onChange={setSelected}>
-          <RadioGroup.Label className="sr-only">Select time</RadioGroup.Label>
+          <RadioGroup.Label className="sr-only">Seleziona il tempo</RadioGroup.Label>
           <div className="flex flex-wrap gap-x-2 items-center justify-space-evenly ">
             {plans.map((plan) => (
               <RadioGroup.Option
@@ -153,7 +153,7 @@ const Slots = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 17l-5-5m0 0l5-5m-5 5h12" />
                 </svg>
                 </button>
-                <input type="submit" onClick={btnClick} className="shadow-lg text-white bg-main rounded px-16 py-2 text-sm focus:outline-none hover:shadow-lg" value={processing? "Processing..." : "Next"} />
+                <input type="submit" onClick={btnClick} className="shadow-lg text-white bg-main rounded px-16 py-2 text-sm focus:outline-none hover:shadow-lg" value={processing? "Elaborazione..." : "Prossimo"} />
             </div>
            
             </form>

@@ -74,16 +74,16 @@ const Professionals = () => {
     }
     const btnClick = () => {
         if(bookingStaff.prof) {
-          enqueueSnackbar('Please select a professional',{ variant: 'info'});
+          enqueueSnackbar('Seleziona un professionista',{ variant: 'info'});
         }
       }
     return (
         <>
         <div className="col-span-6 shadow-2xl p-8 row-span-9 overflow-y-auto rounded-t-xl h-full bg-red-50 relative">
             <div className="w-full h-auto" >
-                <h1 className="text-main font-bold text-lg py-2 ">3. Select professional</h1>
+                <h1 className="text-main font-bold text-lg py-2 ">3. Seleziona il professionista</h1>
             </div>
-            <input type="text" placeholder="Search a professional" onChange={e => setSearchValue(e.target.value)} value={searchValue} className="pl-2 ml-4 text-main focus:border-transparent focus:outline-none w-full bg-transparent border-t-0 border-l-0 border-r-0 border-b-1 border-gray-300"/>
+            <input type="text" placeholder="Cerca un professionista" onChange={e => setSearchValue(e.target.value)} value={searchValue} className="pl-2 ml-4 text-main focus:border-transparent focus:outline-none w-full bg-transparent border-t-0 border-l-0 border-r-0 border-b-1 border-gray-300"/>
             <form onSubmit={handleSubmit(onSubmit)}>
             <div className="professionals_wrapper mt-5 ml-4">
                     <section className="w-full mt-4 mb-8">
@@ -111,7 +111,7 @@ const Professionals = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 17l-5-5m0 0l5-5m-5 5h12" />
                 </svg>
                 </button>
-            <input type="submit" onClick={btnClick} className="shadow-lg text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg" value={processing? "Processing..." : "Proceed"}/>
+            <input type="submit" onClick={btnClick} className="shadow-lg text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg" value={processing? "Elaborazione..." : "Procedere"}/>
             </div>
             </form>
         </div>

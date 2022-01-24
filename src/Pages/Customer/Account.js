@@ -62,7 +62,7 @@ const Account = () => {
     return (
         <>
         <div className="col-span-6 shadow-2xl p-8 row-span-9 overflow-y-auto rounded-t-xl h-full bg-red-50 relative">
-        <h1 className="w-full text-main font-bold text-xl pl-1 mb-2" >Account</h1>
+        <h1 className="w-full text-main font-bold text-xl pl-1 mb-2" >Conto</h1>
             <div className="pofile_wrapper mt-5 h-full relative">
                     <section className="w-full min-h-full mt-4 mb-8 pb-28 h-auto">
                     {loading ? 
@@ -78,7 +78,7 @@ const Account = () => {
                             name="fname"
                             id="fname"
                             autoComplete="off"
-                            placeholder="First Name"
+                            placeholder="Nome"
                             className="text-input"
                             />
                         </div>
@@ -92,7 +92,7 @@ const Account = () => {
                             name="lname"
                             id="lname"
                             autoComplete="off"
-                            placeholder="Last Name"
+                            placeholder="Cognome"
                             className="text-input"
                             />
                         </div>
@@ -106,7 +106,7 @@ const Account = () => {
                             name="contact"
                             id="contact"
                             autoComplete="off"
-                            placeholder="Contact"
+                            placeholder="Contatta"
                             className="text-input"
                             />
                         </div>
@@ -149,7 +149,7 @@ const Account = () => {
                             name="password_confirmation"
                             id="password_confirmation"
                             autoComplete="off"
-                            placeholder="Confirm password"
+                            placeholder="Conferma la password"
                             className="text-input"
                             />
                         </div>
@@ -163,7 +163,7 @@ const Account = () => {
                             name="bdate"
                             id="bdate"
                             autoComplete="off"
-                            placeholder="Date of birth"
+                            placeholder="Data di nascita"
                             className="text-input"
                             />
                         </div>
@@ -176,12 +176,12 @@ const Account = () => {
                             name="gender"
                             defaultValue={profile.gender}
                             {...register("gender",{ required: true })}
-                            autoComplete="gender"
+                            autoComplete="genere"
                             className="text-input">
-                                <option disabled>Gender</option>
-                                <option value="0">Male</option>
-                                <option value="1">Female</option>
-                                <option value="2">Other</option>
+                                <option disabled>Genere</option>
+                                <option value="0">Maschio</option>
+                                <option value="1">Femminile</option>
+                                <option value="2">Altro</option>
                         </select>
                         </div>
                         </div>
@@ -195,7 +195,7 @@ const Account = () => {
                             name="address"
                             id="address"
                             autoComplete="off"
-                            placeholder="Address"
+                            placeholder="Indirizzo"
                             className="text-input"
                             />
                         </div>
@@ -210,13 +210,13 @@ const Account = () => {
                             type="checkbox"
                             className="focus:text-main h-5 w-5 top-1/3 text-main border-gray-300 mr-3 focus:ring-0 focus:outline-none outline-none" />
                         <label htmlFor="newsconsent" className="text-gray-400 font-normal text-md inline cursor-pointer">
-                        Send me news, updates, and other interesting offers.
+                        Inviatemi notizie, aggiornamenti e altre offerte interessanti.
                         </label> 
                         </div>
                         </div>
                         <div className="fixed right-8 bottom-8 flex flex-wrap  gap-x-1 items-center justify-center">
 
-            <input type="submit" className="shadow-lg text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg" value={processing? "Submitting..." : "Update details"}/>
+            <input type="submit" className="shadow-lg text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg" value={processing? "Presentare..." : "Update details"}/>
             </div>
                     </form> }
                     </section> 

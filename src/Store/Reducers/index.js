@@ -11,22 +11,22 @@ const defaultState = {
   stepList: [{
       name: 'Step 1',
       href: '#',
-      status: 'complete'
+      status: 'completo'
     },
     {
       name: 'Step 2',
       href: '#',
-      status: 'current'
+      status: 'corrente'
     },
     {
       name: 'Step 3',
       href: '#',
-      status: 'upcoming'
+      status: 'prossimo'
     },
     {
       name: 'Step 4',
       href: '#',
-      status: 'upcoming'
+      status: 'prossimo'
     },
   ],
   slotList: [ ],

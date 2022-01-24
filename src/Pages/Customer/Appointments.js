@@ -34,36 +34,36 @@ const Appointments = () => {
     return(
         <>
         <div className="col-span-6 shadow-2xl p-8 row-span-9 overflow-y-auto rounded-t-xl h-full bg-red-50 relative">
-        <h1 className="w-full text-main font-bold text-xl pl-1 mb-1" >Appointments</h1>
+        <h1 className="w-full text-main font-bold text-xl pl-1 mb-1" >Appuntamenti</h1>
 
              <Tabs className="pl-1" selectedTabClassName="react-tabs__tab--selected opacity-100" >
                 <TabList className="w-full flex border-b mb-3 pb-1">
-                  <Tab className="react-tabs__tab opacity-50 mr-5 cursor-pointer" ><h2 className="w-full text-main font-bold text-xl  mt-4 mb-2">Upcoming </h2></Tab>
-                  <Tab className="react-tabs__tab opacity-50 mr-5 cursor-pointer" ><h2 className="w-full text-main font-bold text-xl mt-4 mb-2">Previous </h2></Tab>
-                  <Tab className="react-tabs__tab opacity-50 mr-5 cursor-pointer" ><h2 className="w-full text-main font-bold text-xl mt-4 mb-2">Cancelled </h2></Tab>
+                  <Tab className="react-tabs__tab opacity-50 mr-5 cursor-pointer" ><h2 className="w-full text-main font-bold text-xl  mt-4 mb-2">Prossimo </h2></Tab>
+                  <Tab className="react-tabs__tab opacity-50 mr-5 cursor-pointer" ><h2 className="w-full text-main font-bold text-xl mt-4 mb-2">Precedente </h2></Tab>
+                  <Tab className="react-tabs__tab opacity-50 mr-5 cursor-pointer" ><h2 className="w-full text-main font-bold text-xl mt-4 mb-2">Cancellato </h2></Tab>
 
                 </TabList>
               
                 <TabPanel>
                 {appointments.upcoming != undefined ? appointments.upcoming.map((appointment)=>(
                         <AppointmentDetails key={appointment.id} {...appointment}/>
-                      )) : <div className="pl-2 mt-4">No upcoming appointments</div>}
+                      )) : <div className="pl-2 mt-4">Nessun appuntamento imminente</div>}
                 </TabPanel>
                 <TabPanel>
                 {appointments.previous != undefined ? appointments.previous.map((appointment)=>(
                         <AppointmentDetails key={appointment.id} {...appointment}/>
-                      )) : <div className="pl-2 mt-4">No previous appointments</div>}
+                      )) : <div className="pl-2 mt-4">Nessun appuntamento precedente</div>}
                 </TabPanel>
                 <TabPanel>
                 {appointments.cancelled != undefined ? appointments.cancelled.map((appointment)=>(
                         <AppointmentDetails key={appointment.id} {...appointment}/>
-                      )) : <div className="pl-2 mt-4">No cancelled appointments</div>}
+                      )) : <div className="pl-2 mt-4">Nessun appuntamento cancellato</div>}
                 </TabPanel>
                 
             </Tabs>
             <div className="fixed right-8 bottom-8 shadow-lg flex flex-wrap  gap-x-1 items-center justify-center">
             {/* <button className="text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg">Book Another</button> */}
-            <Link to={location => ({ ...location, pathname: 'services' })} className="text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg">Book Another</Link>
+            <Link to={location => ({ ...location, pathname: 'services' })} className="text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg">Prenota un altro</Link>
             </div>
         </div>
         </>

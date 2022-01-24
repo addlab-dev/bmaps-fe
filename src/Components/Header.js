@@ -14,15 +14,15 @@ import { useHistory } from "react-router-dom";
 const menuItems = [
   {
     to: 'services',
-    text: 'Services',
+    text: 'Servizi',
   },
   {
     to: 'appointments',
-    text: 'Appointments',
+    text: 'Appuntamenti',
   },
   {
     to: 'account',
-    text: 'Account',
+    text: 'Conto',
   },
 ]
 function classNames(...classes) {
@@ -37,7 +37,7 @@ const Header = () => {
 
   const logOut = () => {
     logout();
-    enqueueSnackbar('Logged Out Successfully',{ variant: 'success'});
+    enqueueSnackbar('Disconnesso con successo',{ variant: 'success'});
     history.push(`/${shopID}/services`);
   }
     return (
@@ -78,7 +78,7 @@ const Header = () => {
                         <>
                           <div>
                             <Menu.Button className="bg-white rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green">
-                              <span className="sr-only">Open user menu</span>
+                              <span className="sr-only">Aprire il menu utente</span>
                               <img
                                 className="h-8 w-8 rounded-full"
                                 src="https://d6e2eexatv3xy.cloudfront.net/home_sections/TaglioUomo-Homesections.jpg"
@@ -135,7 +135,7 @@ const Header = () => {
                                       'block px-4 py-2 text-sm text-gray-700 w-full'
                                     )}
                                   >
-                                    Sign out
+                                    Uscire
                                   </button>
                                 )}
                               </Menu.Item>
@@ -150,7 +150,7 @@ const Header = () => {
                   <div className="-mr-2 flex items-center sm:hidden">
                     {/* Mobile menu button */}
                     <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-main hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-green">
-                      <span className="sr-only">Open main menu</span>
+                      <span className="sr-only">Aprire il menu principale</span>
                       {open ? (
                         <XIcon className="block h-6 w-6" aria-hidden="true" />
                       ) : (
@@ -214,7 +214,7 @@ const Header = () => {
                       onClick={logOut}
                       className="text-left block px-4 py-2 text-base font-medium text-main hover:text-gray-800 hover:bg-gray-100"
                     >
-                      Sign out
+                      Uscire
                     </button>
                   </div>
                 </div>
