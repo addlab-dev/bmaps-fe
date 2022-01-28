@@ -209,7 +209,7 @@ const Questions = () => {
                 </svg>
                 </button>
                 <button className={`shadow-lg text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg ${answers[activeStep] === "" ? "opacity-50 cursor-not-allowed" : ""}`} disabled={answers[activeStep] === ""} onClick={handleNext}>
-                    {activeStep === steps-1 ? 'Completato' : 'Prossimo'}
+                    {activeStep === steps-1 ? 'Completato' : 'Prossimo'} 
                   </button>
             {/* <button className="text-white bg-main rounded px-16 py-2 text-sm shadow-md focus:outline-none hover:shadow-lg">Next</button> */}
             </div>
